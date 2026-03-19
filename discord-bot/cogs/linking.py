@@ -56,10 +56,14 @@ class LinkingCog(commands.Cog):
         """POST /link — called by Houdini plugin to complete account linking."""
         data = await request.json()
         code = data.get("code", "")
-        penguin_id = data.get("penguin_id")
         penguin_name = data.get("penguin_name", "Unknown")
 
-        if not code or penguin_id is None:
+        try:
+            penguin_id = int(data["penguin_id"])
+        except (KeyError, TypeError, ValueError):
+            return web.json_response({"status": "bad_request"}, status=400)
+
+        if not code:
             return web.json_response({"status": "bad_request"}, status=400)
 
         entry = self.bot.pending_links.pop(code, None)

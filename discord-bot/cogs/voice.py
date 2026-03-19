@@ -28,10 +28,11 @@ class VoiceCog(commands.Cog):
     async def handle_move(self, request: web.Request) -> web.Response:
         """POST /move — move a Discord member to a voice channel."""
         data = await request.json()
-        user_id = data.get("user_id")
-        channel_id = data.get("channel_id")
 
-        if not user_id or not channel_id:
+        try:
+            user_id = int(data["user_id"])
+            channel_id = int(data["channel_id"])
+        except (KeyError, TypeError, ValueError):
             return web.json_response({"status": "bad_request"}, status=400)
 
         guild = self.bot.get_guild(self.bot.guild_id)
