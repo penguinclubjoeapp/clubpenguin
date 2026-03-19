@@ -189,11 +189,12 @@ step_03() {
 
         if [ -n "$token" ] && [ -n "$guild" ] && [ "$pass" != "changeme" ]; then
             ok ".env exists and appears fully configured"
-            if confirm "Keep existing configuration?"; then
+            if confirm "Reconfigure from scratch?"; then
+                rm "$ENV_FILE"
+            else
                 set -a; source "$ENV_FILE"; set +a
                 return 0
             fi
-            rm "$ENV_FILE"
         else
             warn ".env exists but has placeholder values"
             rm "$ENV_FILE"
@@ -327,7 +328,7 @@ step_04() {
 
     if [ -d "$MEDIA_DIR/play" ] && [ -f "$MEDIA_DIR/ruffle/ruffle.js" ]; then
         ok "Game SWFs and Ruffle are already downloaded"
-        confirm "Skip media download?" && return 0
+        confirm "Skip media download?" || return 0
     fi
 
     echo "This will download:"
