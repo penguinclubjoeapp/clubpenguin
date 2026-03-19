@@ -1,0 +1,116 @@
+# Club Penguin Discord Bridge — Docker Compose
+# Usage: docker-compose up -d
+# Requires: .env file (copy from .env.example)
+
+services:
+
+  # ── Database ────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d
+    networks:
+      - clubpenguin
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ── Houdini Login Server ────────────────────────────────────────────
+  houdini-login:
+    build: ./houdini
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${GAME_LOGIN_PORT:-6112}:${GAME_LOGIN_PORT:-6112}"
+    networks:
+      - clubpenguin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost ${GAME_LOGIN_PORT:-6112} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Houdini World Server ────────────────────────────────────────────
+  houdini-world:
+    build: ./houdini
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${GAME_WORLD_PORT:-6113}:${GAME_WORLD_PORT:-6113}"
+    volumes:
+      - ./houdini/plugins:/opt/houdini/plugins
+    networks:
+      - clubpenguin
+    depends_on:
+      houdini-login:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost ${GAME_WORLD_PORT:-6113} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Dash Web Services ───────────────────────────────────────────────
+  dash:
+    build: ./dash
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${DASH_PORT:-3000}:${DASH_PORT:-3000}"
+    networks:
+      - clubpenguin
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ── Media Server (nginx) ────────────────────────────────────────────
+  media-server:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "${MEDIA_PORT:-80}:80"
+    volumes:
+      - media-assets:/usr/share/nginx/html:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - clubpenguin
+
+  # ── Discord Bot ─────────────────────────────────────────────────────
+  discord-bot:
+    build: ./discord-bot
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${BOT_API_PORT:-3001}:${BOT_API_PORT:-3001}"
+    networks:
+      - clubpenguin
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  media-assets:
+
+networks:
+  clubpenguin:
+    driver: bridge
