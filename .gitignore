@@ -1,6 +1,85 @@
-.obsidian/
+# ── 1. Environment & Secrets ──────────────────────────────────────────
+# .env.example is intentionally NOT ignored — it serves as a template
 .env
-*.pyc
+.env.local
+.env.*.local
+
+# ── 2. Python Artifacts ──────────────────────────────────────────────
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.venv/
+venv/
+env/
+
+# ── 3. Node.js Artifacts ─────────────────────────────────────────────
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# ── 4. Docker Artifacts ──────────────────────────────────────────────
+# Volume directory names are preliminary — update when issue #4 is implemented
+postgres-data/
+docker-compose.override.yml
+
+# ── 5. Media / Game Assets ───────────────────────────────────────────
+# Scoped to media/ directory only so custom modded SWFs can be tracked
+# elsewhere (e.g., mods/). See README and issue #13 for sourcing assets.
+media/
+
+# ── 6. Logs ──────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── 7. Database Files ───────────────────────────────────────────────
+# SQLite dev files, PostgreSQL dumps, and Redis dump files
+*.sqlite3
+*.db
+*.sql.gz
+*.dump
+dump.rdb
+*.rdb
+
+# ── 8. IDE / Editor ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.obsidian/
+
+# ── 9. OS-Specific ──────────────────────────────────────────────────
 .DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── 10. Testing / Tooling ───────────────────────────────────────────
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.cover
