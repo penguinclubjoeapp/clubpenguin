@@ -128,7 +128,7 @@ step_02() {
     # Skip if token already configured
     if [ -f "$ENV_FILE" ] && grep -q '^DISCORD_BOT_TOKEN=.\+' "$ENV_FILE"; then
         ok "A Discord bot token is already configured in .env"
-        confirm "Skip the bot setup walkthrough?" && return 0
+        confirm "Skip the bot setup walkthrough?" || return 0
     fi
 
     echo "You need a Discord bot before continuing. Follow these steps:"
