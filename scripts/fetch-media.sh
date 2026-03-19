@@ -45,10 +45,11 @@ else
     echo "[ruffle] Downloading latest Ruffle self-hosted release..."
     mkdir -p "$RUFFLE_DIR"
     # Use /releases instead of /releases/latest since Ruffle only publishes prereleases
+    # Use || true to prevent pipefail from exiting on empty grep results
     RUFFLE_URL=$(curl -sL https://api.github.com/repos/ruffle-rs/ruffle/releases \
         | grep -o '"browser_download_url": *"[^"]*selfhosted[^"]*\.zip"' \
         | head -1 \
-        | cut -d'"' -f4)
+        | cut -d'"' -f4 || true)
     if [ -z "$RUFFLE_URL" ]; then
         echo "[ruffle] ERROR: Could not determine Ruffle download URL."
         echo "[ruffle] Download the self-hosted ZIP manually from:"
