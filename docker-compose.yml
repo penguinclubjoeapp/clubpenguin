@@ -55,6 +55,8 @@ services:
         condition: service_healthy
     entrypoint:
       - dockerize
+      - -timeout
+      - "60s"
       - -wait
       - tcp://redis:6379
       - -wait
@@ -74,7 +76,9 @@ services:
       - --database-name
       - ${POSTGRES_DB}
       - --redis-address
-      - redis
+      - ${REDIS_HOST:-redis}
+      - --redis-port
+      - "${REDIS_PORT:-6379}"
       - --single-client-mode
       - --default-client
       - legacy
@@ -105,6 +109,8 @@ services:
         condition: service_healthy
     entrypoint:
       - dockerize
+      - -timeout
+      - "60s"
       - -wait
       - "tcp://houdini-login:${GAME_LOGIN_PORT:-6112}"
       - python
@@ -126,7 +132,9 @@ services:
       - --database-name
       - ${POSTGRES_DB}
       - --redis-address
-      - redis
+      - ${REDIS_HOST:-redis}
+      - --redis-port
+      - "${REDIS_PORT:-6379}"
       - --single-client-mode
       - --default-client
       - legacy
