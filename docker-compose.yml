@@ -27,6 +27,18 @@ services:
       retries: 5
       start_period: 10s
 
+  # ── Redis (required by Houdini for player state) ───────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - clubpenguin
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   # ── Houdini Login Server ────────────────────────────────────────────
   houdini-login:
     build: ./houdini
@@ -39,6 +51,33 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint:
+      - dockerize
+      - -wait
+      - tcp://redis:6379
+      - -wait
+      - tcp://postgres:5432
+      - python
+      - bootstrap.py
+      - login
+    command:
+      - --port
+      - "${GAME_LOGIN_PORT:-6112}"
+      - --database-address
+      - postgres
+      - --database-username
+      - ${POSTGRES_USER}
+      - --database-password
+      - ${POSTGRES_PASSWORD}
+      - --database-name
+      - ${POSTGRES_DB}
+      - --redis-address
+      - redis
+      - --single-client-mode
+      - --default-client
+      - legacy
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost ${GAME_LOGIN_PORT:-6112} || exit 1"]
       interval: 10s
@@ -62,6 +101,35 @@ services:
         condition: service_healthy
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+    entrypoint:
+      - dockerize
+      - -wait
+      - "tcp://houdini-login:${GAME_LOGIN_PORT:-6112}"
+      - python
+      - bootstrap.py
+      - world
+    command:
+      - -id
+      - "3100"
+      - --name
+      - Blizzard
+      - --port
+      - "${GAME_WORLD_PORT:-6113}"
+      - --database-address
+      - postgres
+      - --database-username
+      - ${POSTGRES_USER}
+      - --database-password
+      - ${POSTGRES_PASSWORD}
+      - --database-name
+      - ${POSTGRES_DB}
+      - --redis-address
+      - redis
+      - --single-client-mode
+      - --default-client
+      - legacy
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost ${GAME_WORLD_PORT:-6113} || exit 1"]
       interval: 10s

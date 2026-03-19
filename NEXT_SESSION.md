@@ -11,10 +11,27 @@ Key docs:
 
 ## What's Been Done
 
-Issue #1 (README) is complete and closed. Issue #13 (asset sourcing research) was split out from #1 and created. The remaining 12 issues form a dependency chain tracked on GitHub.
+Closed issues: #1 (README), #2 (.gitignore), #3 (env config), #4 (Docker Compose), #5 (Database Schema), #13 (asset research).
+
+Issue #6 (Houdini container) has an open PR awaiting merge.
 
 ## What To Do
 
-Read the GitHub issues with `gh issue list` and pick the next 2 unblocked issues from the dependency chain. Handle them in parallel using sub-agents.
+Check if the PR for #6 has been merged. If yes, the next unblocked issues are:
 
-For each issue: make a proper plan, ask the user questions, and once it's finalized, replace that issue's body on GitHub with the plan. Do not implement the plan — planning only.
+- **#7** (Discord Bot Container) — unblocked by #4, #5
+- **#8** (Media Server Container) — unblocked by #4
+- **#11** (Dash Web Service Container) — unblocked by #4
+
+\#7 is on the critical path to voice integration (#9 → #10).
+
+### Workflow per issue
+
+1. Read the issue and make a proper plan — ask the user questions to finalize it.
+2. Replace the issue's body on GitHub with the finalized plan.
+3. User approves the plan, then implementation begins in a follow-up step.
+
+### Tables deferred to other issues
+
+- `room_channel_mappings` → #7 (Discord Bot Container)
+- `pending_link_codes` → #9 (Account Linking Plugin)
