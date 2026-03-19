@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Penguin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+        #player { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <div id="player"></div>
+
+    <script>
+        // ── Game Configuration ──────────────────────────────────────────
+        // Edit these values to match your server setup.
+        const GAME_CONFIG = {
+            // Server hostname (defaults to the host serving this page)
+            host: window.location.hostname,
+
+            // Houdini server ports
+            loginPort: 6112,
+            worldPort: 6113,
+
+            // WebSocket proxy ports (websockify or similar, bridging WS → TCP)
+            // These must point to a WebSocket proxy forwarding to the Houdini ports above.
+            wsLoginPort: 6112,
+            wsWorldPort: 6113,
+
+            // CHANGEME: Path to the AS2 client boot SWF.
+            // Verify this path after running scripts/fetch-media.sh.
+            // Common paths: /play/v2/client/boot.swf, /play/v2/content/local/en/boot.swf
+            swfPath: "/play/v2/client/boot.swf",
+        };
+
+        // ── Ruffle Setup ────────────────────────────────────────────────
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            autoplay: "on",
+            unmuteOverlay: "hidden",
+            socketProxy: [
+                {
+                    host: GAME_CONFIG.host,
+                    port: GAME_CONFIG.loginPort,
+                    proxyUrl: "ws://" + GAME_CONFIG.host + ":" + GAME_CONFIG.wsLoginPort,
+                },
+                {
+                    host: GAME_CONFIG.host,
+                    port: GAME_CONFIG.worldPort,
+                    proxyUrl: "ws://" + GAME_CONFIG.host + ":" + GAME_CONFIG.wsWorldPort,
+                },
+            ],
+        };
+    </script>
+    <script src="/ruffle/ruffle.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+
+            player.style.width = "100%";
+            player.style.height = "100%";
+            document.getElementById("player").appendChild(player);
+
+            player.load({ url: GAME_CONFIG.swfPath });
+        });
+    </script>
+</body>
+</html>

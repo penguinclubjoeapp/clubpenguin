@@ -46,7 +46,8 @@ docker-compose.override.yml
 # ── 5. Media / Game Assets ───────────────────────────────────────────
 # Scoped to media/ directory only so custom modded SWFs can be tracked
 # elsewhere (e.g., mods/). See README and issue #13 for sourcing assets.
-media/
+media/*
+!media/client/
 
 # ── 6. Logs ──────────────────────────────────────────────────────────
 logs/
