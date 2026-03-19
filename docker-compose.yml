@@ -121,6 +121,8 @@ services:
       - "3100"
       - --name
       - Blizzard
+      - --address
+      - "${GAME_ADDRESS:-127.0.0.1}"
       - --port
       - "${GAME_WORLD_PORT:-6113}"
       - --database-address

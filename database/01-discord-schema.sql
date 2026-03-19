@@ -1,10 +1,10 @@
 -- Discord account linking table
 -- Runs on first postgres container start via docker-entrypoint-initdb.d
 --
--- penguin_id logically references penguin(id) from Houdini's schema,
--- but the FK is not added here because Houdini creates its schema at
--- runtime (after init scripts run). Approach for adding the constraint
--- will be decided when #6 (Houdini container) is implemented.
+-- penguin_id logically references penguin(id) from Houdini's schema.
+-- The FK constraint is not enforced here because Houdini creates its
+-- tables at runtime (after these init scripts run). Referential
+-- integrity is handled at the application layer.
 
 CREATE TABLE IF NOT EXISTS discord_links (
     penguin_id    INTEGER     PRIMARY KEY,
