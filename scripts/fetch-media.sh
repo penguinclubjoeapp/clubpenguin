@@ -34,6 +34,16 @@ else
     shopt -u dotglob
     rm -rf "$MEDIA_DIR/legacy-media-tmp"
     rm -rf "$MEDIA_DIR/.git"
+
+    # Flatten if repo contained its own media/ folder (creates media/media/)
+    if [ -d "$MEDIA_DIR/media" ]; then
+        echo "[media] Flattening nested media/media/ structure..."
+        shopt -s dotglob
+        mv "$MEDIA_DIR/media"/* "$MEDIA_DIR/" 2>/dev/null || true
+        shopt -u dotglob
+        rmdir "$MEDIA_DIR/media" 2>/dev/null || rm -rf "$MEDIA_DIR/media"
+    fi
+
     echo "[media] Legacy media downloaded to $MEDIA_DIR"
 fi
 

@@ -63,9 +63,26 @@ pause() {
 # Docker compose command (set in step 1)
 COMPOSE=""
 
-# Websockify port defaults
-WS_LOGIN_PORT="${WS_LOGIN_PORT:-7112}"
-WS_WORLD_PORT="${WS_WORLD_PORT:-7113}"
+# Load .env if it exists and hasn't been loaded yet
+load_env() {
+    if [ -z "${_ENV_LOADED:-}" ] && [ -f "$ENV_FILE" ]; then
+        set -a; source "$ENV_FILE"; set +a
+        _ENV_LOADED=1
+    fi
+}
+
+# Check if a port is in use; prompt for alternative if occupied
+check_port() {
+    local port=$1 name=$2 default=$3
+    if ss -tlnp 2>/dev/null | grep -q ":${port} " ; then
+        warn "Port $port ($name) is in use"
+        read -rp "  Alternative port [$default]: " alt
+        echo "${alt:-$default}"
+    else
+        ok "Port $port ($name) — available"
+        echo "$port"
+    fi
+}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -193,6 +210,7 @@ step_03() {
                 rm "$ENV_FILE"
             else
                 set -a; source "$ENV_FILE"; set +a
+                _ENV_LOADED=1
                 return 0
             fi
         else
@@ -263,18 +281,6 @@ step_03() {
     local ws_lport=7112
     local ws_wport=7113
 
-    check_port() {
-        local port=$1 name=$2 default=$3
-        if ss -tlnp 2>/dev/null | grep -q ":${port} " ; then
-            warn "Port $port ($name) is in use"
-            read -rp "  Alternative port [$default]: " alt
-            echo "${alt:-$default}"
-        else
-            ok "Port $port ($name) — available"
-            echo "$port"
-        fi
-    }
-
     media_port=$(check_port 80 "media server" 8080)
     dash_port=$(check_port 3000 "account registration" 3000)
     login_port=$(check_port 6112 "game login" 6112)
@@ -296,15 +302,12 @@ step_03() {
     sed -i "s|^GAME_LOGIN_PORT=.*|GAME_LOGIN_PORT=$login_port|" "$ENV_FILE"
     sed -i "s|^GAME_WORLD_PORT=.*|GAME_WORLD_PORT=$world_port|" "$ENV_FILE"
     sed -i "s|^DASH_PORT=.*|DASH_PORT=$dash_port|" "$ENV_FILE"
+    sed -i "s|^WS_LOGIN_PORT=.*|WS_LOGIN_PORT=$ws_lport|" "$ENV_FILE"
+    sed -i "s|^WS_WORLD_PORT=.*|WS_WORLD_PORT=$ws_wport|" "$ENV_FILE"
 
-    # Append websockify ports (not in .env.example)
-    echo "" >> "$ENV_FILE"
-    echo "# WebSocket proxy ports (websockify — bridges browser WS to Houdini TCP)" >> "$ENV_FILE"
-    echo "WS_LOGIN_PORT=$ws_lport" >> "$ENV_FILE"
-    echo "WS_WORLD_PORT=$ws_wport" >> "$ENV_FILE"
-
-    # Export for later steps
+    # Export for later steps and mark as loaded
     set -a; source "$ENV_FILE"; set +a
+    _ENV_LOADED=1
 
     echo ""
     ok ".env created"
@@ -354,22 +357,28 @@ step_04() {
 step_05() {
     header 5 "Configure Game Client"
 
-    # Source .env if not already loaded
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     local ws_lport="${WS_LOGIN_PORT:-7112}"
     local ws_wport="${WS_WORLD_PORT:-7113}"
 
-    # ── Detect boot.swf ──
+    # ── Detect boot.swf (or boots.swf) ──
     local swf_path=""
     local candidates=(
+        # Standard paths
         "play/v2/client/boot.swf"
         "play/v2/content/local/en/boot.swf"
         "play/v2/content/local/boot.swf"
         "play/client/boot.swf"
         "play/boot.swf"
+        # Alternate name (boots.swf)
+        "play/v2/client/boots.swf"
+        "play/v2/content/local/en/boots.swf"
+        "boots.swf"
+        # Nested media/ fallback (if flatten failed)
+        "media/play/v2/client/boot.swf"
+        "media/play/v2/client/boots.swf"
+        "media/boots.swf"
     )
 
     for candidate in "${candidates[@]}"; do
@@ -379,16 +388,17 @@ step_05() {
         fi
     done
 
+    # Fallback: search for boot.swf or boots.swf anywhere
     if [ -z "$swf_path" ]; then
         local found
-        found=$(find "$MEDIA_DIR" -name "boot.swf" -type f 2>/dev/null | head -1)
+        found=$(find "$MEDIA_DIR" \( -name "boot.swf" -o -name "boots.swf" \) -type f 2>/dev/null | head -1)
         if [ -n "$found" ]; then
             swf_path="/${found#"$MEDIA_DIR/"}"
         fi
     fi
 
     if [ -z "$swf_path" ]; then
-        warn "Could not find boot.swf in media directory."
+        warn "Could not find boot.swf or boots.swf in media directory."
         warn "If you haven't downloaded media yet, go back and run Step 4."
         read -rp "  Enter the SWF path manually (or press Enter to skip): " swf_path
         if [ -z "$swf_path" ]; then
@@ -456,10 +466,7 @@ step_06() {
         confirm "Regenerate it?" || return 0
     fi
 
-    # Source .env if needed
-    if [ -z "${GAME_LOGIN_PORT:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     local login_port="${GAME_LOGIN_PORT:-6112}"
     local world_port="${GAME_WORLD_PORT:-6113}"
@@ -512,10 +519,7 @@ EOF
 step_07() {
     header 7 "Build & Launch"
 
-    # Source .env if needed
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     # Check if already running
     cd "$PROJECT_ROOT"
@@ -582,9 +586,7 @@ step_07() {
 step_08() {
     header 8 "Smoke Test"
 
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     echo "Checking that each service is responding..."
     echo ""
@@ -643,9 +645,7 @@ step_08() {
 step_09() {
     header 9 "Firewall Configuration"
 
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     local media_port="${MEDIA_PORT:-80}"
     local dash_port="${DASH_PORT:-3000}"
@@ -712,9 +712,7 @@ step_09() {
 step_10() {
     header 10 "Router Port Forwarding"
 
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     local media_port="${MEDIA_PORT:-80}"
     local dash_port="${DASH_PORT:-3000}"
@@ -781,9 +779,7 @@ step_11() {
 step_12() {
     header 12 "You're Done — Getting Started"
 
-    if [ -z "${GAME_ADDRESS:-}" ] && [ -f "$ENV_FILE" ]; then
-        set -a; source "$ENV_FILE"; set +a
-    fi
+    load_env
 
     local media_port="${MEDIA_PORT:-80}"
     local dash_port="${DASH_PORT:-3000}"
