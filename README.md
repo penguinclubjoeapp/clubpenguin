@@ -76,7 +76,7 @@ The player must already be in any voice channel on the Discord server for the bo
 - **Docker** and **Docker Compose**
 - **Discord bot token** — create one at the [Discord Developer Portal](https://discord.com/developers/applications). The bot needs `Move Members`, `Connect`, and `View Channels` permissions, and its role must be above the users it moves.
 - **Discord server** with a voice channel for each CP room you want to sync
-- **Game assets** — SWF files must be sourced separately (see [#13](https://github.com/Borges-Fable/ClubPenguin/issues/13))
+- **Game assets** — SWF files fetched via `./scripts/fetch-media.sh` (see [Media Assets](#media-assets))
 
 ## Quickstart
 
@@ -85,10 +85,27 @@ git clone https://github.com/Borges-Fable/ClubPenguin.git
 cd ClubPenguin
 cp .env.example .env
 # Edit .env — add your DB password, Discord bot token, guild ID, and channel mappings
+./scripts/fetch-media.sh
 docker-compose up -d
 ```
 
 See `.env.example` for documentation on each variable.
+
+## Media Assets
+
+Club Penguin game assets (SWFs) are not included in this repository. Run the fetch script to download them:
+
+```bash
+./scripts/fetch-media.sh
+```
+
+This downloads:
+- **Solero legacy-media** — AS2 game SWFs into `media/play/...`
+- **Ruffle** — Flash emulator (WASM/JS) into `media/ruffle/`
+
+The `media/` directory is gitignored. Assets are served by the nginx container at `http://localhost:${MEDIA_PORT:-80}/`.
+
+If Solero's GitLab is unavailable, see the fallback sources listed in `scripts/fetch-media.sh`.
 
 ## Project Status
 

@@ -165,10 +165,16 @@ services:
     ports:
       - "${MEDIA_PORT:-80}:80"
     volumes:
-      - media-assets:/usr/share/nginx/html:ro
+      - ./media:/usr/share/nginx/html:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
       - clubpenguin
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/healthz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
   # ── Discord Bot ─────────────────────────────────────────────────────
   discord-bot:
@@ -185,7 +191,6 @@ services:
 
 volumes:
   postgres-data:
-  media-assets:
 
 networks:
   clubpenguin:
