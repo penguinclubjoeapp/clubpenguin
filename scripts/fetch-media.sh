@@ -44,7 +44,8 @@ if [ -d "$RUFFLE_DIR" ] && [ -f "$RUFFLE_DIR/ruffle.js" ]; then
 else
     echo "[ruffle] Downloading latest Ruffle self-hosted release..."
     mkdir -p "$RUFFLE_DIR"
-    RUFFLE_URL=$(curl -sL https://api.github.com/repos/ruffle-rs/ruffle/releases/latest \
+    # Use /releases instead of /releases/latest since Ruffle only publishes prereleases
+    RUFFLE_URL=$(curl -sL https://api.github.com/repos/ruffle-rs/ruffle/releases \
         | grep -o '"browser_download_url": *"[^"]*selfhosted[^"]*\.zip"' \
         | head -1 \
         | cut -d'"' -f4)
