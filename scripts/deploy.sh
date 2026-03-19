@@ -580,20 +580,30 @@ step_07() {
         db_elapsed=$((db_elapsed + 1))
     done
 
-    # Check if Houdini schema needs to be loaded
+    # Check if Houdini schema needs to be loaded (run psql as postgres user)
     local has_schema
-    has_schema=$($COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -tAc "SELECT 1 FROM information_schema.tables WHERE table_name='penguin'" 2>/dev/null || echo "")
+    has_schema=$($COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -tAc "SELECT 1 FROM information_schema.tables WHERE table_name='penguin'" 2>/dev/null || echo "")
 
     if [ "$has_schema" != "1" ]; then
         info "Initializing database schema..."
-        # Extract schema from Houdini image and load it
-        $COMPOSE run --rm --entrypoint "" houdini-login cat /opt/houdini/houdini.sql \
-            | $COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" > /dev/null 2>&1
 
-        # Also run our custom schema files
+        # Extract schema to temp file, then load (avoids broken pipe)
+        local schema_tmp
+        schema_tmp=$(mktemp)
+        $COMPOSE run --rm --entrypoint "" houdini-login cat /opt/houdini/houdini.sql > "$schema_tmp" 2>/dev/null
+
+        # Copy schema into postgres container and run it
+        docker cp "$schema_tmp" clubpenguin-postgres-1:/tmp/houdini.sql
+        $COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -f /tmp/houdini.sql > /dev/null 2>&1
+        rm -f "$schema_tmp"
+
+        # Run our custom schema files
         for sql_file in "$PROJECT_ROOT"/database/*.sql; do
             if [ -f "$sql_file" ]; then
-                $COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" < "$sql_file" > /dev/null 2>&1
+                local sql_name
+                sql_name=$(basename "$sql_file")
+                docker cp "$sql_file" clubpenguin-postgres-1:/tmp/"$sql_name"
+                $COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -f /tmp/"$sql_name" > /dev/null 2>&1
             fi
         done
         ok "Database schema initialized"
