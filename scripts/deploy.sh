@@ -33,6 +33,9 @@ warn()  { echo -e "${YELLOW}  !${NC} $*"; }
 err()   { echo -e "${RED}  ✗${NC} $*" >&2; }
 hr()    { echo -e "${DIM}$(printf '─%.0s' {1..60})${NC}"; }
 
+# Escape special characters for sed replacement strings (using | delimiter)
+sed_escape() { printf '%s' "$1" | sed 's/[&|\]/\\&/g'; }
+
 header() {
     local num=$1; shift
     echo ""
@@ -283,12 +286,12 @@ step_03() {
     info "Generating .env..."
     cp "$ENV_EXAMPLE" "$ENV_FILE"
 
-    sed -i "s|^DISCORD_BOT_TOKEN=.*|DISCORD_BOT_TOKEN=$bot_token|" "$ENV_FILE"
+    sed -i "s|^DISCORD_BOT_TOKEN=.*|DISCORD_BOT_TOKEN=$(sed_escape "$bot_token")|" "$ENV_FILE"
     sed -i "s|^DISCORD_GUILD_ID=.*|DISCORD_GUILD_ID=$guild_id|" "$ENV_FILE"
-    sed -i "s|^GAME_ADDRESS=.*|GAME_ADDRESS=$game_address|" "$ENV_FILE"
-    sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$db_password|" "$ENV_FILE"
+    sed -i "s|^GAME_ADDRESS=.*|GAME_ADDRESS=$(sed_escape "$game_address")|" "$ENV_FILE"
+    sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$(sed_escape "$db_password")|" "$ENV_FILE"
     sed -i "s|^MEDIA_PORT=.*|MEDIA_PORT=$media_port|" "$ENV_FILE"
-    sed -i "s|^WEB_HOSTNAME=.*|WEB_HOSTNAME=$game_address|" "$ENV_FILE"
+    sed -i "s|^WEB_HOSTNAME=.*|WEB_HOSTNAME=$(sed_escape "$game_address")|" "$ENV_FILE"
     sed -i "s|^GAME_LOGIN_PORT=.*|GAME_LOGIN_PORT=$login_port|" "$ENV_FILE"
     sed -i "s|^GAME_WORLD_PORT=.*|GAME_WORLD_PORT=$world_port|" "$ENV_FILE"
     sed -i "s|^DASH_PORT=.*|DASH_PORT=$dash_port|" "$ENV_FILE"
