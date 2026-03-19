@@ -11,19 +11,20 @@ Key docs:
 
 ## What's Been Done
 
-Closed issues: #1 (README), #2 (.gitignore), #3 (env config), #4 (Docker Compose), #5 (Database Schema), #13 (asset research).
+Closed issues: #1 (README), #2 (.gitignore), #3 (env config), #4 (Docker Compose), #5 (Database Schema), #6 (Houdini Container), #7 (Discord Bot Container), #13 (asset research).
 
-Issue #6 (Houdini container) has an open PR awaiting merge.
+Issue #7 implemented: discord-bot container with discord.py bot, aiohttp internal API (`/link`, `/move`), account linking (`!link`), voice move, room mapping admin commands (`!mapchannel`, `!unmapchannel`, `!listchannels`), and `room_channel_mappings` SQL migration.
 
 ## What To Do
 
-Check if the PR for #6 has been merged. If yes, the next unblocked issues are:
+The next unblocked issues are:
 
-- **#7** (Discord Bot Container) — unblocked by #4, #5
 - **#8** (Media Server Container) — unblocked by #4
+- **#9** (Account Linking Plugin) — unblocked by #7
+- **#10** (Room Sync Plugin) — unblocked by #7
 - **#11** (Dash Web Service Container) — unblocked by #4
 
-\#7 is on the critical path to voice integration (#9 → #10).
+\#9 and #10 are on the critical path to voice integration.
 
 ### Workflow per issue
 
@@ -33,5 +34,4 @@ Check if the PR for #6 has been merged. If yes, the next unblocked issues are:
 
 ### Tables deferred to other issues
 
-- `room_channel_mappings` → #7 (Discord Bot Container)
 - `pending_link_codes` → #9 (Account Linking Plugin)
