@@ -157,6 +157,29 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      houdini-login:
+        condition: service_healthy
+    entrypoint:
+      - dockerize
+      - -timeout
+      - "60s"
+      - -wait
+      - tcp://postgres:5432
+      - -wait
+      - tcp://redis:6379
+      - python
+      - bootstrap.py
+    command:
+      - -c
+      - config.py
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost ${DASH_PORT:-3000} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
 
   # ── Media Server (nginx) ────────────────────────────────────────────
   media-server:
