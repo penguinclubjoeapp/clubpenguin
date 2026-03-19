@@ -39,6 +39,18 @@ sed_escape() {
     printf '%s' "$1" | tr -d '\n\r\t' | tr -cd '[:print:]' | sed 's/[&|\\]/\\&/g'
 }
 
+# Run sed with error logging
+safe_sed() {
+    local pattern="$1" file="$2"
+    if ! sed -i "$pattern" "$file" 2>/tmp/sed_err.log; then
+        err "sed failed: $(cat /tmp/sed_err.log)"
+        err "pattern was: $pattern"
+        err "hex dump of pattern:"
+        printf '%s' "$pattern" | xxd | head -4 >&2
+        return 1
+    fi
+}
+
 header() {
     local num=$1; shift
     echo ""
@@ -75,14 +87,15 @@ load_env() {
 }
 
 # Check if a port is in use; prompt for alternative if occupied
+# Status messages go to stderr so only the port number is captured
 check_port() {
     local port=$1 name=$2 default=$3
     if ss -tlnp 2>/dev/null | grep -q ":${port} " ; then
-        warn "Port $port ($name) is in use"
+        warn "Port $port ($name) is in use" >&2
         read -rp "  Alternative port [$default]: " alt
         echo "${alt:-$default}"
     else
-        ok "Port $port ($name) — available"
+        ok "Port $port ($name) — available" >&2
         echo "$port"
     fi
 }
@@ -296,17 +309,17 @@ step_03() {
     info "Generating .env..."
     cp "$ENV_EXAMPLE" "$ENV_FILE"
 
-    sed -i "s|^DISCORD_BOT_TOKEN=.*|DISCORD_BOT_TOKEN=$(sed_escape "$bot_token")|" "$ENV_FILE"
-    sed -i "s|^DISCORD_GUILD_ID=.*|DISCORD_GUILD_ID=$guild_id|" "$ENV_FILE"
-    sed -i "s|^GAME_ADDRESS=.*|GAME_ADDRESS=$(sed_escape "$game_address")|" "$ENV_FILE"
-    sed -i "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$(sed_escape "$db_password")|" "$ENV_FILE"
-    sed -i "s|^MEDIA_PORT=.*|MEDIA_PORT=$media_port|" "$ENV_FILE"
-    sed -i "s|^WEB_HOSTNAME=.*|WEB_HOSTNAME=$(sed_escape "$game_address")|" "$ENV_FILE"
-    sed -i "s|^GAME_LOGIN_PORT=.*|GAME_LOGIN_PORT=$login_port|" "$ENV_FILE"
-    sed -i "s|^GAME_WORLD_PORT=.*|GAME_WORLD_PORT=$world_port|" "$ENV_FILE"
-    sed -i "s|^DASH_PORT=.*|DASH_PORT=$dash_port|" "$ENV_FILE"
-    sed -i "s|^WS_LOGIN_PORT=.*|WS_LOGIN_PORT=$ws_lport|" "$ENV_FILE"
-    sed -i "s|^WS_WORLD_PORT=.*|WS_WORLD_PORT=$ws_wport|" "$ENV_FILE"
+    safe_sed "s|^DISCORD_BOT_TOKEN=.*|DISCORD_BOT_TOKEN=$(sed_escape "$bot_token")|" "$ENV_FILE"
+    safe_sed "s|^DISCORD_GUILD_ID=.*|DISCORD_GUILD_ID=$guild_id|" "$ENV_FILE"
+    safe_sed "s|^GAME_ADDRESS=.*|GAME_ADDRESS=$(sed_escape "$game_address")|" "$ENV_FILE"
+    safe_sed "s|^POSTGRES_PASSWORD=.*|POSTGRES_PASSWORD=$(sed_escape "$db_password")|" "$ENV_FILE"
+    safe_sed "s|^MEDIA_PORT=.*|MEDIA_PORT=$media_port|" "$ENV_FILE"
+    safe_sed "s|^WEB_HOSTNAME=.*|WEB_HOSTNAME=$(sed_escape "$game_address")|" "$ENV_FILE"
+    safe_sed "s|^GAME_LOGIN_PORT=.*|GAME_LOGIN_PORT=$login_port|" "$ENV_FILE"
+    safe_sed "s|^GAME_WORLD_PORT=.*|GAME_WORLD_PORT=$world_port|" "$ENV_FILE"
+    safe_sed "s|^DASH_PORT=.*|DASH_PORT=$dash_port|" "$ENV_FILE"
+    safe_sed "s|^WS_LOGIN_PORT=.*|WS_LOGIN_PORT=$ws_lport|" "$ENV_FILE"
+    safe_sed "s|^WS_WORLD_PORT=.*|WS_WORLD_PORT=$ws_wport|" "$ENV_FILE"
 
     # Export for later steps and mark as loaded
     set -a; source "$ENV_FILE"; set +a
@@ -552,7 +565,43 @@ step_07() {
     info "Building containers..."
     $COMPOSE build
 
-    info "Starting services..."
+    # Start database first to initialize schema
+    info "Starting database..."
+    $COMPOSE up -d postgres redis
+
+    # Wait for postgres to be ready
+    local db_timeout=30
+    local db_elapsed=0
+    while [ $db_elapsed -lt $db_timeout ]; do
+        if $COMPOSE exec -T postgres pg_isready -U "${POSTGRES_USER:-penguin}" &>/dev/null; then
+            break
+        fi
+        sleep 1
+        db_elapsed=$((db_elapsed + 1))
+    done
+
+    # Check if Houdini schema needs to be loaded
+    local has_schema
+    has_schema=$($COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -tAc "SELECT 1 FROM information_schema.tables WHERE table_name='penguin'" 2>/dev/null || echo "")
+
+    if [ "$has_schema" != "1" ]; then
+        info "Initializing database schema..."
+        # Extract schema from Houdini image and load it
+        $COMPOSE run --rm --entrypoint "" houdini-login cat /opt/houdini/houdini.sql \
+            | $COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" > /dev/null 2>&1
+
+        # Also run our custom schema files
+        for sql_file in "$PROJECT_ROOT"/database/*.sql; do
+            if [ -f "$sql_file" ]; then
+                $COMPOSE exec -T postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" < "$sql_file" > /dev/null 2>&1
+            fi
+        done
+        ok "Database schema initialized"
+    else
+        ok "Database schema already exists"
+    fi
+
+    info "Starting all services..."
     $COMPOSE up -d
 
     info "Waiting for services to become healthy..."

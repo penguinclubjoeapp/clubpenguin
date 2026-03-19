@@ -1,5 +1,4 @@
 FROM python:3.11.3-alpine
-ARG TARGETARCH
 
 RUN apk add --no-cache \
     openssl \
@@ -13,9 +12,10 @@ WORKDIR /opt/houdini
 
 # Install dockerize for service readiness checks
 ENV DOCKERIZE_VERSION=v0.7.0
-RUN wget -q "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-${TARGETARCH}-${DOCKERIZE_VERSION}.tar.gz" \
-    && tar -C /usr/local/bin -xzf "dockerize-linux-${TARGETARCH}-${DOCKERIZE_VERSION}.tar.gz" \
-    && rm "dockerize-linux-${TARGETARCH}-${DOCKERIZE_VERSION}.tar.gz"
+RUN ARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') \
+    && wget -q "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz" \
+    && tar -C /usr/local/bin -xzf "dockerize-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz" \
+    && rm "dockerize-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz"
 
 # Clone Houdini source
 ARG HOUDINI_COMMIT=master
