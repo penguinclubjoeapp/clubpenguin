@@ -34,7 +34,7 @@ err()   { echo -e "${RED}  ✗${NC} $*" >&2; }
 hr()    { echo -e "${DIM}$(printf '─%.0s' {1..60})${NC}"; }
 
 # Escape special characters for sed replacement strings (using | delimiter)
-sed_escape() { printf '%s' "$1" | sed 's/[&|\]/\\&/g'; }
+sed_escape() { printf '%s' "$1" | sed 's/[&|\\]/\\&/g'; }
 
 header() {
     local num=$1; shift
