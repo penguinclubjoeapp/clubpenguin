@@ -26,13 +26,14 @@ if [ -d "$MEDIA_DIR/play" ]; then
     echo "[media] Solero legacy-media already present, skipping."
 else
     echo "[media] Cloning Solero legacy-media (this may take a while)..."
-    TMPDIR="$(mktemp -d)"
-    trap 'rm -rf "$TMPDIR"' EXIT
-    git clone --depth 1 https://git.solero.me/solero/legacy-media.git "$TMPDIR"
     mkdir -p "$MEDIA_DIR"
-    rsync -a --exclude='.git' "$TMPDIR/" "$MEDIA_DIR/"
-    rm -rf "$TMPDIR"
-    trap - EXIT
+    git clone --depth 1 https://git.solero.me/solero/legacy-media.git "$MEDIA_DIR/legacy-media-tmp"
+    # Move contents up and remove .git
+    shopt -s dotglob
+    mv "$MEDIA_DIR/legacy-media-tmp"/* "$MEDIA_DIR/" 2>/dev/null || true
+    shopt -u dotglob
+    rm -rf "$MEDIA_DIR/legacy-media-tmp"
+    rm -rf "$MEDIA_DIR/.git"
     echo "[media] Legacy media downloaded to $MEDIA_DIR"
 fi
 
