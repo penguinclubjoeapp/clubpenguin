@@ -15,9 +15,10 @@ Closed issues: #1 (README), #2 (.gitignore), #3 (env config), #4 (Docker Compose
 
 ## What To Do
 
-The only remaining issue is:
+The remaining issues are:
 
-- **#10** (Room Sync Plugin) — the final feature, unblocked by #9
+- **#10** (Room Sync Plugin) — the final voice integration feature, unblocked by #9
+- **#12** (Game Client Page) — static HTML page with Ruffle embed, unblocked by #8
 
 ### Workflow per issue
 
