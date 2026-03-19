@@ -34,7 +34,10 @@ err()   { echo -e "${RED}  ✗${NC} $*" >&2; }
 hr()    { echo -e "${DIM}$(printf '─%.0s' {1..60})${NC}"; }
 
 # Escape special characters for sed replacement strings (using | delimiter)
-sed_escape() { printf '%s' "$1" | sed 's/[&|\\]/\\&/g'; }
+# Also strips any problematic characters that can sneak in from copy-paste
+sed_escape() {
+    printf '%s' "$1" | tr -d '\n\r\t' | tr -cd '[:print:]' | sed 's/[&|\\]/\\&/g'
+}
 
 header() {
     local num=$1; shift
