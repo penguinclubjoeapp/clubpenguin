@@ -29,10 +29,8 @@
             wsLoginPort: 7112,
             wsWorldPort: 7113,
 
-            // CHANGEME: Path to the AS2 client boot SWF.
-            // Verify this path after running scripts/fetch-media.sh.
-            // Common paths: /play/v2/client/boot.swf, /play/v2/content/local/en/boot.swf
-            swfPath: "/boots.swf",
+            // Path to the AS2 client boot SWF
+            swfPath: "/play/v2/client/load.swf",
         };
 
         // ── Ruffle Setup ────────────────────────────────────────────────
@@ -64,7 +62,10 @@
             player.style.height = "100%";
             document.getElementById("player").appendChild(player);
 
-            player.load({ url: GAME_CONFIG.swfPath });
+            player.load({
+                url: GAME_CONFIG.swfPath,
+                parameters: { lang: "en" }
+            });
         });
     </script>
 </body>
