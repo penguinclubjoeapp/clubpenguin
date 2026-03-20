@@ -563,52 +563,32 @@ step_07() {
     fi
 
     info "Building containers..."
-    $COMPOSE build
+    if ! $COMPOSE build; then
+        err "Build failed"
+        exit 1
+    fi
+    ok "Build complete"
 
-    # Start database first to initialize schema
-    info "Starting database..."
-    $COMPOSE up -d postgres redis
-
-    # Wait for postgres to be ready
-    local db_timeout=30
-    local db_elapsed=0
-    while [ $db_elapsed -lt $db_timeout ]; do
-        if $COMPOSE exec -T postgres pg_isready -U "${POSTGRES_USER:-penguin}" &>/dev/null; then
-            break
+    # Extract Houdini schema if not already present (before starting postgres)
+    local schema_file="$PROJECT_ROOT/database/00-houdini-schema.sql"
+    if [ ! -f "$schema_file" ]; then
+        info "Extracting database schema from Houdini image..."
+        if ! $COMPOSE run --rm --no-deps --entrypoint "" houdini-login cat /opt/houdini/houdini.sql > "$schema_file" 2>/dev/null; then
+            err "Failed to extract schema"
+            cat "$schema_file" >&2
+            rm -f "$schema_file"
+            exit 1
         fi
-        sleep 1
-        db_elapsed=$((db_elapsed + 1))
-    done
-
-    # Check if Houdini schema needs to be loaded (run psql as postgres user)
-    local has_schema
-    has_schema=$($COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -tAc "SELECT 1 FROM information_schema.tables WHERE table_name='penguin'" 2>/dev/null || echo "")
-
-    if [ "$has_schema" != "1" ]; then
-        info "Initializing database schema..."
-
-        # Extract schema to temp file, then load (avoids broken pipe)
-        local schema_tmp
-        schema_tmp=$(mktemp)
-        $COMPOSE run --rm --entrypoint "" houdini-login cat /opt/houdini/houdini.sql > "$schema_tmp" 2>/dev/null
-
-        # Copy schema into postgres container and run it
-        docker cp "$schema_tmp" clubpenguin-postgres-1:/tmp/houdini.sql
-        $COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -f /tmp/houdini.sql > /dev/null 2>&1
-        rm -f "$schema_tmp"
-
-        # Run our custom schema files
-        for sql_file in "$PROJECT_ROOT"/database/*.sql; do
-            if [ -f "$sql_file" ]; then
-                local sql_name
-                sql_name=$(basename "$sql_file")
-                docker cp "$sql_file" clubpenguin-postgres-1:/tmp/"$sql_name"
-                $COMPOSE exec -T -u postgres postgres psql -U "${POSTGRES_USER:-penguin}" -d "${POSTGRES_DB:-penguin}" -f /tmp/"$sql_name" > /dev/null 2>&1
-            fi
-        done
-        ok "Database schema initialized"
+        ok "Schema extracted ($(wc -l < "$schema_file") lines)"
     else
-        ok "Database schema already exists"
+        ok "Schema already exists ($(wc -l < "$schema_file") lines)"
+    fi
+
+    # Start services - postgres will load all SQL files in database/ during init
+    info "Starting services..."
+    if ! $COMPOSE up -d; then
+        err "Failed to start services"
+        exit 1
     fi
 
     info "Starting all services..."
