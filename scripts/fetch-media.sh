@@ -4,47 +4,96 @@
 # Usage: ./scripts/fetch-media.sh
 #
 # Populates the media/ directory with:
-#   1. Solero legacy-media (AS2 game SWFs)
-#   2. Ruffle self-hosted release (Flash emulator WASM/JS)
+#   1. Club Penguin game SWFs (AS2 media)
+#   2. Web service JSON files (stamps, games, etc.)
+#   3. Ruffle self-hosted release (Flash emulator WASM/JS)
 #
 # The media/ directory is gitignored — assets are Disney IP and must not be
 # committed to the repository.
 #
-# ── Fallback sources if Solero GitLab is down ──────────────────────────────
-#   - https://github.com/d3spi/Club-Penguin-SWF-Archive
-#   - https://github.com/abarichello/cp-swf
-#   - https://github.com/anthonywww/cpcontinuned-media
+# ── Primary source ─────────────────────────────────────────────────────────
+#   - https://git.solero.me/solero/legacy-media.git (compatible with Houdini)
+#
+# ── Alternative sources ────────────────────────────────────────────────────
 #   - https://archives.clubpenguinwiki.info/wiki/Main_Page
 
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MEDIA_DIR="$PROJECT_ROOT/media"
+TMP_DIR="$MEDIA_DIR/legacy-media-tmp"
 
-# ── 1. Solero legacy-media ──────────────────────────────────────────────────
-if [ -d "$MEDIA_DIR/play" ]; then
-    echo "[media] Solero legacy-media already present, skipping."
+# ── 1. Club Penguin game media ──────────────────────────────────────────────
+# Check if both SWFs and web_service files exist
+if [ -f "$MEDIA_DIR/play/v2/client/load.swf" ] && [ -f "$MEDIA_DIR/play/en/web_service/stamps.json" ]; then
+    echo "[media] Game media already present (load.swf and web_service files found), skipping."
 else
-    echo "[media] Cloning Solero legacy-media (this may take a while)..."
-    mkdir -p "$MEDIA_DIR"
-    git clone --depth 1 https://git.solero.me/solero/legacy-media.git "$MEDIA_DIR/legacy-media-tmp"
-    # Move contents up and remove .git
-    shopt -s dotglob
-    mv "$MEDIA_DIR/legacy-media-tmp"/* "$MEDIA_DIR/" 2>/dev/null || true
-    shopt -u dotglob
-    rm -rf "$MEDIA_DIR/legacy-media-tmp"
-    rm -rf "$MEDIA_DIR/.git"
+    echo "[media] Downloading Club Penguin media (this may take a while)..."
+    echo "[media] Source: https://git.solero.me/solero/legacy-media.git"
 
-    # Flatten if repo contained its own media/ folder (creates media/media/)
-    if [ -d "$MEDIA_DIR/media" ]; then
-        echo "[media] Flattening nested media/media/ structure..."
-        shopt -s dotglob
-        mv "$MEDIA_DIR/media"/* "$MEDIA_DIR/" 2>/dev/null || true
-        shopt -u dotglob
-        rmdir "$MEDIA_DIR/media" 2>/dev/null || rm -rf "$MEDIA_DIR/media"
+    # Clean up any incomplete previous download
+    rm -rf "$MEDIA_DIR/play" 2>/dev/null || true
+    rm -rf "$TMP_DIR" 2>/dev/null || true
+
+    mkdir -p "$MEDIA_DIR"
+
+    # Clone the media repository
+    if ! git clone --depth 1 https://git.solero.me/solero/legacy-media.git "$TMP_DIR"; then
+        echo "[media] ERROR: Failed to clone repository"
+        exit 1
     fi
 
-    echo "[media] Legacy media downloaded to $MEDIA_DIR"
+    # Solero legacy-media has two directories:
+    #   - media/play/v2/... (game SWFs)
+    #   - play/... (web files including en/web_service/*.json)
+    # We need to merge both into our play/ directory
+
+    mkdir -p "$MEDIA_DIR/play"
+
+    # First, copy the game SWFs from media/play/
+    if [ -d "$TMP_DIR/media/play" ]; then
+        cp -r "$TMP_DIR/media/play/"* "$MEDIA_DIR/play/"
+        echo "[media] Copied game SWFs from media/play/"
+    else
+        echo "[media] ERROR: Expected media/play/ directory not found in repo"
+        rm -rf "$TMP_DIR"
+        exit 1
+    fi
+
+    # Then, copy the web files from play/ (includes web_service JSON files)
+    if [ -d "$TMP_DIR/play" ]; then
+        cp -r "$TMP_DIR/play/"* "$MEDIA_DIR/play/"
+        echo "[media] Copied web files from play/ (includes web_service JSONs)"
+    else
+        echo "[media] WARNING: play/ directory not found, web_service files may be missing"
+    fi
+
+    # Clean up
+    rm -rf "$TMP_DIR"
+
+    # Verify critical files exist
+    if [ ! -f "$MEDIA_DIR/play/v2/client/load.swf" ]; then
+        echo "[media] ERROR: load.swf not found after download"
+        exit 1
+    fi
+
+    # Verify web_service files exist
+    MISSING_FILES=0
+    for f in en/web_service/stamps.json en/web_service/games.json web_service/weblogger.json; do
+        if [ ! -f "$MEDIA_DIR/play/$f" ]; then
+            echo "[media] WARNING: Missing $f"
+            MISSING_FILES=$((MISSING_FILES + 1))
+        fi
+    done
+
+    if [ $MISSING_FILES -gt 0 ]; then
+        echo "[media] WARNING: $MISSING_FILES web_service files are missing"
+    else
+        echo "[media] All web_service files present"
+    fi
+
+    SWF_COUNT=$(find "$MEDIA_DIR/play" -name "*.swf" | wc -l)
+    echo "[media] Downloaded $SWF_COUNT SWF files to $MEDIA_DIR/play"
 fi
 
 # ── 2. Ruffle self-hosted release ───────────────────────────────────────────
