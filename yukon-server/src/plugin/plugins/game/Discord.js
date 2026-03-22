@@ -13,13 +13,53 @@ export default class Discord extends GamePlugin {
         // Bot API configuration
         const botHost = process.env.BOT_API_HOST || 'discord-bot'
         const botPort = process.env.BOT_API_PORT || '3001'
-        this.botLinkUrl = `http://${botHost}:${botPort}/link`
-        this.botMoveUrl = `http://${botHost}:${botPort}/move`
+        this.botBaseUrl = `http://${botHost}:${botPort}`
+        this.botLinkUrl = `${this.botBaseUrl}/link`
+        this.botMoveUrl = `${this.botBaseUrl}/move`
+        this.botRoomsUrl = `${this.botBaseUrl}/rooms`
 
         // Room channel mapping cache
         this.roomMap = {}
         this.cacheUpdatedAt = 0
         this.cacheTTL = 60 // seconds
+
+        // Push room list to Discord bot so it can create voice channels
+        this.pushRooms()
+    }
+
+    async pushRooms(retries = 5, delay = 3000) {
+        const rooms = Object.values(this.rooms).map(r => ({
+            id: r.id,
+            name: r.name,
+            game: r.game,
+        }))
+
+        for (let attempt = 1; attempt <= retries; attempt++) {
+            try {
+                const response = await fetch(this.botRoomsUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(rooms)
+                })
+
+                if (response.ok) {
+                    const data = await response.json()
+                    console.log(`[Discord] Pushed ${rooms.length} rooms to bot: ${data.status}`)
+                    return
+                }
+
+                const text = await response.text()
+                console.warn(`[Discord] Bot returned ${response.status} (attempt ${attempt}/${retries}): ${text.slice(0, 200)}`)
+            } catch (error) {
+                console.warn(`[Discord] Failed to reach bot (attempt ${attempt}/${retries}): ${error.message}`)
+            }
+
+            if (attempt < retries) {
+                await new Promise(r => setTimeout(r, delay))
+            }
+        }
+
+        console.error(`[Discord] Could not push rooms to bot after ${retries} attempts`)
     }
 
     async linkDiscord(args, user) {

@@ -19,22 +19,24 @@ export default class Server {
                 origin: config.cors.origin,
                 methods: ['GET', 'POST']
             },
-            path: '/'
-        })
+            path: '/socket.io'
+        }, config.worlds[id].port)
 
         this.rateLimiter = config.rateLimit.enabled
             ? new RateLimiter(config)
             : null
 
-        this.server = io.listen(config.worlds[id].port)
+        this.server = io
 
         this.server.on('connection', socket => this.onConnection(socket))
     }
 
-    createIo(config, options) {
+    createIo(config, options, port) {
         const server = config.https
             ? this.httpsServer(config.ssl)
             : this.httpServer()
+
+        server.listen(port)
 
         return require('socket.io')(server, options)
     }

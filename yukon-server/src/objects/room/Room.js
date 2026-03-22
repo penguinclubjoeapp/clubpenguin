@@ -33,7 +33,7 @@ export default class Room {
 
         // Notify Discord plugin for voice channel sync
         console.log('[DEBUG] Room.add: calling Discord hook')
-        user.handler.plugins.discord?.onRoomJoin(user, this)
+        user.handler.plugins.plugins.discord?.onRoomJoin(user, this)
         console.log('[DEBUG] Room.add: END')
     }
 
