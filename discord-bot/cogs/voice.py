@@ -1,5 +1,6 @@
 import logging
 
+import aiomysql
 import discord
 from aiohttp import web
 from discord.ext import commands
@@ -19,8 +20,11 @@ class VoiceCog(commands.Cog):
 
     async def cog_load(self):
         """Load room mappings from DB into cache."""
-        rows = await self.bot.db.fetch("SELECT room_id, channel_id FROM room_channel_mappings")
-        self.room_map = {row["room_id"]: row["channel_id"] for row in rows}
+        async with self.bot.db.acquire() as conn:
+            async with conn.cursor(aiomysql.DictCursor) as cur:
+                await cur.execute("SELECT roomId, channelId FROM room_channel_mappings")
+                rows = await cur.fetchall()
+        self.room_map = {row["roomId"]: row["channelId"] for row in rows}
         log.info("Loaded %d room-channel mappings", len(self.room_map))
 
     # ── HTTP endpoint ────────────────────────────────────────────────────
@@ -70,16 +74,16 @@ class VoiceCog(commands.Cog):
     @commands.has_guild_permissions(manage_guild=True)
     async def map_channel(self, ctx: commands.Context, room_id: int, channel: discord.VoiceChannel):
         """Map a Club Penguin room ID to a Discord voice channel."""
-        await self.bot.db.execute(
-            """
-            INSERT INTO room_channel_mappings (room_id, channel_id)
-            VALUES ($1, $2)
-            ON CONFLICT (room_id)
-            DO UPDATE SET channel_id = $2, mapped_at = NOW()
-            """,
-            room_id,
-            channel.id,
-        )
+        async with self.bot.db.acquire() as conn:
+            async with conn.cursor() as cur:
+                await cur.execute(
+                    """
+                    INSERT INTO room_channel_mappings (roomId, channelId, mappedAt)
+                    VALUES (%s, %s, NOW())
+                    ON DUPLICATE KEY UPDATE channelId = %s, mappedAt = NOW()
+                    """,
+                    (room_id, channel.id, channel.id),
+                )
         self.room_map[room_id] = channel.id
         await ctx.message.add_reaction("\u2705")
         log.info("Mapped room %d -> channel %s (%d)", room_id, channel.name, channel.id)
@@ -88,9 +92,11 @@ class VoiceCog(commands.Cog):
     @commands.has_guild_permissions(manage_guild=True)
     async def unmap_channel(self, ctx: commands.Context, room_id: int):
         """Remove a room-to-channel mapping."""
-        await self.bot.db.execute(
-            "DELETE FROM room_channel_mappings WHERE room_id = $1", room_id
-        )
+        async with self.bot.db.acquire() as conn:
+            async with conn.cursor() as cur:
+                await cur.execute(
+                    "DELETE FROM room_channel_mappings WHERE roomId = %s", (room_id,)
+                )
         self.room_map.pop(room_id, None)
         await ctx.message.add_reaction("\u2705")
         log.info("Unmapped room %d", room_id)

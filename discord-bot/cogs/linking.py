@@ -77,16 +77,16 @@ class LinkingCog(commands.Cog):
         discord_id = entry["discord_id"]
 
         # Upsert into discord_links
-        await self.bot.db.execute(
-            """
-            INSERT INTO discord_links (penguin_id, discord_id, linked_at)
-            VALUES ($1, $2, NOW())
-            ON CONFLICT (penguin_id)
-            DO UPDATE SET discord_id = $2, linked_at = NOW()
-            """,
-            penguin_id,
-            discord_id,
-        )
+        async with self.bot.db.acquire() as conn:
+            async with conn.cursor() as cur:
+                await cur.execute(
+                    """
+                    INSERT INTO discord_links (userId, discordId, linkedAt)
+                    VALUES (%s, %s, NOW())
+                    ON DUPLICATE KEY UPDATE discordId = %s, linkedAt = NOW()
+                    """,
+                    (penguin_id, discord_id, discord_id),
+                )
 
         log.info("Linked penguin %d (%s) to Discord user %d", penguin_id, penguin_name, discord_id)
 

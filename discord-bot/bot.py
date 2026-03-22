@@ -1,7 +1,7 @@
 import os
 import logging
 
-import asyncpg
+import aiomysql
 import discord
 from aiohttp import web
 from discord.ext import commands
@@ -17,16 +17,16 @@ class ClubPenguinBot(commands.Bot):
         self.api_port = int(os.environ.get("BOT_API_PORT", "3001"))
         self.link_code_expiry = int(os.environ.get("LINK_CODE_EXPIRY_SECONDS", "300"))
 
-        # Database connection string parts
-        self.db_dsn = (
-            f"postgresql://{os.environ.get('POSTGRES_USER', 'penguin')}"
-            f":{os.environ.get('POSTGRES_PASSWORD', 'changeme')}"
-            f"@{os.environ.get('POSTGRES_HOST', 'postgres')}"
-            f":{os.environ.get('POSTGRES_PORT', '5432')}"
-            f"/{os.environ.get('POSTGRES_DB', 'penguin')}"
-        )
+        # Database connection config for MySQL
+        self.db_config = {
+            "host": os.environ.get("MYSQL_HOST", "mysql"),
+            "port": int(os.environ.get("MYSQL_PORT", "3306")),
+            "user": os.environ.get("MYSQL_USER", "penguin"),
+            "password": os.environ.get("MYSQL_PASSWORD", "changeme"),
+            "db": os.environ.get("MYSQL_DATABASE", "yukon"),
+        }
 
-        self.db: asyncpg.Pool | None = None
+        self.db: aiomysql.Pool | None = None
         self.web_routes: list[web.RouteDef] = []
         self._web_runner: web.AppRunner | None = None
 
@@ -43,7 +43,14 @@ class ClubPenguinBot(commands.Bot):
 
     async def setup_hook(self):
         # Database pool
-        self.db = await asyncpg.create_pool(self.db_dsn)
+        self.db = await aiomysql.create_pool(
+            host=self.db_config["host"],
+            port=self.db_config["port"],
+            user=self.db_config["user"],
+            password=self.db_config["password"],
+            db=self.db_config["db"],
+            autocommit=True,
+        )
         log.info("Database pool created")
 
         # Load cogs (they register web routes via self.bot.web_routes)
