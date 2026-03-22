@@ -46,6 +46,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      discord-bot:
+        condition: service_started
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 6112 && nc -z localhost 6113 || exit 1"]
       interval: 10s
@@ -107,6 +109,12 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:${BOT_API_PORT:-3001}/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
 
 volumes:
   mysql-data:
