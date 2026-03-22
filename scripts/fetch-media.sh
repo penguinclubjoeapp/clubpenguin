@@ -4,32 +4,32 @@
 # Usage: ./scripts/fetch-media.sh
 #
 # Populates the media/ directory with:
-#   1. Club Penguin game SWFs (AS2 media)
-#   2. Web service JSON files (stamps, games, etc.)
-#   3. Ruffle self-hosted release (Flash emulator WASM/JS)
+#   1. Club Penguin game SWFs (AS2 media from cpcontinued)
+#   2. Ruffle self-hosted release (Flash emulator WASM/JS)
 #
 # The media/ directory is gitignored — assets are Disney IP and must not be
 # committed to the repository.
 #
 # ── Primary source ─────────────────────────────────────────────────────────
-#   - https://git.solero.me/solero/legacy-media.git (compatible with Houdini)
+#   - https://github.com/anthonywww/cpcontinuned-media (clean original CP media)
 #
 # ── Alternative sources ────────────────────────────────────────────────────
+#   - https://git.solero.me/solero/legacy-media.git
 #   - https://archives.clubpenguinwiki.info/wiki/Main_Page
 
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MEDIA_DIR="$PROJECT_ROOT/media"
-TMP_DIR="$MEDIA_DIR/legacy-media-tmp"
+TMP_DIR="$MEDIA_DIR/cpcontinued-tmp"
 
 # ── 1. Club Penguin game media ──────────────────────────────────────────────
-# Check if both SWFs and web_service files exist
-if [ -f "$MEDIA_DIR/play/v2/client/load.swf" ] && [ -f "$MEDIA_DIR/play/en/web_service/stamps.json" ]; then
-    echo "[media] Game media already present (load.swf and web_service files found), skipping."
+# Check if SWFs exist (cpcontinued uses different paths)
+if [ -f "$MEDIA_DIR/play/v2/client/shell.swf" ] || [ -f "$MEDIA_DIR/play/v2/client/load.swf" ]; then
+    echo "[media] Game media already present, skipping."
 else
     echo "[media] Downloading Club Penguin media (this may take a while)..."
-    echo "[media] Source: https://git.solero.me/solero/legacy-media.git"
+    echo "[media] Source: https://github.com/anthonywww/cpcontinuned-media"
 
     # Clean up any incomplete previous download
     rm -rf "$MEDIA_DIR/play" 2>/dev/null || true
@@ -38,58 +38,44 @@ else
     mkdir -p "$MEDIA_DIR"
 
     # Clone the media repository
-    if ! git clone --depth 1 https://git.solero.me/solero/legacy-media.git "$TMP_DIR"; then
+    if ! git clone --depth 1 https://github.com/anthonywww/cpcontinuned-media.git "$TMP_DIR"; then
         echo "[media] ERROR: Failed to clone repository"
         exit 1
     fi
 
-    # Solero legacy-media has two directories:
-    #   - media/play/v2/... (game SWFs)
-    #   - play/... (web files including en/web_service/*.json)
-    # We need to merge both into our play/ directory
+    # cpcontinued-media structure:
+    #   - public/ contains the media files (v2/client/, etc.)
+    # We copy public/ contents to our play/ directory
 
     mkdir -p "$MEDIA_DIR/play"
 
-    # First, copy the game SWFs from media/play/
-    if [ -d "$TMP_DIR/media/play" ]; then
-        cp -r "$TMP_DIR/media/play/"* "$MEDIA_DIR/play/"
-        echo "[media] Copied game SWFs from media/play/"
+    if [ -d "$TMP_DIR/public" ]; then
+        cp -r "$TMP_DIR/public/"* "$MEDIA_DIR/play/"
+        echo "[media] Copied media from public/"
     else
-        echo "[media] ERROR: Expected media/play/ directory not found in repo"
+        echo "[media] ERROR: Expected public/ directory not found in repo"
         rm -rf "$TMP_DIR"
         exit 1
-    fi
-
-    # Then, copy the web files from play/ (includes web_service JSON files)
-    if [ -d "$TMP_DIR/play" ]; then
-        cp -r "$TMP_DIR/play/"* "$MEDIA_DIR/play/"
-        echo "[media] Copied web files from play/ (includes web_service JSONs)"
-    else
-        echo "[media] WARNING: play/ directory not found, web_service files may be missing"
     fi
 
     # Clean up
     rm -rf "$TMP_DIR"
 
-    # Verify critical files exist
-    if [ ! -f "$MEDIA_DIR/play/v2/client/load.swf" ]; then
-        echo "[media] ERROR: load.swf not found after download"
-        exit 1
-    fi
-
-    # Verify web_service files exist
-    MISSING_FILES=0
-    for f in en/web_service/stamps.json en/web_service/games.json web_service/weblogger.json; do
-        if [ ! -f "$MEDIA_DIR/play/$f" ]; then
-            echo "[media] WARNING: Missing $f"
-            MISSING_FILES=$((MISSING_FILES + 1))
+    # Verify critical files exist (cpcontinued may use shell.swf or boot.swf instead of load.swf)
+    BOOT_SWF=""
+    for candidate in v2/client/shell.swf v2/client/load.swf v2/client/boot.swf boot.swf; do
+        if [ -f "$MEDIA_DIR/play/$candidate" ]; then
+            BOOT_SWF="$candidate"
+            break
         fi
     done
 
-    if [ $MISSING_FILES -gt 0 ]; then
-        echo "[media] WARNING: $MISSING_FILES web_service files are missing"
+    if [ -z "$BOOT_SWF" ]; then
+        echo "[media] WARNING: No boot SWF found (tried shell.swf, load.swf, boot.swf)"
+        echo "[media] Available SWFs:"
+        find "$MEDIA_DIR/play" -name "*.swf" -type f | head -20
     else
-        echo "[media] All web_service files present"
+        echo "[media] Found boot SWF: $BOOT_SWF"
     fi
 
     SWF_COUNT=$(find "$MEDIA_DIR/play" -name "*.swf" | wc -l)

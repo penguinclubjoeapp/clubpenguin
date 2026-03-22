@@ -38,34 +38,78 @@
         window.RufflePlayer.config = {
             autoplay: "on",
             unmuteOverlay: "hidden",
+            logLevel: "debug",
             socketProxy: [
+                // Intercept connections to window.location.hostname
                 {
                     host: GAME_CONFIG.host,
                     port: GAME_CONFIG.loginPort,
-                    proxyUrl: "ws://" + GAME_CONFIG.host + ":" + GAME_CONFIG.wsLoginPort,
+                    proxyUrl: "wss://" + GAME_CONFIG.host + "/ws-login",
                 },
                 {
                     host: GAME_CONFIG.host,
                     port: GAME_CONFIG.worldPort,
-                    proxyUrl: "ws://" + GAME_CONFIG.host + ":" + GAME_CONFIG.wsWorldPort,
+                    proxyUrl: "wss://" + GAME_CONFIG.host + "/ws-world",
+                },
+                // Also intercept connections to 127.0.0.1 (servers.xml uses this)
+                {
+                    host: "127.0.0.1",
+                    port: GAME_CONFIG.loginPort,
+                    proxyUrl: "wss://" + GAME_CONFIG.host + "/ws-login",
+                },
+                {
+                    host: "127.0.0.1",
+                    port: GAME_CONFIG.worldPort,
+                    proxyUrl: "wss://" + GAME_CONFIG.host + "/ws-world",
                 },
             ],
         };
     </script>
     <script src="/ruffle/ruffle.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
+        document.addEventListener("DOMContentLoaded", async function () {
+            console.log("[CP Debug] Starting Ruffle initialization...");
+            console.log("[CP Debug] Config:", JSON.stringify(GAME_CONFIG, null, 2));
 
+            const ruffle = window.RufflePlayer.newest();
+            console.log("[CP Debug] Ruffle version:", ruffle);
+
+            const player = ruffle.createPlayer();
             player.style.width = "100%";
             player.style.height = "100%";
             document.getElementById("player").appendChild(player);
 
-            player.load({
-                url: GAME_CONFIG.swfPath,
-                parameters: { lang: "en" }
+            // Listen for Ruffle events
+            player.addEventListener("loadedmetadata", () => {
+                console.log("[CP Debug] SWF metadata loaded");
             });
+            player.addEventListener("loadeddata", () => {
+                console.log("[CP Debug] SWF data loaded");
+            });
+            player.addEventListener("error", (e) => {
+                console.error("[CP Debug] Ruffle error:", e);
+            });
+            player.addEventListener("panic", (e) => {
+                console.error("[CP Debug] Ruffle PANIC:", e);
+            });
+
+            console.log("[CP Debug] Loading SWF:", GAME_CONFIG.swfPath);
+
+            try {
+                await player.load({
+                    url: GAME_CONFIG.swfPath,
+                    parameters: {
+                        lang: "en",
+                        basePath: "/play/v2/",
+                        clientPath: "/play/v2/client/",
+                        contentPath: "/play/v2/content/",
+                        gamesPath: "/play/v2/games/"
+                    }
+                });
+                console.log("[CP Debug] SWF load() completed");
+            } catch (err) {
+                console.error("[CP Debug] SWF load() failed:", err);
+            }
         });
     </script>
 </body>
