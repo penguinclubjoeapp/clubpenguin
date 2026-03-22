@@ -20,16 +20,16 @@ export default class Checks extends BaseContainer {
         const text_2 = scene.add.text(34, 56, "", {});
         text_2.setOrigin(0, 0.5);
         text_2.text = "Remember my password";
-        text_2.setStyle({ "color": "#FFFFFFDD", "fontFamily": "Arial", "fontStyle": "bold", "fontSize": "26px" });
-        text_2.setShadow(1, 1, 'rgba(0,0,0,0.3)', 2);
+        text_2.setStyle({ "align": "right", "color": "#000000ff", "fontFamily": "Arial Narrow", "fontSize": "30px" });
+        text_2.setLineSpacing(25);
         this.add(text_2);
 
         // text_1
         const text_1 = scene.add.text(34, 1, "", {});
         text_1.setOrigin(0, 0.5);
         text_1.text = "Remember me on this computer";
-        text_1.setStyle({ "color": "#FFFFFFDD", "fontFamily": "Arial", "fontStyle": "bold", "fontSize": "26px" });
-        text_1.setShadow(1, 1, 'rgba(0,0,0,0.3)', 2);
+        text_1.setStyle({ "align": "right", "color": "#000000ff", "fontFamily": "Arial Narrow", "fontSize": "30px" });
+        text_1.setLineSpacing(25);
         this.add(text_1);
 
         // password
