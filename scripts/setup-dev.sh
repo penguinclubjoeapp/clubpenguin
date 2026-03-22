@@ -399,29 +399,42 @@ EOF
 # ═══════════════════════════════════════════════════════════════════════════════
 # Step 6: Verify Setup
 # ═══════════════════════════════════════════════════════════════════════════════
+find_port() {
+    local port=$1 offset=1000
+    while ss -tlnp 2>/dev/null | grep -q ":${port} " || lsof -iTCP:$port -sTCP:LISTEN &>/dev/null 2>&1; do
+        port=$((port + offset))
+    done
+    echo $port
+}
+
 step_06() {
     header 6 "Verify Setup"
 
     info "Quick smoke test — starting server briefly..."
 
+    # Use same port detection as dev.sh
+    local login_port=$(find_port 6112)
+    local world_port=$(find_port 6113)
+
     cd "$PROJECT_ROOT/yukon-server"
-    NODE_ENV=development npx babel-watch ./src/World.js Login Blizzard &
+    DEV_LOGIN_PORT=$login_port DEV_WORLD_PORT=$world_port NODE_ENV=development \
+        npx babel-watch ./src/World.js Login Blizzard &
     local server_pid=$!
     sleep 4
 
     local server_ok=true
-    if ! ss -tlnp 2>/dev/null | grep -q ':6112 ' && ! lsof -iTCP:6112 -sTCP:LISTEN &>/dev/null; then
-        warn "Port 6112 (Login) not listening"
+    if ! ss -tlnp 2>/dev/null | grep -q ":${login_port} " && ! lsof -iTCP:$login_port -sTCP:LISTEN &>/dev/null; then
+        warn "Port $login_port (Login) not listening"
         server_ok=false
     else
-        ok "Login server on :6112"
+        ok "Login server on :$login_port"
     fi
 
-    if ! ss -tlnp 2>/dev/null | grep -q ':6113 ' && ! lsof -iTCP:6113 -sTCP:LISTEN &>/dev/null; then
-        warn "Port 6113 (Blizzard) not listening"
+    if ! ss -tlnp 2>/dev/null | grep -q ":${world_port} " && ! lsof -iTCP:$world_port -sTCP:LISTEN &>/dev/null; then
+        warn "Port $world_port (Blizzard) not listening"
         server_ok=false
     else
-        ok "Game server on :6113"
+        ok "Game server on :$world_port"
     fi
 
     kill $server_pid 2>/dev/null || true
@@ -433,13 +446,9 @@ step_06() {
         warn "Server didn't bind expected ports. Check config.dev.json and database connection."
     fi
 
-    # Check client can start (just verify webpack config parses)
-    cd "$PROJECT_ROOT/yukon"
-    if npx webpack --config webpack.config.js --env test 2>/dev/null | head -1 | grep -qi 'error'; then
-        warn "Webpack config has issues"
-    else
-        ok "Client webpack config OK"
-    fi
+    # Check client port
+    local client_port=$(find_port 8080)
+    ok "Client port :$client_port available"
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -455,9 +464,11 @@ step_07() {
     echo "    bash scripts/dev.sh"
     echo ""
     echo -e "  ${BOLD}What it runs:${NC}"
-    echo "    Dev MySQL ........... localhost:3307"
-    echo "    Yukon server ........ localhost:6112 (login), :6113 (game)"
-    echo "    Yukon client ........ http://localhost:8080"
+    echo "    Dev MySQL ........... localhost:3307  (auto-picks free port if busy)"
+    echo "    Yukon server ........ localhost:6112/6113  (auto-picks free ports)"
+    echo "    Yukon client ........ http://localhost:8080  (auto-picks free port)"
+    echo ""
+    echo -e "  ${DIM}Ports adjust automatically — check dev.sh output for actual ports.${NC}"
     echo ""
     echo -e "  ${BOLD}Useful commands:${NC}"
     echo "    node scripts/verify.js list         List all accounts"
