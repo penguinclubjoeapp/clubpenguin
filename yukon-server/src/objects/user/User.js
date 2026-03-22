@@ -101,6 +101,7 @@ export default class User {
 
     setPermissions() {
         this.isModerator = this.rank >= 2
+        this.isMember = this.member >= 1
     }
 
     get anonymous() {
@@ -116,6 +117,7 @@ export default class User {
             'color',
             'photo',
             'flag',
+            'member',
         )
     }
 

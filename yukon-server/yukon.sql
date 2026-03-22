@@ -118,7 +118,8 @@ CREATE TABLE `users` (
   `photo` int(11) NOT NULL DEFAULT 0,
   `flag` int(11) NOT NULL DEFAULT 0,
   `ninjaRank` tinyint(1) NOT NULL DEFAULT 0,
-  `ninjaProgress` tinyint(3) NOT NULL DEFAULT 0
+  `ninjaProgress` tinyint(3) NOT NULL DEFAULT 0,
+  `member` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Users';
 DELIMITER $$
 CREATE TRIGGER `trigger_users_insert` AFTER INSERT ON `users` FOR EACH ROW BEGIN
