@@ -76,10 +76,14 @@ step_01() {
         node_ver=$(node -v | sed 's/v//')
         local node_major
         node_major=$(echo "$node_ver" | cut -d. -f1)
-        if (( node_major >= 20 )); then
+        if (( node_major >= 20 && node_major < 25 )); then
             ok "Node.js $node_ver"
+        elif (( node_major >= 25 )); then
+            err "Node.js $node_ver — v25+ is incompatible (SlowBuffer removed)"
+            echo "  Use nvm: nvm install 20 && nvm use 20"
+            missing=1
         else
-            err "Node.js $node_ver found — need v20+"
+            err "Node.js $node_ver found — need v20-24"
             missing=1
         fi
     else

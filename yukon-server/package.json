@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/wizguin/yukon-server.git"
   },
+  "engines": {
+    "node": ">=20 <25"
+  },
   "author": "wizguin",
   "license": "MIT",
   "bugs": {
