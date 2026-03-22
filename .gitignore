@@ -30,7 +30,11 @@ pip-delete-this-directory.txt
 venv/
 env/
 
-# ── 3. Node.js Artifacts ─────────────────────────────────────────────
+# ── 3. Server Config (secrets) ──────────────────────────────────────
+# config.json contains DB password — use config.example.json as template
+yukon-server/config/config.json
+
+# ── 4. Node.js Artifacts ─────────────────────────────────────────────
 node_modules/
 npm-debug.log*
 yarn-debug.log*

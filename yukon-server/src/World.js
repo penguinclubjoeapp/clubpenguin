@@ -8,6 +8,12 @@ import configDev from '../config/config.dev.json'
 
 const config = process.env.NODE_ENV === 'development' ? configDev : configProd
 
+// Allow env vars to override database config (secrets stay in .env, not in tracked files)
+if (process.env.MYSQL_HOST) config.database.host = process.env.MYSQL_HOST
+if (process.env.MYSQL_USER) config.database.user = process.env.MYSQL_USER
+if (process.env.MYSQL_PASSWORD) config.database.password = process.env.MYSQL_PASSWORD
+if (process.env.MYSQL_DATABASE) config.database.database = process.env.MYSQL_DATABASE
+
 
 class World extends Server {
 
