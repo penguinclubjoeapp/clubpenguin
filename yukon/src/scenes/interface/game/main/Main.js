@@ -188,11 +188,11 @@ export default class Main extends BaseScene {
         // news_button
         const news_button = this.add.image(76, 70, "main", "news-button");
 
-        // mod_button
-        const mod_button = this.add.image(1426, 78, "main", "mod/button");
+        // mod_button (disabled — clutters UI)
+        // const mod_button = this.add.image(1426, 78, "main", "mod/button");
 
         // mod_m
-        const mod_m = this.add.sprite(1426, 78, "main", "mod/m");
+        // const mod_m = this.add.sprite(1426, 78, "main", "mod/m");
 
         // widgetLayer
         const widgetLayer = this.add.layer();
@@ -237,10 +237,10 @@ export default class Main extends BaseScene {
         this.add.existing(safe);
         safe.visible = false;
 
-        // moderator
-        const moderator = new Moderator(this, 760, 480);
-        this.add.existing(moderator);
-        moderator.visible = false;
+        // moderator (disabled — clutters UI)
+        // const moderator = new Moderator(this, 760, 480);
+        // this.add.existing(moderator);
+        // moderator.visible = false;
 
         // settings
         const settings = new Settings(this, 760, 480);
@@ -258,7 +258,7 @@ export default class Main extends BaseScene {
         mailbook.visible = false;
 
         // lists
-        const hideOnSleep = [settings, moderator, playerCard, petCard, buddy, waddle, phone];
+        const hideOnSleep = [settings, playerCard, petCard, buddy, waddle, phone];
 
         // dock (components)
         new Interactive(dock);
@@ -356,11 +356,11 @@ export default class Main extends BaseScene {
         news_buttonButton.spriteName = "news-button";
         news_buttonButton.activeFrame = false;
 
-        // mod_button (components)
-        const mod_buttonSimpleButton = new SimpleButton(mod_button);
-        mod_buttonSimpleButton.hoverCallback = () => this.onModOver();
-        mod_buttonSimpleButton.hoverOutCallback = () => this.onModOut();
-        mod_buttonSimpleButton.callback = () => this.onModClick();
+        // mod_button (components) — disabled
+        // const mod_buttonSimpleButton = new SimpleButton(mod_button);
+        // mod_buttonSimpleButton.hoverCallback = () => this.onModOver();
+        // mod_buttonSimpleButton.hoverOutCallback = () => this.onModOut();
+        // mod_buttonSimpleButton.callback = () => this.onModClick();
 
         this.popup = popup;
         this.popupText = popupText;
@@ -370,7 +370,7 @@ export default class Main extends BaseScene {
         this.phone_button = phone_button;
         this.request_button = request_button;
         this.mailButton = mailButton;
-        this.mod_m = mod_m;
+        // this.mod_m = mod_m;
         this.phone = phone;
         this.waddle = waddle;
         this.buddy = buddy;
@@ -380,7 +380,7 @@ export default class Main extends BaseScene {
         this.actionsMenu = actionsMenu;
         this.emotesMenu = emotesMenu;
         this.safe = safe;
-        this.moderator = moderator;
+        // this.moderator = moderator;
         this.settings = settings;
         this.mail = mail;
         this.mailbook = mailbook;
