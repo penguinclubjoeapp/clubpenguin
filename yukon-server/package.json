@@ -3,7 +3,7 @@
   "version": "1.11.0-beta",
   "description": "A server for https://github.com/wizguin/yukon",
   "scripts": {
-    "dev": "babel-watch ./src/World.js Login Blizzard",
+    "dev": "NODE_ENV=development babel-watch ./src/World.js Login Blizzard",
     "build": "rimraf dist && babel src -d dist --copy-files",
     "start": "pm2 start ecosystem.config.js",
     "stop": "pm2 stop ecosystem.config.js",

@@ -1,0 +1,23 @@
+services:
+  mysql-dev:
+    image: mysql:8.0
+    container_name: clubpenguin-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: devroot
+      MYSQL_USER: penguin
+      MYSQL_PASSWORD: devpassword
+      MYSQL_DATABASE: yukon
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-dev-data:/var/lib/mysql
+      - ./yukon-server/yukon.sql:/docker-entrypoint-initdb.d/yukon.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql-dev-data:

@@ -12,6 +12,7 @@ export default class Database {
             config.password,
             {
                 host: config.host,
+                port: config.port || 3306,
                 dialect: config.dialect,
                 logging: (config.debug) ? console.log : false,
                 logQueryParameters: config.logQueryParameters

@@ -3,7 +3,10 @@ import GameHandler from './handlers/GameHandler'
 import LoginHandler from './handlers/LoginHandler'
 import Server from './server/Server'
 
-import config from '../config/config.json'
+import configProd from '../config/config.json'
+import configDev from '../config/config.dev.json'
+
+const config = process.env.NODE_ENV === 'development' ? configDev : configProd
 
 
 class World extends Server {

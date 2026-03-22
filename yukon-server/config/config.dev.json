@@ -1,0 +1,54 @@
+{
+    "crypto": {
+        "secret": "dev-secret-not-for-production",
+        "rounds": 10,
+        "loginKeyExpiry": 300
+    },
+    "database": {
+        "host": "127.0.0.1",
+        "port": 3307,
+        "user": "penguin",
+        "password": "devpassword",
+        "database": "yukon",
+        "dialect": "mysql",
+        "debug": false,
+        "logQueryParameters": true
+    },
+    "socketio": {
+        "https": false,
+        "ssl": {
+            "cert": "",
+            "ca": "",
+            "key": ""
+        }
+    },
+    "cors": {
+        "origin": "*"
+    },
+    "rateLimit": {
+        "enabled": false,
+        "addressConnectsPerSecond": 50,
+        "addressEventsPerSecond": 500,
+        "userEventsPerSecond": 100,
+        "ipAddressHeader": false
+    },
+    "worlds": {
+        "Login": {
+            "host": "0.0.0.0",
+            "port": 6112
+        },
+        "Blizzard": {
+            "host": "0.0.0.0",
+            "port": 6113,
+            "maxUsers": 300
+        }
+    },
+    "cooldowns": {
+        "send_emote": 250,
+        "send_frame": 250
+    },
+    "game": {
+        "preferredSpawn": 0,
+        "iglooIdOffset": 2000
+    }
+}

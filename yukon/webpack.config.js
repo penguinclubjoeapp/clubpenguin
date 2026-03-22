@@ -35,13 +35,13 @@ let config = {
         proxy: [
             {
                 context: '/world/login',
-                target: 'http://localhost:6111',
+                target: 'http://localhost:6112',
                 pathRewrite: { '^/world/login': '' },
                 ws: true
             },
             {
                 context: '/world/blizzard',
-                target: 'http://localhost:6112',
+                target: 'http://localhost:6113',
                 pathRewrite: { '^/world/blizzard': '' },
                 ws: true
             },
@@ -55,7 +55,7 @@ let config = {
         },
         host: 'localhost',
         port: 8080,
-        hot: false
+        hot: true
     },
     resolve: {
         alias: {
