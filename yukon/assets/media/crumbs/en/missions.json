@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "title": "Case of the Missing Puffles",
+        "description": "AUNT ARCTIC, FAMOUS REPORTER FOR\nTHE CLUB PENGUIN TIMES, IS VERY\nUPSET, BECAUSE TWO OF HER PET\nPUFFLES ARE MISSING! WILL YOU TAKE\nTHE CHALLENGE OF RESCUING THEM?",
+        "award": 801
+    },
+    {
+        "id": 2,
+        "title": "G's Secret Mission",
+        "description": "G, THE BRILLIANT INVENTOR FOR THE\nPENGUIN SECRET AGENCY, NEEDS\nYOUR HELP WITH ONE OF HIS NEWEST\nPROJECTS. WHAT COULD G BE UP TO\nNOW?",
+        "award": 803
+    },
+    {
+        "id": 3,
+        "title": "Case of the Missing Coins",
+        "description": "THE COINS FROM THE VAULT IN THE\nGIFT SHOP HAVE MYSTERIOUSLY\nGONE MISSING. WILL YOU HELP FIND\nTHEM AND SOLVE THE MYSTERY?",
+        "award": 805
+    },
+    {
+        "id": 4,
+        "title": "Avalanche Rescue",
+        "description": "THERE HAS BEEN AN AVALANCHE ON\nTHE SKI HILL, AND YOUR HELP IS\nNEEDED. WILL YOU ANSWER THE CALL?",
+        "award": 808
+    },
+    {
+        "id": 5,
+        "title": "Secret of the Fur",
+        "description": "THE MYSTERY OF THE FUR REMAINS\nUNSOLVED. WILL YOU HELP G TO\nUNRAVEL ITS SECRET?",
+        "award": 810
+    },
+    {
+        "id": 6,
+        "title": "Questions for a Crab",
+        "description": "MANY QUESTIONS REMAIN THAT ONLY\nA CRAB CAN ANSWER.",
+        "award": 813
+    },
+    {
+        "id": 7,
+        "title": "Clockwork Repairs",
+        "description": "THE CLOCK TOWER NEEDS REPAIR, AND\nG NEEDS YOUR HELP.  CAN YOU FIX IT\nIN TIME?",
+        "award": 815
+    },
+    {
+        "id": 8,
+        "title": "Mysterious Tremors",
+        "description": "TERRIBLE TREMORS HAVE BEEN\nSHAKING THINGS UP AROUND THE\nISLAND. CAN YOU SOLVE THIS\nMYSTERIOUS MENACE?",
+        "award": 817
+    },
+    {
+        "id": 9,
+        "title": "Operation: Spy & Seek",
+        "description": "YOU’VE BEEN CONTACTED FOR A\nSPECIAL MISSION TO TRACK DOWN\nHERBERT. CAN YOU BEAR DOWN ON HIS\nLOCATION?",
+        "award": 819
+    },
+    {
+        "id": 10,
+        "title": "Waddle Squad",
+        "description": "THE PSA NEEDS YOU FOR A SPECIAL\nTEAM MISSION. CAN YOU WORK WELL\nWITH OTHERS?",
+        "award": 822
+    },
+    {
+        "id": 11,
+        "title": "The Veggie Villain",
+        "description": "ANOTHER INCIDENT HAS BEEN\nREPORTED INVOLVING HERBERT P.\nBEAR. ARE YOU READY FOR THE BIG\nSHOWDOWN?",
+        "award": 8007
+    }
+]

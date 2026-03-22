@@ -1,0 +1,1317 @@
+{
+    "anims": [
+        {
+            "key": "door_open",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "agent",
+                    "frame": "door/door0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0043",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0044",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0045",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0046",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0047",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0048",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0049",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0050",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0051",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0052",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0053",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0054",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0055",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0056",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0057",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0058",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0059",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0060",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0061",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0062",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0063",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0064",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0065",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0066",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0067",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0068",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0069",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0070",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0071",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0072",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0073",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "door/door0074",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        },
+        {
+            "key": "dance_floor",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0043",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0044",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0045",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0046",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0047",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0048",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0049",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0050",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0051",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0052",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0053",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0054",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0055",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0056",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0057",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0058",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0059",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0060",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0061",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0062",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0063",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0064",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0065",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0066",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0067",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0068",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0069",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0070",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0071",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0072",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0073",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0074",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0075",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0076",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0077",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0078",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0079",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0080",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0081",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0082",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0083",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0084",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0085",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0086",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0087",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0088",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0089",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0090",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0091",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0092",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0093",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0094",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0095",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0096",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0097",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0098",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0099",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0100",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0101",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0102",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0103",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0104",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0105",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0106",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0107",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0108",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0109",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0110",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0111",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0112",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0113",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0114",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0115",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0116",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0117",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0118",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0119",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0120",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0121",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0122",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0123",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0124",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0125",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0126",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0127",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0128",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0129",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0130",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0131",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0132",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0133",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0134",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0135",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0136",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0137",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0138",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0139",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "agent",
+                    "frame": "dance/floor0140",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

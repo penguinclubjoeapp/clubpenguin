@@ -1,0 +1,31 @@
+{
+    "section1": {
+        "files": [
+            {
+                "type": "multiatlas",
+                "url": "assets/media/interface/game/missions/missions.json",
+                "path": "assets/media/interface/game/missions",
+                "key": "missions"
+            },
+            {
+                "url": "assets/media/interface/game/missions/missions-anims.json",
+                "type": "animation",
+                "key": "missions-anims"
+            },
+            {
+                "url": [
+                    "assets/media/interface/game/missions/switch.mp3"
+                ],
+                "type": "audio",
+                "key": "switch"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

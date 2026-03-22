@@ -1,0 +1,548 @@
+{
+    "anims": [
+        {
+            "key": "light_green",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/green/green0043",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1
+        },
+        {
+            "key": "light_red",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "missions",
+                    "frame": "light/red/red0043",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

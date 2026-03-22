@@ -1,0 +1,103 @@
+{
+    "900": {
+        "key": "astro",
+        "path": "astro/bootstrap.swf"
+    },
+    "901": {
+        "key": "beans",
+        "path": "beans/bootstrap.swf"
+    },
+    "902": {
+        "key": "roundup",
+        "path": "roundup/bootstrap.swf",
+        "music": 102
+    },
+    "903": {
+        "key": "hydro",
+        "path": "hydro/bootstrap.swf"
+    },
+    "904": {
+        "key": "fish",
+        "path": "fish/bootstrap.swf",
+        "music": 103
+    },
+    "905": {
+        "key": "mine",
+        "path": "mine/bootstrap.swf",
+        "music": 105
+    },
+    "906": {
+        "key": "jetpack",
+        "path": "jetpack/bootstrap.swf",
+        "music": 110
+    },
+    "907": {
+        "key": "mission1",
+        "path": "quests/q1/quest.swf"
+    },
+    "908": {
+        "key": "mission2",
+        "path": "quests/q2/quest.swf"
+    },
+    "909": {
+        "key": "thinice",
+        "path": "thinice/bootstrap.swf",
+        "music": 111
+    },
+    "911": {
+        "key": "mission3",
+        "path": "quests/q3/quest.swf"
+    },
+    "912": {
+        "key": "waves",
+        "path": "waves/bootstrap.swf"
+    },
+    "913": {
+        "key": "mission4",
+        "path": "quests/q4/quest.swf"
+    },
+    "914": {
+        "key": "mission5",
+        "path": "quests/q5/quest.swf"
+    },
+    "915": {
+        "key": "mission6",
+        "path": "quests/q6/quest.swf"
+    },
+    "916": {
+        "key": "sub",
+        "path": "sub/bootstrap.swf"
+    },
+    "920": {
+        "key": "mission7",
+        "path": "quests/q7/quest.swf"
+    },
+    "921": {
+        "key": "mission8",
+        "path": "quests/q8/quest.swf"
+    },
+    "922": {
+        "key": "mission9",
+        "path": "quests/q9/quest.swf"
+    },
+    "923": {
+        "key": "mission10",
+        "path": "quests/q10/quest.swf"
+    },
+    "927": {
+        "key": "mission11",
+        "path": "quests/q11/quest.swf"
+    },
+    "951": {
+        "key": "Sensei",
+        "path": "sensei/Sensei"
+    },
+    "998": {
+        "key": "card",
+        "path": "card/CardJitsu"
+    },
+    "999": {
+        "key": "sled",
+        "path": "sled/Sled"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "section1": {
+        "files": [
+            {
+                "type": "multiatlas",
+                "url": "assets/media/rooms/shack/shack.json",
+                "path": "assets/media/rooms/shack/",
+                "key": "shack"
+            },
+            {
+                "url": "assets/media/rooms/shack/shack-physics.json",
+                "type": "json",
+                "key": "shack-physics"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2
+    }
+}

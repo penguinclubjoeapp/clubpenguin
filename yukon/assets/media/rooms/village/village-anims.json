@@ -1,0 +1,1351 @@
+{
+    "anims": [
+        {
+            "key": "village/smoke",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "village",
+                    "frame": "smoke0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "smoke0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "smoke0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "smoke0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "smoke0005",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "village/chair",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "village",
+                    "frame": "chair/chair0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0043",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0044",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0045",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0046",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0047",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0048",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0049",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0050",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0051",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0052",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0053",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0054",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0055",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0056",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0057",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0058",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0059",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0060",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0061",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0062",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0063",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0064",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0065",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0066",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0067",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0068",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0069",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0070",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0071",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0072",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0073",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0074",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0075",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0076",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0077",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0078",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0079",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0080",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0081",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0082",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0083",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0084",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0085",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0086",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0087",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0088",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0089",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0090",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0091",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0092",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0093",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0094",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0095",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0096",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0097",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0098",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0099",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0100",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0101",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0102",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0103",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0104",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0105",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0106",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0107",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0108",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0109",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0110",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0111",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0112",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0113",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0114",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0115",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0116",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0117",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0118",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0119",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0120",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0121",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0122",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0123",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0124",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0125",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0126",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0127",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0128",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0129",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0130",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0131",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0132",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0133",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0134",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0135",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0136",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0137",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0138",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0139",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0140",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0141",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0142",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0143",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0144",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0145",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0146",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0147",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0148",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0149",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0150",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0151",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0152",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0153",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0154",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0155",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0156",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0157",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0158",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0159",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0160",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0161",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0162",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0163",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0164",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0165",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0166",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0167",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0168",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0169",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0170",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0171",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0172",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0173",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0174",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0175",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0176",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0177",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0178",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "chair/chair0179",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "village/rings",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "village",
+                    "frame": "rings/rings0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "village",
+                    "frame": "rings/rings0034",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

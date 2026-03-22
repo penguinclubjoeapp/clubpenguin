@@ -1,0 +1,128 @@
+[
+    {
+        "question": "Which of these games has a shark in it?",
+        "answers": {
+            "Jetpack Adventure": true,
+            "Cart Surfer": false,
+            "Mancala": false,
+            "Sled Racing": false
+        }
+    },
+    {
+        "question": "What item is always hidden in a different place in the clothing catalog every month?",
+        "answers": {
+            "The red scarf": false,
+            "The green running shoes": false,
+            "The Viking helmet": true,
+            "The chef hat": false
+        }
+    },
+    {
+        "question": "Which of these rooms doesn't have music playing in the background?",
+        "answers": {
+            "Coffee Shop": false,
+            "Dance Club": false,
+            "Pizza Shop": false,
+            "Pet Shop": true
+        }
+    },
+    {
+        "question": "What item is thrown out of the truck in Level 4 of Bean Counters?",
+        "answers": {
+            "A candlestick": false,
+            "A flower pot": true,
+            "A brick": false,
+            "A teapot": false
+        }
+    },
+    {
+        "question": "How does the pink puffle play?",
+        "answers": {
+            "Blows bubbles": false,
+            "Skips with a skipping rope": true,
+            "Flies around wearing a propeller cap": false,
+            "Rolls a ball around": false
+        }
+    },
+    {
+        "question": "Which room has a cuckoo clock?",
+        "answers": {
+            "Ski Lodge": true,
+            "Pet Shop": false,
+            "Pizza Shop": false,
+            "Cave": false
+        }
+    },
+    {
+        "question": "How many Sled Racing tracks are there?",
+        "answers": {
+            "2": false,
+            "3": false,
+            "4": true,
+            "6": false
+        }
+    },
+    {
+        "question": "What is the name of Captain Rockhopper's ship?",
+        "answers": {
+            "The Swift Swimmer": false,
+            "The Voyager": false,
+            "The Icebreaker": false,
+            "The Migrator": true
+        }
+    },
+    {
+        "question": "What is the name of the big fish in Ice Fishing?",
+        "answers": {
+            "Guppy": false,
+            "Fluffy": false,
+            "Mullet": true,
+            "Blub": false
+        }
+    },
+    {
+        "question": "In what room can you find old copies of the Penguin Times?",
+        "answers": {
+            "Book Room": false,
+            "Boiler Room": true,
+            "Mine": false,
+            "Coffee Shop": false
+        }
+    },
+    {
+        "question": "How do you get a pin?",
+        "answers": {
+            "Buy it in the Gift Shop": false,
+            "Click on it": false,
+            "Throw a snowball at it": false,
+            "Walk on top of it": true
+        }
+    },
+    {
+        "question": "Which of these rooms does NOT have a game in it?",
+        "answers": {
+            "Book Room": false,
+            "Pet Shop": false,
+            "Lodge Attic": false,
+            "Beach": true
+        }
+    },
+    {
+        "question": "Which color of puffle can catch on fire?",
+        "answers": {
+            "Blue": false,
+            "Black": true,
+            "Green": false,
+            "Red": false
+        }
+    },
+    {
+        "question": "How many coins does it cost to buy a player card background?",
+        "answers": {
+            "20": false,
+            "50": false,
+            "60": true,
+            "80": false
+        }
+    }
+]

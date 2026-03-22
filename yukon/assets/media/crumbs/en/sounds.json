@@ -1,0 +1,29 @@
+{
+    "emotes": {
+        "19": "toot"
+    },
+    "items": {
+        "194": "whistle",
+        "328": "bell",
+        "3002": "whistle",
+        "5012": "gong",
+        "5035": "cowbell",
+        "5051": "bell"
+    },
+    "itemSounds": {
+        "bell": {
+            "frame": 25
+        },
+        "cowbell": {
+            "frame": 63,
+            "start": 8
+        },
+        "gong": {
+            "frame": 54,
+            "start": 10
+        },
+        "whistle": {
+            "frame": 25
+        }
+    }
+}

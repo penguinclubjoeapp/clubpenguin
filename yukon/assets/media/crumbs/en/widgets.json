@@ -1,0 +1,117 @@
+{
+    "AdoptCatalog": {
+        "path": "interface/catalogs/adopt/AdoptCatalog",
+        "preload": {
+            "key": "adoptcatalog-pack",
+            "url": "assets/media/interface/catalogs/adopt/adoptcatalog-pack.json"
+        }
+    },
+    "AgentQuiz": {
+        "path": "interface/quiz/agent/AgentQuiz",
+        "preload": {
+            "key": "agent_quiz-pack",
+            "url": "assets/media/interface/quiz/agent/agent_quiz-pack.json"
+        }
+    },
+    "ClothingCatalog": {
+        "path": "interface/catalogs/clothing/ClothingCatalog",
+        "preload": {
+            "key": "clothingcatalog-pack",
+            "url": "assets/media/interface/catalogs/clothing/clothingcatalog-pack.json"
+        }
+    },
+    "FindFour": {
+        "path": "games/four/FindFour",
+        "preload": {
+            "key": "four-pack",
+            "url": "assets/media/games/four/four-pack.json"
+        }
+    },
+    "FurnitureCatalog": {
+        "path": "interface/catalogs/furniture/FurnitureCatalog",
+        "preload": {
+            "key": "furniturecatalog-pack",
+            "url": "assets/media/interface/catalogs/furniture/furniturecatalog-pack.json"
+        }
+    },
+    "GiveTour": {
+        "path": "interface/books/give_tour/GiveTour",
+        "preload": {
+            "key": "give_tour-pack",
+            "url": "assets/media/interface/books/give_tour/give_tour-pack.json"
+        }
+    },
+    "IglooCatalog": {
+        "path": "interface/catalogs/igloo/IglooCatalog",
+        "preload": {
+            "key": "igloocatalog-pack",
+            "url": "assets/media/interface/catalogs/igloo/igloocatalog-pack.json"
+        }
+    },
+    "Mancala": {
+        "path": "games/mancala/Mancala",
+        "preload": {
+            "key": "mancala-pack",
+            "url": "assets/media/games/mancala/mancala-pack.json"
+        }
+    },
+    "Map": {
+        "path": "interface/game/map/Map",
+        "preload": {
+            "key": "map-pack",
+            "url": "assets/media/interface/game/map/map-pack.json"
+        }
+    },
+    "Missions": {
+        "path": "interface/game/missions/Missions",
+        "preload": {
+            "key": "missions-pack",
+            "url": "assets/media/interface/game/missions/missions-pack.json"
+        }
+    },
+    "NinjaBelts": {
+        "path": "interface/instructions/ninjabelts/NinjaBelts",
+        "preload": {
+            "key": "ninjabelts-pack",
+            "url": "assets/media/interface/instructions/ninjabelts/ninjabelts-pack.json"
+        }
+    },
+    "NinjaInstructions": {
+        "path": "interface/instructions/ninjainstructions/NinjaInstructions",
+        "preload": {
+            "key": "ninjainstructions-pack",
+            "url": "assets/media/interface/instructions/ninjainstructions/ninjainstructions-pack.json"
+        }
+    },
+    "NinjaProgress": {
+        "path": "games/ninjaprogress/NinjaProgress",
+        "preload": {
+            "key": "ninjaprogress-pack",
+            "url": "assets/media/games/ninjaprogress/ninjaprogress-pack.json"
+        }
+    },
+    "PetsCatalog": {
+        "path": "interface/catalogs/pets/PetsCatalog",
+        "preload": {
+            "key": "petscatalog-pack",
+            "url": "assets/media/interface/catalogs/pets/petscatalog-pack.json"
+        }
+    },
+    "Sensei": {
+        "path": "games/sensei/widget/SenseiWidget",
+        "preload": {
+            "key": "sensei-pack",
+            "url": "assets/media/games/sensei/sensei-pack.json"
+        }
+    },
+    "TakeTour": {
+        "path": "interface/game/take_tour/TakeTour",
+        "preload": {
+            "key": "take_tour-pack",
+            "url": "assets/media/interface/game/take_tour/take_tour-pack.json"
+        }
+    },
+    "TourQuiz": {
+        "path": "interface/quiz/tour/TourQuiz"
+    }
+}

@@ -1,0 +1,266 @@
+{
+    "anims": [
+        {
+            "key": "reply/arrow",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/arrow0032",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "showOnStart": true
+        },
+        {
+            "key": "reply/note",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "mail",
+                    "frame": "reply/reply0008",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

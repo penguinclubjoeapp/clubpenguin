@@ -1,0 +1,50 @@
+[
+    {
+        "question": "Pick one quality that you think a\nSecret Agent should have:",
+        "answers": {
+            "Popular": false,
+            "Honest": true,
+            "In Charge": false
+        }
+    },
+    {
+        "question": "Pick the correct reason to report a\npenguin to a moderator.",
+        "answers": {
+            "Throwing snowballs at you": false,
+            "Not being your buddy": false,
+            "Being mean or rude": true
+        }
+    },
+    {
+        "question": "What would you do if you saw a\npenguin breaking the rules?",
+        "answers": {
+            "Yell at them": false,
+            "Report them": true,
+            "Throw snowballs at them": false
+        }
+    },
+    {
+        "question": "Which type of personal information\nshould be reported?",
+        "answers": {
+            "Saying their country": false,
+            "Saying boy or girl": false,
+            "Saying their address": true
+        }
+    },
+    {
+        "question": "Pick one reason why you want to\nbe a Secret Agent.",
+        "answers": {
+            "My friends are Secret Agents": false,
+            "I want a Spy Phone": false,
+            "I want to keep Club Penguin Safe": true
+        }
+    },
+    {
+        "question": "Pick another reason why you want\nto be a Secret Agent.",
+        "answers": {
+            "I've always wanted to be a spy": false,
+            "I want to help other penguins": true,
+            "I want to hang-out the HQ": false
+        }
+    }
+]

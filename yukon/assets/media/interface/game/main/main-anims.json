@@ -1,0 +1,940 @@
+{
+    "anims": [
+        {
+            "key": "mod_button",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "mod/m0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "mod/m0009",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "repeatDelay": 500
+        },
+        {
+            "key": "phone_scroll_up",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0001",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        },
+        {
+            "key": "phone_scroll_down",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scroll0001",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        },
+        {
+            "key": "phone_comb",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/comb/comb0040",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        },
+        {
+            "key": "phone_wrench",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/wrench/wrench0040",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        },
+        {
+            "key": "phone_scissors",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0001",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0022",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0036",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0037",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0038",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0039",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0040",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0041",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0042",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0043",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0044",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0045",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0046",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "main",
+                    "frame": "phone/scissors/scissors0047",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

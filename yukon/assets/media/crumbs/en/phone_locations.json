@@ -1,0 +1,114 @@
+[
+    {
+        "name": "The Town",
+        "id": 100
+    },
+    {
+        "name": "Coffee Shop",
+        "id": 110
+    },
+    {
+        "name": "Book Room",
+        "id": 111
+    },
+    {
+        "name": "Night Club",
+        "id": 120
+    },
+    {
+        "name": "The Lounge",
+        "id": 121
+    },
+    {
+        "name": "Gift Shop",
+        "id": 130
+    },
+    {
+        "name": "Ski Village",
+        "id": 200
+    },
+    {
+        "name": "Sport Shop",
+        "id": 210
+    },
+    {
+        "name": "Ski Lodge",
+        "id": 220
+    },
+    {
+        "name": "Lodge Attic",
+        "id": 221
+    },
+    {
+        "name": "Mountain",
+        "id": 230
+    },
+    {
+        "name": "The Plaza",
+        "id": 300
+    },
+    {
+        "name": "Pet Shop",
+        "id": 310
+    },
+    {
+        "name": "The Stage",
+        "id": 340
+    },
+    {
+        "name": "Pizza Parlor",
+        "id": 330
+    },
+    {
+        "name": "The Beach",
+        "id": 400
+    },
+    {
+        "name": "Lighthouse",
+        "id": 410
+    },
+    {
+        "name": "Beacon",
+        "id": 411
+    },
+    {
+        "name": "The Dock",
+        "id": 800
+    },
+    {
+        "name": "Snow Forts",
+        "id": 801
+    },
+    {
+        "name": "Pitch",
+        "id": 802
+    },
+    {
+        "name": "Boiler Room",
+        "id": 804
+    },
+    {
+        "name": "Ice Berg",
+        "id": 805
+    },
+    {
+        "name": "Cave",
+        "id": 806
+    },
+    {
+        "name": "The Mine",
+        "id": 808
+    },
+    {
+        "name": "Mine Shack",
+        "id": 807
+    },
+    {
+        "name": "The Forest",
+        "id": 809
+    },
+    {
+        "name": "The Cove",
+        "id": 810
+    }
+]

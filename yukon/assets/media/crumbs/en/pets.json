@@ -1,0 +1,52 @@
+{
+    "0": {
+        "name": "Blue",
+        "cost": 800,
+        "member": 0
+    },
+    "1": {
+        "name": "Pink",
+        "cost": 800,
+        "member": 1
+    },
+    "2": {
+        "name": "Black",
+        "cost": 800,
+        "member": 1
+    },
+    "3": {
+        "name": "Green",
+        "cost": 800,
+        "member": 1
+    },
+    "4": {
+        "name": "Purple",
+        "cost": 800,
+        "member": 1
+    },
+    "5": {
+        "name": "Red",
+        "cost": 800,
+        "member": 0
+    },
+    "6": {
+        "name": "Yellow",
+        "cost": 800,
+        "member": 1
+    },
+    "7": {
+        "name": "White",
+        "cost": 800,
+        "member": 1
+    },
+    "8": {
+        "name": "Orange",
+        "cost": 800,
+        "member": 1
+    },
+    "9": {
+        "name": "Brown",
+        "cost": 800,
+        "member": 1
+    }
+}

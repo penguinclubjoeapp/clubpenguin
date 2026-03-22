@@ -1,0 +1,242 @@
+{
+    "anims": [
+        {
+            "key": "register_in",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "sport",
+                    "frame": "register/register0002",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0003",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0004",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0005",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0006",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0007",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0008",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0009",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0010",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0011",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0012",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0013",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0014",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0015",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0016",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0017",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0018",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0019",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0020",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0021",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0022",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        },
+        {
+            "key": "register_out",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "sport",
+                    "frame": "register/register0023",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0024",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0025",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0026",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0027",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0028",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0029",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0030",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0031",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0032",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0033",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0034",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0035",
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "sport",
+                    "frame": "register/register0001",
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        }
+    ],
+    "globalTimeScale": 1,
+    "meta": {
+        "app": "Phaser Editor 2D v3",
+        "contentType": "Phaser v3 Animations"
+    },
+    "settings": {
+        "sourceLang": "JAVA_SCRIPT",
+        "esModule": false,
+        "generateCode": false
+    }
+}

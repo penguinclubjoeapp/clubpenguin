@@ -1,0 +1,152 @@
+{
+    "100": {
+        "key": "Town",
+        "path": "town/Town",
+        "x": 760,
+        "y": 660
+    },
+    "110": {
+        "key": "Coffee",
+        "path": "coffee/Coffee",
+        "x": 640,
+        "y": 480
+    },
+    "111": {
+        "key": "Book",
+        "path": "book/Book",
+        "x": 1260,
+        "y": 560
+    },
+    "120": {
+        "key": "Dance",
+        "path": "dance/Dance",
+        "x": 360,
+        "y": 560
+    },
+    "121": {
+        "key": "Lounge",
+        "path": "lounge/Lounge",
+        "x": 1120,
+        "y": 640
+    },
+    "130": {
+        "key": "Shop",
+        "path": "shop/Shop",
+        "x": 1000,
+        "y": 560
+    },
+    "200": {
+        "key": "Village",
+        "path": "village/Village",
+        "x": 800,
+        "y": 640
+    },
+    "210": {
+        "key": "Sport",
+        "path": "sport/Sport",
+        "x": 1000,
+        "y": 560
+    },
+    "220": {
+        "key": "Lodge",
+        "path": "lodge/Lodge",
+        "x": 760,
+        "y": 580
+    },
+    "221": {
+        "key": "Attic",
+        "path": "attic/Attic",
+        "x": 966,
+        "y": 560
+    },
+    "230": {
+        "key": "Mtn",
+        "path": "mtn/Mtn",
+        "x": 760,
+        "y": 440
+    },
+    "300": {
+        "key": "Plaza",
+        "path": "plaza/Plaza",
+        "x": 760,
+        "y": 680
+    },
+    "310": {
+        "key": "Pet",
+        "path": "pet/Pet",
+        "x": 828,
+        "y": 520
+    },
+    "320": {
+        "key": "Dojo",
+        "path": "dojo/Dojo",
+        "x": 400,
+        "y": 680
+    },
+    "321": {
+        "key": "DojoExt",
+        "path": "dojoext/DojoExt",
+        "x": 780,
+        "y": 790
+    },
+    "400": {
+        "key": "Beach",
+        "path": "beach/Beach",
+        "x": 840,
+        "y": 680
+    },
+    "800": {
+        "key": "Dock",
+        "path": "dock/Dock",
+        "x": 800,
+        "y": 400
+    },
+    "801": {
+        "key": "Forts",
+        "path": "forts/Forts",
+        "x": 960,
+        "y": 610
+    },
+    "802": {
+        "key": "Rink",
+        "path": "rink/Rink",
+        "x": 770,
+        "y": 400
+    },
+    "803": {
+        "key": "Agent",
+        "path": "agent/Agent",
+        "x": 748,
+        "y": 720
+    },
+    "805": {
+        "key": "Berg",
+        "path": "berg/Berg",
+        "x": 652,
+        "y": 448
+    },
+    "806": {
+        "key": "Cave",
+        "path": "cave/Cave",
+        "x": 780,
+        "y": 700
+    },
+    "807": {
+        "key": "Shack",
+        "path": "shack/Shack",
+        "x": 760,
+        "y": 680
+    },
+    "809": {
+        "key": "Forest",
+        "path": "forest/Forest",
+        "x": 760,
+        "y": 430
+    },
+    "810": {
+        "key": "Cove",
+        "path": "cove/Cove",
+        "x": 840,
+        "y": 480
+    }
+}
