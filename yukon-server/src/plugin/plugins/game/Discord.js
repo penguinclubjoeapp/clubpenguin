@@ -11,12 +11,18 @@ export default class Discord extends GamePlugin {
         }
 
         // Bot API configuration
-        const botHost = process.env.BOT_API_HOST || 'discord-bot'
+        const botHost = process.env.BOT_API_HOST
         const botPort = process.env.BOT_API_PORT || '3001'
-        this.botBaseUrl = `http://${botHost}:${botPort}`
-        this.botLinkUrl = `${this.botBaseUrl}/link`
-        this.botMoveUrl = `${this.botBaseUrl}/move`
-        this.botRoomsUrl = `${this.botBaseUrl}/rooms`
+        this.enabled = !!botHost
+
+        if (this.enabled) {
+            this.botBaseUrl = `http://${botHost}:${botPort}`
+            this.botLinkUrl = `${this.botBaseUrl}/link`
+            this.botMoveUrl = `${this.botBaseUrl}/move`
+            this.botRoomsUrl = `${this.botBaseUrl}/rooms`
+        } else {
+            console.log('[Discord] No BOT_API_HOST set — Discord integration disabled')
+        }
 
         // Room channel mapping cache
         this.roomMap = {}
@@ -24,7 +30,7 @@ export default class Discord extends GamePlugin {
         this.cacheTTL = 60 // seconds
 
         // Push room list to Discord bot so it can create voice channels
-        this.pushRooms()
+        if (this.enabled) this.pushRooms()
     }
 
     async pushRooms(retries = 5, delay = 3000) {
@@ -63,6 +69,11 @@ export default class Discord extends GamePlugin {
     }
 
     async linkDiscord(args, user) {
+        if (!this.enabled) {
+            user.send('error', { error: 'Discord integration is not configured.' })
+            return
+        }
+
         if (!args.code || typeof args.code !== 'string') {
             user.send('error', { error: 'Usage: !link <CODE>' })
             return
@@ -97,6 +108,8 @@ export default class Discord extends GamePlugin {
     }
 
     async onRoomJoin(user, room) {
+        if (!this.enabled) return
+
         await this.ensureCacheFresh()
 
         const channelId = this.roomMap[room.id]

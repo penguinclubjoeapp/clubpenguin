@@ -3,7 +3,8 @@
 # Auto-detects free ports if defaults are in use.
 set -e
 
-cd "$(dirname "$0")/.."
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_ROOT"
 
 # ── Port detection ────────────────────────────────────────────────────────────
 find_port() {
@@ -32,6 +33,7 @@ cleanup() {
     echo ""
     echo "[dev] Shutting down..."
     kill $SERVER_PID 2>/dev/null || true
+    cd "$PROJECT_ROOT"
     docker compose -f docker-compose.dev.yml down
     echo "[dev] Done."
 }
@@ -60,13 +62,12 @@ echo "[dev] MySQL ready."
 
 # ── Start server with babel-watch (background) ───────────────────────────────
 echo "[dev] Starting yukon-server (babel-watch)..."
-cd yukon-server && npm run dev &
+cd "$PROJECT_ROOT/yukon-server" && npm run dev &
 SERVER_PID=$!
-cd ..
 
 # Give server a moment to bind ports
 sleep 2
 
 # ── Start client with webpack dev server (foreground) ─────────────────────────
 echo "[dev] Starting yukon client on http://localhost:$DEV_CLIENT_PORT..."
-cd yukon && npm run dev
+cd "$PROJECT_ROOT/yukon" && npm run dev
