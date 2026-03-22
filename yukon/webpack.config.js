@@ -40,13 +40,13 @@ let config = {
             {
                 context: '/world/login',
                 target: `http://localhost:${loginPort}`,
-                pathRewrite: { '^/world/login': '' },
+                pathRewrite: { '^/world/login': '/socket.io' },
                 ws: true
             },
             {
                 context: '/world/blizzard',
                 target: `http://localhost:${worldPort}`,
-                pathRewrite: { '^/world/blizzard': '' },
+                pathRewrite: { '^/world/blizzard': '/socket.io' },
                 ws: true
             },
             {
