@@ -1,10 +1,33 @@
 #!/usr/bin/env bash
 # scripts/dev.sh — Start local dev environment
-# MySQL on :3307 (isolated from prod), server with babel-watch, client with webpack HMR
+# Auto-detects free ports if defaults are in use.
 set -e
 
 cd "$(dirname "$0")/.."
 
+# ── Port detection ────────────────────────────────────────────────────────────
+find_port() {
+    local port=$1 offset=1000
+    while ss -tlnp 2>/dev/null | grep -q ":${port} " || lsof -iTCP:$port -sTCP:LISTEN &>/dev/null 2>&1; do
+        echo "[dev] Port $port in use, trying $((port + offset))..." >&2
+        port=$((port + offset))
+    done
+    echo $port
+}
+
+export DEV_MYSQL_PORT=$(find_port 3307)
+export DEV_LOGIN_PORT=$(find_port 6112)
+export DEV_WORLD_PORT=$(find_port 6113)
+export DEV_CLIENT_PORT=$(find_port 8080)
+
+echo "[dev] Ports:"
+echo "  MySQL ........... :$DEV_MYSQL_PORT"
+echo "  Login server .... :$DEV_LOGIN_PORT"
+echo "  Game server ..... :$DEV_WORLD_PORT"
+echo "  Client .......... http://localhost:$DEV_CLIENT_PORT"
+echo ""
+
+# ── Cleanup ───────────────────────────────────────────────────────────────────
 cleanup() {
     echo ""
     echo "[dev] Shutting down..."
@@ -14,7 +37,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-# Install dependencies if needed
+# ── Install dependencies if needed ────────────────────────────────────────────
 if [ ! -d "yukon-server/node_modules" ]; then
     echo "[dev] Installing server dependencies..."
     cd yukon-server && npm install && cd ..
@@ -25,8 +48,8 @@ if [ ! -d "yukon/node_modules" ]; then
     cd yukon && npm install && cd ..
 fi
 
-# Start dev MySQL
-echo "[dev] Starting dev MySQL on port 3307..."
+# ── Start dev MySQL ───────────────────────────────────────────────────────────
+echo "[dev] Starting dev MySQL on port $DEV_MYSQL_PORT..."
 docker compose -f docker-compose.dev.yml up -d
 
 echo "[dev] Waiting for MySQL..."
@@ -35,7 +58,7 @@ until docker compose -f docker-compose.dev.yml exec -T mysql-dev mysqladmin ping
 done
 echo "[dev] MySQL ready."
 
-# Start server with babel-watch (background)
+# ── Start server with babel-watch (background) ───────────────────────────────
 echo "[dev] Starting yukon-server (babel-watch)..."
 cd yukon-server && npm run dev &
 SERVER_PID=$!
@@ -44,6 +67,6 @@ cd ..
 # Give server a moment to bind ports
 sleep 2
 
-# Start client with webpack dev server (foreground)
-echo "[dev] Starting yukon client on http://localhost:8080..."
+# ── Start client with webpack dev server (foreground) ─────────────────────────
+echo "[dev] Starting yukon client on http://localhost:$DEV_CLIENT_PORT..."
 cd yukon && npm run dev

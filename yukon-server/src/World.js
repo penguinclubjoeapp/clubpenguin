@@ -14,6 +14,11 @@ if (process.env.MYSQL_USER) config.database.user = process.env.MYSQL_USER
 if (process.env.MYSQL_PASSWORD) config.database.password = process.env.MYSQL_PASSWORD
 if (process.env.MYSQL_DATABASE) config.database.database = process.env.MYSQL_DATABASE
 
+// Allow env vars to override ports (for dynamic port selection in dev)
+if (process.env.DEV_MYSQL_PORT) config.database.port = parseInt(process.env.DEV_MYSQL_PORT)
+if (process.env.DEV_LOGIN_PORT) config.worlds.Login.port = parseInt(process.env.DEV_LOGIN_PORT)
+if (process.env.DEV_WORLD_PORT) config.worlds.Blizzard.port = parseInt(process.env.DEV_WORLD_PORT)
+
 
 class World extends Server {
 

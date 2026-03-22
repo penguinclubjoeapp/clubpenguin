@@ -9,6 +9,10 @@ const WebpackObfuscator = require('webpack-obfuscator')
 
 const timestamp = + Date.now()
 
+// Dev port overrides (set by scripts/dev.sh for dynamic port selection)
+const loginPort = process.env.DEV_LOGIN_PORT || 6112
+const worldPort = process.env.DEV_WORLD_PORT || 6113
+const clientPort = process.env.DEV_CLIENT_PORT || 8080
 
 let config = {
     mode: 'development',
@@ -35,13 +39,13 @@ let config = {
         proxy: [
             {
                 context: '/world/login',
-                target: 'http://localhost:6112',
+                target: `http://localhost:${loginPort}`,
                 pathRewrite: { '^/world/login': '' },
                 ws: true
             },
             {
                 context: '/world/blizzard',
-                target: 'http://localhost:6113',
+                target: `http://localhost:${worldPort}`,
                 pathRewrite: { '^/world/blizzard': '' },
                 ws: true
             },
@@ -54,7 +58,7 @@ let config = {
             overlay: false
         },
         host: 'localhost',
-        port: 8080,
+        port: clientPort,
         hot: true
     },
     resolve: {
