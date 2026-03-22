@@ -62,6 +62,7 @@ class ClubPenguinBot(commands.Bot):
 
         # Start aiohttp server with routes from cogs
         app = web.Application()
+        app.router.add_get("/healthz", self.healthz)
         app.add_routes(self.web_routes)
         self._web_runner = web.AppRunner(app)
         await self._web_runner.setup()
@@ -73,11 +74,18 @@ class ClubPenguinBot(commands.Bot):
         if self._web_runner:
             await self._web_runner.cleanup()
         if self.db:
-            await self.db.close()
+            self.db.close()
+            await self.db.wait_closed()
         await super().close()
 
     async def on_ready(self):
+        self._ready = True
         log.info("Bot ready as %s (guild %d)", self.user, self.guild_id)
+
+    async def healthz(self, request):
+        if getattr(self, "_ready", False) and self.get_guild(self.guild_id):
+            return web.Response(text="ok")
+        return web.Response(status=503, text="not ready")
 
 
 bot = ClubPenguinBot()
