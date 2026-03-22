@@ -3,8 +3,11 @@ import GameHandler from './handlers/GameHandler'
 import LoginHandler from './handlers/LoginHandler'
 import Server from './server/Server'
 
-import configProd from '../config/config.json'
 import configDev from '../config/config.dev.json'
+import configExample from '../config/config_example.json'
+
+let configProd
+try { configProd = require('../config/config.json') } catch { configProd = configExample }
 
 const config = process.env.NODE_ENV === 'development' ? configDev : configProd
 
