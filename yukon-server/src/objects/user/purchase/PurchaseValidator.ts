@@ -39,8 +39,7 @@ export default class PurchaseValidator {
         return this.validate(id, 'floorings', [this.user.room.flooring])
     }
 
-    // @ts-expect-error temp
-    validate(id: number | string, type: string, includes: Includes = []) {
+    validate(id: number | string, type: string, includes: Includes = [] as any) {
         if (typeof id === 'string') {
             id = parseInt(id)
         }

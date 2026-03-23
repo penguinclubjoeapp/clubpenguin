@@ -1,4 +1,13 @@
-export default {
+const Rules: {
+    elements: Record<string, string>
+    onPlayed: number[]
+    currentRound: number[]
+    affectsOwnPlayer: number[]
+    discardElements: Record<number, string>
+    discardColors: Record<number, string>
+    replacements: Record<number, [string, string]>
+    limiters: Record<number, string>
+} = {
     elements: {
         f: 's',
         w: 'f',
@@ -33,3 +42,5 @@ export default {
         15: 'w'
     }
 }
+
+export default Rules

@@ -8,7 +8,7 @@ Visit the Discord server for more support.
 
 * [Node.js](https://nodejs.org/en/)
 * [Socket.IO](https://socket.io/)
-* [Sequelize](https://sequelize.org/)
+* [Prisma](https://www.prisma.io/)
 
 ## Local Installation
 

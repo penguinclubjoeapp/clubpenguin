@@ -71,8 +71,7 @@ export default class Join extends GamePlugin {
 
         user.buddies.sendOnline()
 
-        // @ts-expect-error temp
-        await this.handler.updateWorldPopulation()
+        await (this.handler as GameHandler).updateWorldPopulation()
     }
 
     joinRoom(args: Args, user: GameUser) {

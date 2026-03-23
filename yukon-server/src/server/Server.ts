@@ -120,8 +120,7 @@ export default class Server {
             this.initUser(socket)
 
         } catch (error) {
-            if (!(error instanceof RateLimiterRes)) {
-                // @ts-expect-error temp
+            if (!(error instanceof RateLimiterRes) && error instanceof Error) {
                 this.handler.error(error)
             }
 
@@ -154,8 +153,7 @@ export default class Server {
             this.handler.handle(message, user)
 
         } catch (error) {
-            if (!(error instanceof RateLimiterRes)) {
-                // @ts-expect-error temp
+            if (!(error instanceof RateLimiterRes) && error instanceof Error) {
                 this.handler.error(error)
             }
         }

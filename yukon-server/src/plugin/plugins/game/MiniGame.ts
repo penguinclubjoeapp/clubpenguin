@@ -19,22 +19,19 @@ export default class Minigame extends GamePlugin {
 
     getGame(args: Args, user: GameUser) {
         if (user.minigameRoom) {
-            // @ts-expect-error temp
-            user.minigameRoom.getGame(args, user)
+            (user.minigameRoom as any).getGame(args, user)
         }
     }
 
     joinGame(args: Args, user: GameUser) {
         if (user.minigameRoom) {
-            // @ts-expect-error temp
-            user.minigameRoom.joinGame(args, user)
+            (user.minigameRoom as any).joinGame(args, user)
         }
     }
 
     sendMove(args: Args, user: GameUser) {
         if (user.minigameRoom) {
-            // @ts-expect-error temp
-            user.minigameRoom.sendMove(args, user)
+            (user.minigameRoom as any).sendMove(args, user)
         }
     }
 
