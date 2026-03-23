@@ -111,6 +111,38 @@ function createScreen(config) {
     });
     y += 6;
 
+    // Issues separator
+    const issuesSep = blessed.line({
+        parent: screen,
+        top: y,
+        left: 0,
+        width: '100%',
+        orientation: 'horizontal',
+        style: { fg: 'gray' },
+    });
+    y += 1;
+
+    // Issues list — fixed height viewport, scrollable
+    const issuesPanel = blessed.list({
+        parent: screen,
+        top: y,
+        left: 0,
+        width: '100%',
+        height: 6,
+        tags: true,
+        mouse: true,
+        scrollable: true,
+        alwaysScroll: true,
+        keys: true,
+        vi: true,
+        style: {
+            selected: { bg: 'blue', fg: 'white' },
+            item: { fg: 'white' },
+        },
+        padding: { left: 1 },
+    });
+    y += 6;
+
     // Rebuild All button
     const rebuildAllBtn = blessed.box({
         parent: screen,
@@ -167,7 +199,7 @@ function createScreen(config) {
         style: { fg: 'white', bg: 'black' },
         padding: { left: 1 },
     });
-    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[g]{/} Git   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
+    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[i]{/} Issues   {bold}[g]{/} Git   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
 
     // Status line
     const statusLine = blessed.box({
@@ -189,7 +221,7 @@ function createScreen(config) {
     // Focus the service list so it receives key events
     serviceList.focus();
 
-    return { screen, header, colHeader, serviceList, detailPanel, rebuildAllBtn, gitPanel, statusLine };
+    return { screen, header, colHeader, serviceList, detailPanel, issuesPanel, rebuildAllBtn, gitPanel, statusLine };
 }
 
 function formatRow(label, status, health, changeCount, lastRestart, actionLabel, width) {
@@ -209,8 +241,8 @@ function formatRow(label, status, health, changeCount, lastRestart, actionLabel,
     return `  ${col1}${col2}${col3}${col4}${col5}`;
 }
 
-function render(ui, config, env, healthResults, changeResults, state, actionStatus, gitStatus, prList, getActionForService) {
-    const { header, colHeader, serviceList, detailPanel, statusLine, gitPanel } = ui;
+function render(ui, config, env, healthResults, changeResults, state, actionStatus, gitStatus, prList, issuesList, getActionForService) {
+    const { header, colHeader, serviceList, detailPanel, issuesPanel, statusLine, gitPanel } = ui;
     const services = config.services;
 
     // Header
@@ -267,6 +299,21 @@ function render(ui, config, env, healthResults, changeResults, state, actionStat
         } else {
             detailPanel.setContent(`{white-fg}No pending changes for ${selectedSvc.label}{/}`);
         }
+    }
+
+    // Issues panel
+    if (issuesList !== null && issuesList !== undefined) {
+        if (issuesList.length > 0) {
+            const issueItems = issuesList.map((issue) => {
+                const labels = issue.labels.length > 0 ? ` {magenta-fg}[${issue.labels.join(', ')}]{/}` : '';
+                return `{green-fg}#${issue.number}{/} ${issue.title}${labels} {gray-fg}(${issue.author}, ${issue.updatedAt}){/}`;
+            });
+            issuesPanel.setItems([`{bold}Open Issues (${issuesList.length}):{/}`, ...issueItems]);
+        } else {
+            issuesPanel.setItems(['{bold}Open Issues:{/} {white-fg}none{/}']);
+        }
+    } else {
+        issuesPanel.setItems(['{bold}Issues:{/} {white-fg}loading...{/}']);
     }
 
     // Rebuild All button

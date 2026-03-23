@@ -9,6 +9,7 @@ const { execute, executeQueue, isRunning, getActionForService } = require('./lib
 const { load } = require('./lib/state');
 const { fetchGitStatus } = require('./lib/git-status');
 const { fetchOpenPRs } = require('./lib/github');
+const { fetchOpenIssues } = require('./lib/issues');
 const { createScreen, render } = require('./lib/ui');
 
 // Parse CLI args
@@ -37,6 +38,7 @@ let healthResults = {};
 let changeResults = {};
 let gitStatus = null;
 let prList = null;
+let issuesList = null;
 let lastActionStatus = null;
 let actionStatusTimer = null;
 
@@ -66,20 +68,37 @@ function poll() {
 function pollGithub() {
     if (config.github) {
         prList = fetchOpenPRs(config.github);
+        issuesList = fetchOpenIssues(config.github);
         doRender();
     }
 }
 
 function doRender() {
-    render(ui, config, env, healthResults, changeResults, state, lastActionStatus, gitStatus, prList, getActionForService);
+    render(ui, config, env, healthResults, changeResults, state, lastActionStatus, gitStatus, prList, issuesList, getActionForService);
 }
 
 // Navigation — bound to screen so it works regardless of focus
 let gitPanelFocused = false;
+let issuesPanelFocused = false;
+
+function unfocusPanels() {
+    gitPanelFocused = false;
+    issuesPanelFocused = false;
+    delete ui.gitPanel.style.border;
+}
 
 ui.screen.key(['j', 'down'], () => {
     if (gitPanelFocused) {
         ui.gitPanel.scroll(1);
+        process.nextTick(doRender);
+        return;
+    }
+    if (issuesPanelFocused) {
+        const max = (issuesList || []).length;
+        const cur = ui.issuesPanel.selected || 0;
+        if (cur < max) {
+            ui.issuesPanel.select(cur + 1);
+        }
         process.nextTick(doRender);
         return;
     }
@@ -98,6 +117,14 @@ ui.screen.key(['k', 'up'], () => {
         process.nextTick(doRender);
         return;
     }
+    if (issuesPanelFocused) {
+        const cur = ui.issuesPanel.selected || 0;
+        if (cur > 0) {
+            ui.issuesPanel.select(cur - 1);
+        }
+        process.nextTick(doRender);
+        return;
+    }
     const cur = ui.serviceList.selected || 0;
     if (cur > 0) {
         ui.serviceList.select(cur - 1);
@@ -106,23 +133,25 @@ ui.screen.key(['k', 'up'], () => {
     process.nextTick(doRender);
 });
 
+ui.screen.key(['i'], () => {
+    unfocusPanels();
+    issuesPanelFocused = true;
+    ui.issuesPanel.focus();
+    process.nextTick(doRender);
+});
+
 ui.screen.key(['g'], () => {
-    gitPanelFocused = !gitPanelFocused;
-    if (gitPanelFocused) {
-        ui.gitPanel.focus();
-        ui.gitPanel.style.border = { fg: 'cyan' };
-    } else {
-        ui.serviceList.focus();
-        delete ui.gitPanel.style.border;
-    }
+    unfocusPanels();
+    gitPanelFocused = true;
+    ui.gitPanel.focus();
+    ui.gitPanel.style.border = { fg: 'cyan' };
     process.nextTick(doRender);
 });
 
 ui.screen.key(['escape'], () => {
-    if (gitPanelFocused) {
-        gitPanelFocused = false;
+    if (gitPanelFocused || issuesPanelFocused) {
+        unfocusPanels();
         ui.serviceList.focus();
-        delete ui.gitPanel.style.border;
         process.nextTick(doRender);
     }
 });
