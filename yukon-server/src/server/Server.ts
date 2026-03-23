@@ -60,7 +60,42 @@ export default class Server {
     }
 
     httpServer() {
-        return http.createServer()
+        return http.createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
+            if (req.method === 'POST' && req.url === '/api/register') {
+                this.handleRegister(req, res)
+            }
+        })
+    }
+
+    handleRegister(req: http.IncomingMessage, res: http.ServerResponse) {
+        let body = ''
+
+        req.on('data', (chunk: Buffer) => {
+            body += chunk.toString()
+
+            if (body.length > 1024) {
+                res.writeHead(413, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({ success: false, error: 'Request too large' }))
+                req.destroy()
+            }
+        })
+
+        req.on('end', async () => {
+            res.setHeader('Content-Type', 'application/json')
+
+            try {
+                const args = JSON.parse(body)
+                const result = await (this.handler as any).register(args)
+                res.writeHead(200)
+                res.end(JSON.stringify(result))
+            } catch (error) {
+                if (error instanceof Error) {
+                    this.handler.error(error)
+                }
+                res.writeHead(400)
+                res.end(JSON.stringify({ success: false, error: 'Invalid request' }))
+            }
+        })
     }
 
     httpsServer(ssl: Config['socketio']['ssl']) {
