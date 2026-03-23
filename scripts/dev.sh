@@ -60,8 +60,15 @@ until docker compose -f docker-compose.dev.yml exec -T mysql-dev mysqladmin ping
 done
 echo "[dev] MySQL ready."
 
-# ── Start server with babel-watch (background) ───────────────────────────────
-echo "[dev] Starting yukon-server (babel-watch)..."
+# ── Generate Prisma client (if needed) ────────────────────────────────────────
+if [ ! -d "$PROJECT_ROOT/yukon-server/src/generated/prisma" ]; then
+    echo "[dev] Generating Prisma client..."
+    cd "$PROJECT_ROOT/yukon-server"
+    DATABASE_URL="mysql://penguin:devpassword@127.0.0.1:${DEV_MYSQL_PORT}/yukon" npx prisma generate
+fi
+
+# ── Start server with nodemon (background) ───────────────────────────────────
+echo "[dev] Starting yukon-server (nodemon + ts-node)..."
 cd "$PROJECT_ROOT/yukon-server" && npm run dev &
 SERVER_PID=$!
 
