@@ -78,82 +78,67 @@ function doRender() {
 }
 
 // Navigation — bound to screen so it works regardless of focus
-let gitPanelFocused = false;
-let issuesPanelFocused = false;
-
-function unfocusPanels() {
-    gitPanelFocused = false;
-    issuesPanelFocused = false;
-    delete ui.gitPanel.style.border;
-}
+// Unified navigation: services -> issues -> git
+// 'services' | 'issues' | 'git'
+let focusArea = 'services';
 
 ui.screen.key(['j', 'down'], () => {
-    if (gitPanelFocused) {
-        ui.gitPanel.scroll(1);
-        process.nextTick(doRender);
-        return;
-    }
-    if (issuesPanelFocused) {
-        const max = (issuesList || []).length;
-        const cur = ui.issuesPanel.selected || 0;
+    if (focusArea === 'services') {
+        const max = config.services.length - 1;
+        const cur = ui.serviceList.selected || 0;
         if (cur < max) {
-            ui.issuesPanel.select(cur + 1);
+            ui.serviceList.select(cur + 1);
+        } else {
+            // At bottom of services — move to issues
+            focusArea = 'issues';
+            ui.issuesPanel.select(0);
+            ui.issuesPanel.focus();
         }
-        process.nextTick(doRender);
-        return;
-    }
-    const max = config.services.length - 1;
-    const cur = ui.serviceList.selected || 0;
-    if (cur < max) {
-        ui.serviceList.select(cur + 1);
-        ui.serviceList.focus();
+    } else if (focusArea === 'issues') {
+        const items = ui.issuesPanel.items || [];
+        const cur = ui.issuesPanel.selected || 0;
+        if (cur < items.length - 1) {
+            ui.issuesPanel.select(cur + 1);
+        } else {
+            // At bottom of issues — move to git
+            focusArea = 'git';
+            ui.gitPanel.focus();
+        }
+    } else if (focusArea === 'git') {
+        ui.gitPanel.scroll(1);
     }
     process.nextTick(doRender);
 });
 
 ui.screen.key(['k', 'up'], () => {
-    if (gitPanelFocused) {
-        ui.gitPanel.scroll(-1);
-        process.nextTick(doRender);
-        return;
-    }
-    if (issuesPanelFocused) {
+    if (focusArea === 'git') {
+        const scrollPos = ui.gitPanel.getScroll();
+        if (scrollPos <= 0) {
+            // At top of git — move to issues
+            focusArea = 'issues';
+            const items = ui.issuesPanel.items || [];
+            ui.issuesPanel.select(Math.max(0, items.length - 1));
+            ui.issuesPanel.focus();
+        } else {
+            ui.gitPanel.scroll(-1);
+        }
+    } else if (focusArea === 'issues') {
         const cur = ui.issuesPanel.selected || 0;
         if (cur > 0) {
             ui.issuesPanel.select(cur - 1);
+        } else {
+            // At top of issues — move to services
+            focusArea = 'services';
+            ui.serviceList.select(config.services.length - 1);
+            ui.serviceList.focus();
         }
-        process.nextTick(doRender);
-        return;
-    }
-    const cur = ui.serviceList.selected || 0;
-    if (cur > 0) {
-        ui.serviceList.select(cur - 1);
-        ui.serviceList.focus();
+    } else if (focusArea === 'services') {
+        const cur = ui.serviceList.selected || 0;
+        if (cur > 0) {
+            ui.serviceList.select(cur - 1);
+        }
     }
     process.nextTick(doRender);
-});
-
-ui.screen.key(['i'], () => {
-    unfocusPanels();
-    issuesPanelFocused = true;
-    ui.issuesPanel.focus();
-    process.nextTick(doRender);
-});
-
-ui.screen.key(['g'], () => {
-    unfocusPanels();
-    gitPanelFocused = true;
-    ui.gitPanel.focus();
-    ui.gitPanel.style.border = { fg: 'cyan' };
-    process.nextTick(doRender);
-});
-
-ui.screen.key(['escape'], () => {
-    if (gitPanelFocused || issuesPanelFocused) {
-        unfocusPanels();
-        ui.serviceList.focus();
-        process.nextTick(doRender);
-    }
 });
 
 ui.screen.key(['r'], () => {

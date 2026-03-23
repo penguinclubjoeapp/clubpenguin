@@ -122,7 +122,7 @@ function createScreen(config) {
     });
     y += 1;
 
-    // Issues list — fixed height viewport, scrollable
+    // Issues list — fixed height viewport, navigation handled at screen level
     const issuesPanel = blessed.list({
         parent: screen,
         top: y,
@@ -131,10 +131,6 @@ function createScreen(config) {
         height: 6,
         tags: true,
         mouse: true,
-        scrollable: true,
-        alwaysScroll: true,
-        keys: true,
-        vi: true,
         style: {
             selected: { bg: 'blue', fg: 'white' },
             item: { fg: 'white' },
@@ -199,7 +195,7 @@ function createScreen(config) {
         style: { fg: 'white', bg: 'black' },
         padding: { left: 1 },
     });
-    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[i]{/} Issues   {bold}[g]{/} Git   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
+    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
 
     // Status line
     const statusLine = blessed.box({
