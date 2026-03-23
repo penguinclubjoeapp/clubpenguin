@@ -14,8 +14,9 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Generate Prisma client and build TypeScript
+ARG DATABASE_URL=mysql://placeholder:placeholder@localhost:3306/yukon
+RUN npx prisma generate && npm run build
 
 # Expose ports (Login: 6112, World: 6113)
 EXPOSE 6112 6113

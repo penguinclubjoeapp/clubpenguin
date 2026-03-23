@@ -37,6 +37,10 @@ services:
       - "${GAME_LOGIN_PORT:-6112}:6112"
       - "${GAME_WORLD_PORT:-6113}:6113"
     environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       BOT_API_HOST: discord-bot
       BOT_API_PORT: ${BOT_API_PORT:-3001}
     volumes:

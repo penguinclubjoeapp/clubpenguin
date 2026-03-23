@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es2023",
+        "module": "commonjs",
+
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "removeComments": true,
+        "skipLibCheck": true,
+        "strict": true,
+
+        "outDir": "dist",
+
+        "paths": {
+            "@config": ["./src/config/config"],
+            "@data": ["./src/data/data"],
+
+            "@database/*": ["./src/database/*"],
+            "@objects/*": ["./src/objects/*"],
+            "@plugin/*": ["./src/plugin/*"],
+            "@utils/*": ["./src/utils/*"]
+        },
+
+        "plugins": [
+            { "transform": "ts-runtime-checks" }
+        ]
+    },
+    "include": ["src", "tests"]
+}

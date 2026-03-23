@@ -413,13 +413,20 @@ step_06() {
 
     info "Quick smoke test — starting server briefly..."
 
+    # Generate Prisma client if needed
+    if [ ! -d "$PROJECT_ROOT/yukon-server/src/generated/prisma" ]; then
+        info "Generating Prisma client..."
+        cd "$PROJECT_ROOT/yukon-server"
+        DATABASE_URL="mysql://penguin:devpassword@127.0.0.1:3307/yukon" npx prisma generate
+    fi
+
     # Use same port detection as dev.sh
     local login_port=$(find_port 6112)
     local world_port=$(find_port 6113)
 
     cd "$PROJECT_ROOT/yukon-server"
     DEV_LOGIN_PORT=$login_port DEV_WORLD_PORT=$world_port NODE_ENV=development \
-        npx babel-watch ./src/World.js Login Blizzard &
+        npx nodemon --exec "node -r ts-node/register -r tsconfig-paths/register" ./src/World.ts Login Blizzard &
     local server_pid=$!
     sleep 4
 
@@ -483,8 +490,8 @@ step_07() {
     echo ""
     echo -e "  ${BOLD}Edit workflow:${NC}"
     echo "    Client changes → webpack HMR auto-reloads browser"
-    echo "    Server changes → babel-watch auto-restarts server"
-    echo "    Database changes → edit yukon.sql + add migration to scripts/"
+    echo "    Server changes → nodemon auto-restarts TypeScript server"
+    echo "    Database changes → edit prisma/schema.prisma + run prisma migrate"
     echo ""
     hr
     echo ""
