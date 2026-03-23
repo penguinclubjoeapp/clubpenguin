@@ -1,0 +1,9 @@
+{
+  "name": "clubpenguin-hub",
+  "version": "1.0.0",
+  "private": true,
+  "main": "hub.js",
+  "dependencies": {
+    "neo-blessed": "^0.2.0"
+  }
+}

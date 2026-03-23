@@ -88,3 +88,6 @@ Desktop.ini
 .coverage
 htmlcov/
 *.cover
+
+# ── 11. Hub State ──────────────────────────────────────────────────
+.hub-state.json
