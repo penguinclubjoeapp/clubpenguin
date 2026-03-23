@@ -55,12 +55,11 @@ export default class Login extends Plugin {
 
         const check = this.check({ username: args.username, password: args.password })
 
-        if (check != true) {
+        if (check !== true) {
             // Invalid data input
             user.send('login', {
                 success: false,
-                // @ts-expect-error temp
-                message: check[0].message
+                message: (check as any[])[0].message
             })
 
         } else {

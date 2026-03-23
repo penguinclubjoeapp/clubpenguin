@@ -1,12 +1,19 @@
-// @ts-nocheck temp
-
 import CardInstance from './CardInstance'
 
 import SenseiNinja from './ninja/SenseiNinja'
 
+import type Ninja from './ninja/Ninja'
+import type { Args } from '../../../server/Server'
+import type GameUser from '@objects/user/GameUser'
+
 export default class SenseiInstance extends CardInstance {
 
-    constructor(user) {
+    user: GameUser
+    senseiData: { username: string, color: number, ninjaRank: number, sensei: boolean }
+    sensei: SenseiNinja | null
+    me: Ninja | null
+
+    constructor(user: GameUser) {
         super({ users: [user] })
 
         this.user = user
@@ -51,33 +58,33 @@ export default class SenseiInstance extends CardInstance {
         this.start()
     }
 
-    handleSendDeal(args, user) {
-        if (this.me.hasDealt) {
+    handleSendDeal(args: Args, user: GameUser) {
+        if (this.me!.hasDealt) {
             return
         }
 
         const canBeatSensei = user.ninjaRank >= this.itemAwards.length - 1
 
-        const cards = this.me.dealCards(canBeatSensei)
-        const senseiCards = this.sensei.dealCards(cards, canBeatSensei)
+        const cards = this.me!.dealCards(canBeatSensei)
+        const senseiCards = this.sensei!.dealCards(cards, canBeatSensei)
 
         user.send('send_deal', { cards })
         user.send('send_opponent_deal', { deal: senseiCards.length })
     }
 
-    handlePickCard(args, _user) {
-        if (!this.me.isInDealt(args.card) || this.me.pick) {
+    handlePickCard(args: Args, _user: GameUser) {
+        if (!this.me!.isInDealt(args.card) || this.me!.pick) {
             return
         }
 
-        this.me.pickCard(args.card)
-        this.sensei.pickCard(args.card)
+        this.me!.pickCard(args.card)
+        this.sensei!.pickCard(args.card)
 
-        this.me.revealCards()
-        this.judgeRound(this.me)
+        this.me!.revealCards()
+        this.judgeRound(this.me!)
     }
 
-    updateProgress(user, won) {
+    updateProgress(user: GameUser, won: boolean) {
         if (!user) {
             return
         }
@@ -89,12 +96,12 @@ export default class SenseiInstance extends CardInstance {
         super.updateProgress(user, won)
     }
 
-    checkBlackBeltWin(user, won) {
+    checkBlackBeltWin(user: GameUser, won: boolean) {
         return user.ninjaRank == 9 && won
     }
 
-    getNinja(seat) {
-        return [this.sensei, this.me][seat]
+    getNinja(seat: number) {
+        return [this.sensei!, this.me!][seat]
     }
 
 }

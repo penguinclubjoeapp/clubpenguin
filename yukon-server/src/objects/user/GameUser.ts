@@ -11,12 +11,12 @@ import PostcardCollection from '@database/collections/PostcardCollection'
 
 import PurchaseValidator from './purchase/PurchaseValidator'
 
-import type BaseInstance from '@objects/instance/BaseInstance'
 import type BaseTable from '@objects/room/table/BaseTable'
 import Igloo from '@objects/room/Igloo'
 import type Pet from '@objects/pet/Pet'
 import Database from '@database/Database'
 import type Room from '@objects/room/Room'
+import type GameHandler from '../../handlers/GameHandler'
 import type Server from '../../server/Server'
 import type Waddle from '@objects/room/waddle/Waddle'
 
@@ -48,7 +48,7 @@ export default class GameUser extends User {
 
     room: Room | Igloo | null = null
     waddle: Waddle | null = null
-    minigameRoom: BaseInstance | BaseTable | null = null
+    minigameRoom: any = null
 
     buddyRequests: number[] = []
     walkingPet: Pet | null = null
@@ -67,8 +67,7 @@ export default class GameUser extends User {
     constructor(server: Server, socket: Socket) {
         super(server, socket)
 
-        // @ts-expect-error temp
-        this.crumbs = this.handler.crumbs
+        this.crumbs = (this.handler as GameHandler).crumbs
 
         this.validatePurchase = new PurchaseValidator(this)
 
@@ -85,8 +84,7 @@ export default class GameUser extends User {
     }
 
     setItem(slot: string, item: number) {
-        // @ts-expect-error temp
-        if (this[slot] == item) {
+        if ((this as Record<string, any>)[slot] == item) {
             return
         }
 
@@ -140,8 +138,7 @@ export default class GameUser extends User {
     addBuddy(id: number, username: string, requester = false) {
         this.buddies.add(id)
 
-        // @ts-expect-error temp
-        const online = id in this.handler.usersById
+        const online = id in (this.handler as GameHandler).usersById
 
         this.send('buddy_accept', { id, username, requester, online })
     }

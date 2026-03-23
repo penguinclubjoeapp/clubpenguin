@@ -127,7 +127,7 @@ export default defineConfig(
             '@stylistic/space-infix-ops': 'error',
             '@stylistic/type-annotation-spacing': 'error',
 
-            '@typescript-eslint/ban-ts-comment': 'off', // temp
+            '@typescript-eslint/ban-ts-comment': 'error',
             '@typescript-eslint/consistent-type-imports': 'error',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': [

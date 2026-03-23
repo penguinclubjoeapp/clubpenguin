@@ -1,14 +1,24 @@
-// @ts-nocheck temp
-
 import BaseInstance from '../BaseInstance'
 
 import Ninja from './ninja/Ninja'
 import Power from './Power'
 import Rules from './Rules'
 
+import type Card from './ninja/Card'
+import type { Args } from '../../../server/Server'
+import type GameUser from '@objects/user/GameUser'
+
 export default class CardInstance extends BaseInstance {
 
-    constructor(waddle) {
+    ninjas: Record<number, Ninja>
+    powers: Power[]
+
+    xpPercentageStart: number
+    rankSpeed: number
+    itemAwards: number[]
+    postcardAwards: Record<number, number>
+
+    constructor(waddle: any) {
         super(waddle, 998)
 
         this.ninjas = {}
@@ -23,18 +33,20 @@ export default class CardInstance extends BaseInstance {
         this.itemAwards = [4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 104]
         this.postcardAwards = { 1: 177, 5: 178, 9: 179 }
 
-        this.handleSendDeal = this.handleSendDeal.bind(this)
-        this.handlePickCard = this.handlePickCard.bind(this)
+        ;(this as any).handleSendDeal = this.handleSendDeal.bind(this)
+        ;(this as any).handlePickCard = this.handlePickCard.bind(this)
     }
 
     init() {
         super.init()
 
         for (const user of this.users) {
+            if (!user) continue
             this.ninjas[user.id] = new Ninja(user)
         }
 
         for (const user of this.users) {
+            if (!user) continue
             const opponent = this.getOpponent(user)
 
             if (opponent) {
@@ -43,21 +55,21 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    addListeners(user) {
-        user.events.on('send_deal', this.handleSendDeal)
-        user.events.on('pick_card', this.handlePickCard)
+    addListeners(user: GameUser) {
+        user.events!.on('send_deal', this.handleSendDeal)
+        user.events!.on('pick_card', this.handlePickCard)
 
         super.addListeners(user)
     }
 
-    removeListeners(user) {
-        user.events.off('send_deal', this.handleSendDeal)
-        user.events.off('pick_card', this.handlePickCard)
+    removeListeners(user: GameUser) {
+        user.events!.off('send_deal', this.handleSendDeal)
+        user.events!.off('pick_card', this.handlePickCard)
 
         super.removeListeners(user)
     }
 
-    handleSendDeal(args, user) {
+    handleSendDeal(args: Args, user: GameUser) {
         const me = this.ninjas[user.id]
 
         if (me.hasDealt) {
@@ -67,10 +79,10 @@ export default class CardInstance extends BaseInstance {
         const cards = me.dealCards()
 
         user.send('send_deal', { cards })
-        me.opponent.send('send_opponent_deal', { deal: cards.length })
+        me.opponent!.send('send_opponent_deal', { deal: cards.length })
     }
 
-    handlePickCard(args, user) {
+    handlePickCard(args: Args, user: GameUser) {
         const me = this.ninjas[user.id]
 
         if (!me.isInDealt(args.card) || me.pick) {
@@ -79,7 +91,7 @@ export default class CardInstance extends BaseInstance {
 
         me.pickCard(args.card)
 
-        if (!me.opponent.pick) {
+        if (!me.opponent!.pick) {
             return
         }
 
@@ -88,7 +100,7 @@ export default class CardInstance extends BaseInstance {
     }
 
     start() {
-        const users = this.users.map(user => ({
+        const users = this.users.map(user => user && ({
             username: user.username,
             color: user.color,
             ninjaRank: user.ninjaRank
@@ -99,7 +111,7 @@ export default class CardInstance extends BaseInstance {
         super.start()
     }
 
-    judgeRound(me) {
+    judgeRound(me: Ninja) {
         const winner = this.getRoundWinner()
 
         this.send('judge', { winner })
@@ -109,12 +121,12 @@ export default class CardInstance extends BaseInstance {
         }
 
         me.resetTurn()
-        me.opponent.resetTurn()
+        me.opponent!.resetTurn()
     }
 
     getRoundWinner() {
-        const first = this.getPick(0)
-        const second = this.getPick(1)
+        const first = this.getPick(0)!
+        const second = this.getPick(1)!
 
         this.applyPowers(first, second)
 
@@ -126,7 +138,7 @@ export default class CardInstance extends BaseInstance {
         return this.getWinningSeat(first, second)
     }
 
-    applyPowers(first, second) {
+    applyPowers(first: Card, second: Card) {
         for (const power of this.powers) {
             const id = power.id
 
@@ -148,7 +160,7 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    reverseCardValues(first, second) {
+    reverseCardValues(first: Card, second: Card) {
         const swap = first.value
 
         first.value = second.value
@@ -160,11 +172,11 @@ export default class CardInstance extends BaseInstance {
         this.checkPowerOnPlayed(1)
     }
 
-    checkPowerOnPlayed(seat) {
+    checkPowerOnPlayed(seat: number) {
         this.checkPower(seat, true)
     }
 
-    checkPowerOnScored(first, second) {
+    checkPowerOnScored(first: Card, second: Card) {
         const winSeat = this.getWinningSeat(first, second)
 
         if (winSeat > -1) {
@@ -172,8 +184,8 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    checkPower(seat, onPlayed) {
-        const card = this.getPick(seat)
+    checkPower(seat: number, onPlayed: boolean) {
+        const card = this.getPick(seat)!
 
         if (!this.hasPower(card)) {
             return
@@ -198,15 +210,15 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    hasPower(card) {
+    hasPower(card: Card) {
         return card.powerId > 0
     }
 
-    isOnPlayed(card) {
+    isOnPlayed(card: Card) {
         return Rules.onPlayed.includes(card.powerId)
     }
 
-    addPower(seat, card) {
+    addPower(seat: number, card: Card) {
         if (card.powerId == 1) {
             const hasReverse = this.powers.some(power => power.id == 1)
 
@@ -218,9 +230,9 @@ export default class CardInstance extends BaseInstance {
         this.powers.push(new Power(seat, card))
     }
 
-    replaceCards(card) {
-        const first = this.getPick(0)
-        const second = this.getPick(1)
+    replaceCards(card: Card) {
+        const first = this.getPick(0)!
+        const second = this.getPick(1)!
 
         const [original, replace] = Rules.replacements[card.powerId]
 
@@ -233,8 +245,8 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    discardCards(card, seat) {
-        const opponent = this.getNinja(seat).opponent
+    discardCards(card: Card, seat: number) {
+        const opponent = this.getNinja(seat).opponent!
 
         if (card.powerId in Rules.discardElements) {
             this.discardElements(card, opponent)
@@ -245,7 +257,7 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    discardElements(card, opponent) {
+    discardElements(card: Card, opponent: Ninja) {
         const element = Rules.discardElements[card.powerId]
 
         if (opponent.wins[element].length) {
@@ -253,7 +265,7 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    discardColors(card, opponent) {
+    discardColors(card: Card, opponent: Ninja) {
         const color = Rules.discardColors[card.powerId]
         const wins = opponent.wins
 
@@ -267,7 +279,7 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    getWinningSeat(first, second) {
+    getWinningSeat(first: Card, second: Card) {
         if (first.element != second.element) {
             return this.compareElements(first, second)
         }
@@ -283,7 +295,7 @@ export default class CardInstance extends BaseInstance {
         return -1
     }
 
-    compareElements(first, second) {
+    compareElements(first: Card, second: Card) {
         if (Rules.elements[first.element] == second.element) {
             return 0
         }
@@ -291,9 +303,9 @@ export default class CardInstance extends BaseInstance {
         return 1
     }
 
-    checkWin(winSeat) {
+    checkWin(winSeat: number) {
         const winner = this.getNinja(winSeat)
-        const winCard = winner.pick
+        const winCard = winner.pick!
 
         const loser = this.getNinja(this.getOppositeSeat(winSeat))
 
@@ -310,13 +322,13 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    sendWin(winSeat, winningCards = []) {
+    sendWin(winSeat: number, winningCards: Card[] = []) {
         this.send('winner', { winner: winSeat, cards: winningCards.map(card => card.id) })
 
-        this.users.forEach(user => super.remove(user))
+        this.users.forEach(user => { if (user) super.remove(user) })
     }
 
-    getWinningCards(winner) {
+    getWinningCards(winner: Ninja): Card[] | false {
         const wins = Object.values(winner.wins)
 
         for (const element of wins) {
@@ -336,9 +348,9 @@ export default class CardInstance extends BaseInstance {
         return false
     }
 
-    check1ElementWin(element) {
-        const result = []
-        const colors = []
+    check1ElementWin(element: Card[]): Card[] | false {
+        const result: Card[] = []
+        const colors: string[] = []
 
         for (const card of element) {
             if (colors.includes(card.color)) {
@@ -356,7 +368,7 @@ export default class CardInstance extends BaseInstance {
         return false
     }
 
-    check3ElementWin(cards) {
+    check3ElementWin(cards: Card[][]): Card[] | false {
         const product = this.product(cards)
 
         for (const combo of product) {
@@ -378,16 +390,16 @@ export default class CardInstance extends BaseInstance {
                 continue
             }
 
-            const winSeat = ninjas.indexOf(ninja.opponent)
+            const winSeat = ninjas.indexOf(ninja.opponent!)
 
-            this.updateNinja(ninja.opponent, ninja)
+            this.updateNinja(ninja.opponent!, ninja)
             this.sendWin(winSeat)
 
             return
         }
     }
 
-    hasPlayableCards(ninja) {
+    hasPlayableCards(ninja: Ninja) {
         const limiters = this.powers.filter(power => power.id in Rules.limiters)
 
         for (const limiter of limiters) {
@@ -403,12 +415,12 @@ export default class CardInstance extends BaseInstance {
         return true
     }
 
-    updateNinja(winner, loser) {
-        this.updateProgress(winner.user, true)
-        this.updateProgress(loser.user, false)
+    updateNinja(winner: Ninja, loser: Ninja) {
+        this.updateProgress(winner.user as GameUser, true)
+        this.updateProgress(loser.user as GameUser, false)
     }
 
-    updateProgress(user, won) {
+    updateProgress(user: GameUser, won: boolean) {
         if (this.checkNoBeltWin(user, won)) {
             user.update({ ninjaProgress: 100 })
 
@@ -425,15 +437,15 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    checkNoBeltWin(user, won) {
+    checkNoBeltWin(user: GameUser, won: boolean) {
         return user.ninjaRank == 0 && won
     }
 
-    xpPercentageIncrease(rank) {
+    xpPercentageIncrease(rank: number) {
         return Math.floor(this.xpPercentageStart / (rank + 1))
     }
 
-    rankUp(user) {
+    rankUp(user: GameUser) {
         const rank = user.ninjaRank + 1
 
         if (rank > this.itemAwards.length) {
@@ -448,7 +460,7 @@ export default class CardInstance extends BaseInstance {
         user.send('award', { rank: user.ninjaRank })
     }
 
-    addAwards(user, rank) {
+    addAwards(user: GameUser, rank: number) {
         const item = this.itemAwards[rank - 1]
 
         if (!user.inventory.includes(item)) {
@@ -460,41 +472,41 @@ export default class CardInstance extends BaseInstance {
         }
     }
 
-    remove(user) {
+    remove(user: GameUser) {
         super.remove(user)
 
         this.closeGame(user)
     }
 
-    closeGame(user) {
+    closeGame(user: GameUser) {
         this.send('close_game', { username: user.username })
     }
 
-    getPick(seat) {
+    getPick(seat: number) {
         const ninja = this.getNinja(seat)
 
         return ninja.pick
     }
 
-    getNinja(seat) {
-        const user = this.users[seat]
+    getNinja(seat: number) {
+        const user = this.users[seat]!
 
         return this.ninjas[user.id]
     }
 
-    getOpponent(user) {
+    getOpponent(user: GameUser) {
         const seat = this.getSeat(user)
         const opponentSeat = this.getOppositeSeat(seat)
 
         return this.users[opponentSeat]
     }
 
-    getOppositeSeat(seat) {
+    getOppositeSeat(seat: number) {
         return (seat + 1) % 2
     }
 
-    product(arrays) {
-        return arrays.reduce((acc, arr) => acc.flatMap(x => arr.map(y => [x, y].flat())))
+    product(arrays: Card[][]): Card[][] {
+        return (arrays as any).reduce((acc: any, arr: any) => acc.flatMap((x: any) => arr.map((y: any) => [x, y].flat())))
     }
 
 }

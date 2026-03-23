@@ -1,12 +1,24 @@
-// @ts-nocheck temp
-
 import Card from './Card'
 
 import { cards } from '@data'
 
+import type GameUser from '@objects/user/GameUser'
+
 export default class Ninja {
 
-    constructor(user = null) {
+    user: GameUser | null
+    opponent: Ninja | null
+
+    deck: number[]
+    dealt: Card[]
+    pick: Card | null
+
+    wins: Record<string, Card[]>
+
+    dealtSize: number
+    hasDealt: boolean
+
+    constructor(user: GameUser | null = null) {
         this.user = user
 
         this.opponent = null
@@ -33,24 +45,24 @@ export default class Ninja {
 
     setDeck() {
         // Shallow copy
-        this.deck = Array.from(this.user.cards.deck)
+        this.deck = Array.from(this.user!.cards.deck)
     }
 
     filterDeckRegularCards() {
         this.deck = this.deck.filter(card => cards[card].powerId == 0)
     }
 
-    isInDealt(card) {
+    isInDealt(card: number) {
         return this.dealt.some(dealt => dealt.id == card)
     }
 
-    hasPlayableCards(element) {
+    hasPlayableCards(element: string) {
         const filtered = this.getLimitedDealt(element)
 
         return Boolean(filtered.length)
     }
 
-    getLimitedDealt(element) {
+    getLimitedDealt(element: string) {
         return this.dealt.filter(dealt => dealt.element != element)
     }
 
@@ -61,7 +73,7 @@ export default class Ninja {
             this.filterDeckRegularCards()
         }
 
-        const currentDealt = []
+        const currentDealt: Card[] = []
         const dealNumber = this.dealtSize - this.dealt.length
 
         for (let i = 0; i < dealNumber; i++) {
@@ -89,21 +101,21 @@ export default class Ninja {
         return randomCard
     }
 
-    pickCard(card) {
-        this.pick = this.getPick(card)
+    pickCard(card: number) {
+        this.pick = this.getPick(card)!
 
-        this.opponent.send('pick_card', { card: this.dealt.indexOf(this.pick) })
+        this.opponent!.send('pick_card', { card: this.dealt.indexOf(this.pick) })
 
         this.dealt.splice(this.dealt.indexOf(this.pick), 1)
     }
 
-    getPick(id) {
+    getPick(id: number) {
         return this.dealt.find(card => card.id == id)
     }
 
     revealCards() {
-        this.send('reveal_card', { card: this.opponent.pick })
-        this.opponent.send('reveal_card', { card: this.pick })
+        this.send('reveal_card', { card: this.opponent!.pick })
+        this.opponent!.send('reveal_card', { card: this.pick })
     }
 
     resetTurn() {
@@ -111,8 +123,8 @@ export default class Ninja {
         this.hasDealt = false
     }
 
-    send(action, args = {}) {
-        this.user.send(action, args)
+    send(action: string, args: Record<string, any> = {}) {
+        this.user!.send(action, args)
     }
 
 }

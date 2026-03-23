@@ -157,15 +157,13 @@ export default class Chat extends GamePlugin {
 
     addItem(args: Args, user: GameUser) {
         if (user.isModerator) {
-            // @ts-expect-error temp
-            this.plugins.item.addItem({ item: args[0] }, user)
+            (this.plugins.item as any).addItem({ item: args[0] }, user)
         }
     }
 
     addFurniture(args: Args, user: GameUser) {
         if (user.isModerator) {
-            // @ts-expect-error temp
-            this.plugins.igloo.addFurniture({ furniture: args[0] }, user)
+            (this.plugins.igloo as any).addFurniture({ furniture: args[0] }, user)
         }
     }
 
@@ -187,16 +185,14 @@ export default class Chat extends GamePlugin {
         }
 
         if (!isNaN(room)) {
-            // @ts-expect-error temp
-            this.plugins.join.joinRoom({ room: parseInt(room) }, user)
+            (this.plugins.join as any).joinRoom({ room: parseInt(room) }, user)
             return
         }
 
         room = Object.values(this.rooms).find(r => r.name == room.toLowerCase())
 
         if (room) {
-            // @ts-expect-error temp
-            this.plugins.join.joinRoom({ room: room.id }, user)
+            (this.plugins.join as any).joinRoom({ room: room.id }, user)
         }
     }
 
@@ -205,8 +201,7 @@ export default class Chat extends GamePlugin {
     }
 
     userPopulation(args: Args, user: GameUser) {
-        // @ts-expect-error temp
-        user.send('error', { error: `Users online: ${this.handler.population}` })
+        user.send('error', { error: `Users online: ${(this.handler as GameHandler).population}` })
     }
 
     showRoom(args: string[], user: GameUser) {
