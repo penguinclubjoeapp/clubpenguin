@@ -37,16 +37,18 @@ function getShaAtTime(projectRoot, isoTime) {
     }
 }
 
-function probeServiceStartTime(svc, env) {
+function probeServiceStartTime(svc, env, projectRoot) {
     const def = svc[env] || svc.prod;
     if (!def) return null;
 
     if (def.type === 'docker') {
-        // Try the compose service name as container name, and common prefixes
+        // Docker compose names containers as {project}-{service}-{n}
+        // Project name defaults to the directory name
+        const dirName = path.basename(projectRoot).toLowerCase().replace(/[^a-z0-9]/g, '');
         const names = [
             def.service,
-            `clubpenguin-${def.service}-1`,
-            `clubpenguin-${def.service}`,
+            `${dirName}-${def.service}-1`,
+            `${dirName}-${def.service}`,
         ];
         for (const name of names) {
             const t = getContainerStartTime(name);
@@ -69,7 +71,7 @@ function load(projectRoot, services, env) {
         const state = { lastRestart: {} };
 
         for (const svc of services) {
-            const startTime = probeServiceStartTime(svc, env || 'prod');
+            const startTime = probeServiceStartTime(svc, env || 'prod', projectRoot);
             if (startTime) {
                 const sha = getShaAtTime(projectRoot, startTime) || getCurrentSha(projectRoot);
                 state.lastRestart[svc.id] = { time: startTime, commitSha: sha };

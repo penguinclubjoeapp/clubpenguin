@@ -13,6 +13,14 @@ const { createScreen, render } = require('./lib/ui');
 
 // Parse CLI args
 const args = process.argv.slice(2);
+
+// Handle init subcommand before loading config
+if (args[0] === 'init') {
+    const { init } = require('./lib/init');
+    init(args[1]);
+    process.exit(0);
+}
+
 let forceEnv = null;
 if (args.includes('--dev')) forceEnv = 'dev';
 if (args.includes('--prod')) forceEnv = 'prod';
