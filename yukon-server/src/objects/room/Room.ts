@@ -40,6 +40,10 @@ export default class Room {
 
         user.send('join_room', { room: this.id, users: this.userValues })
         this.send(user, 'add_player', { user })
+
+        // Discord voice channel sync
+        const discord = (user.handler as any).plugins?.plugins?.discord
+        discord?.onRoomJoin(user, this)
     }
 
     remove(user: GameUser) {
