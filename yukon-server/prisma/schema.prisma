@@ -188,10 +188,12 @@ model User {
     flag          Int      @default(0)
     ninjaRank     Int      @default(0) @db.TinyInt
     ninjaProgress Int      @default(0) @db.TinyInt
+    member        Int      @default(0) @db.TinyInt
 
     authTokens         AuthToken[]
     bans               Ban[]                @relation("Bans")
     bansOf             Ban[]                @relation("BansOf")
+    discordLink        DiscordLink?
     buddies            Buddy[]              @relation("Buddies")
     buddiesOf          Buddy[]              @relation("BuddiesOf")
     cards              Card[]
@@ -207,6 +209,24 @@ model User {
     postcardsOf        Postcard[]           @relation("PostcardsOf")
 
     @@map("users")
+}
+
+model DiscordLink {
+    userId    Int      @id
+    discordId BigInt   @unique
+    linkedAt  DateTime @default(now()) @db.Timestamp(0)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "discord_links_ibfk_1")
+
+    @@map("discord_links")
+}
+
+model RoomChannelMapping {
+    roomId    Int      @id
+    channelId BigInt
+    mappedAt  DateTime @default(now()) @db.Timestamp(0)
+
+    @@map("room_channel_mappings")
 }
 
 model World {
