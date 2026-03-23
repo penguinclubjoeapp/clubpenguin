@@ -3,7 +3,6 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { SERVICES, GLOBAL_TRIGGERS } = require('./services');
 const { getServiceLastRestart } = require('./state');
 
 function run(cmd, projectRoot) {
@@ -42,9 +41,9 @@ function workingTreeForPaths(paths, projectRoot) {
     };
 }
 
-function detectAll(projectRoot, state) {
+function detectAll(projectRoot, services, globalTriggers, state) {
     const results = {};
-    for (const svc of SERVICES) {
+    for (const svc of services) {
         results[svc.id] = { count: 0, files: [] };
     }
 
@@ -55,7 +54,7 @@ function detectAll(projectRoot, state) {
     let globalChanged = [];
     // Find the oldest SHA across all services for global diff
     let oldestSha = null;
-    for (const svc of SERVICES) {
+    for (const svc of services) {
         const last = getServiceLastRestart(state, svc.id);
         if (!last.commitSha) continue;
         if (last.commitSha === currentHead) continue;
@@ -68,10 +67,10 @@ function detectAll(projectRoot, state) {
     if (oldestSha) {
         const valid = run(`git cat-file -t ${oldestSha}`, projectRoot);
         if (valid === 'commit') {
-            globalChanged = diffForPaths(oldestSha, GLOBAL_TRIGGERS, projectRoot);
+            globalChanged = diffForPaths(oldestSha, globalTriggers, projectRoot);
         }
     }
-    const globalWorking = workingTreeForPaths(GLOBAL_TRIGGERS, projectRoot);
+    const globalWorking = workingTreeForPaths(globalTriggers, projectRoot);
     const allGlobalChanged = [...new Set([
         ...globalChanged,
         ...globalWorking.unstaged,
@@ -80,7 +79,7 @@ function detectAll(projectRoot, state) {
     ])];
 
     // Per-service: diff only that service's paths
-    for (const svc of SERVICES) {
+    for (const svc of services) {
         const last = getServiceLastRestart(state, svc.id);
         const svcSha = last.commitSha;
         const files = new Set();

@@ -1,12 +1,11 @@
 'use strict';
 
 const { getDockerServiceStatus, getProcessStatus } = require('./environment');
-const { SERVICES } = require('./services');
 
-function checkAll(env, projectRoot) {
+function checkAll(services, env, projectRoot) {
     const results = {};
 
-    for (const svc of SERVICES) {
+    for (const svc of services) {
         const def = svc[env] || svc.prod;
 
         if (!def || def.type === 'none') {

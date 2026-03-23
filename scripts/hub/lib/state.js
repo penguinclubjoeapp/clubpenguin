@@ -3,7 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { SERVICES } = require('./services');
 const { getContainerStartTime, getProcessStartTime } = require('./environment');
 
 const STATE_FILE = '.hub-state.json';
@@ -60,7 +59,7 @@ function probeServiceStartTime(svc, env) {
     return null;
 }
 
-function load(projectRoot, env) {
+function load(projectRoot, services, env) {
     const filePath = getStatePath(projectRoot);
     try {
         const raw = fs.readFileSync(filePath, 'utf8');
@@ -69,7 +68,7 @@ function load(projectRoot, env) {
         // First run — seed from actual service start times
         const state = { lastRestart: {} };
 
-        for (const svc of SERVICES) {
+        for (const svc of services) {
             const startTime = probeServiceStartTime(svc, env || 'prod');
             if (startTime) {
                 const sha = getShaAtTime(projectRoot, startTime) || getCurrentSha(projectRoot);

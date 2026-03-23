@@ -1,15 +1,15 @@
+#!/usr/bin/env node
 'use strict';
 
-const path = require('path');
-const { SERVICES } = require('./lib/services');
+const { loadConfig } = require('./lib/config-loader');
 const { detectEnvironment } = require('./lib/environment');
 const { checkAll } = require('./lib/health');
 const { detectAll } = require('./lib/changes');
-const { execute, executeQueue, isRunning } = require('./lib/actions');
+const { execute, executeQueue, isRunning, getActionForService } = require('./lib/actions');
 const { load } = require('./lib/state');
+const { fetchGitStatus } = require('./lib/git-status');
+const { fetchOpenPRs } = require('./lib/github');
 const { createScreen, render } = require('./lib/ui');
-
-const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 
 // Parse CLI args
 const args = process.argv.slice(2);
@@ -17,14 +17,18 @@ let forceEnv = null;
 if (args.includes('--dev')) forceEnv = 'dev';
 if (args.includes('--prod')) forceEnv = 'prod';
 
-// Initialize — detect env first so state can probe real container start times
-const { detectEnvironment: detectEnvForInit } = require('./lib/environment');
-const initEnv = forceEnv || detectEnvForInit(PROJECT_ROOT);
-const state = load(PROJECT_ROOT, initEnv);
-const ui = createScreen();
+// Load config
+const config = loadConfig(args);
+
+// Initialize
+const initEnv = forceEnv || detectEnvironment(config.root);
+const state = load(config.root, config.services, initEnv);
+const ui = createScreen(config);
 let env = initEnv;
 let healthResults = {};
 let changeResults = {};
+let gitStatus = null;
+let prList = null;
 let lastActionStatus = null;
 let actionStatusTimer = null;
 
@@ -44,19 +48,34 @@ function setActionStatus(status) {
 }
 
 function poll() {
-    env = forceEnv || detectEnvironment(PROJECT_ROOT);
-    healthResults = checkAll(env, PROJECT_ROOT);
-    changeResults = detectAll(PROJECT_ROOT, state);
+    env = forceEnv || detectEnvironment(config.root);
+    healthResults = checkAll(config.services, env, config.root);
+    changeResults = detectAll(config.root, config.services, config.globalTriggers, state);
+    gitStatus = fetchGitStatus(config.root);
     doRender();
 }
 
+function pollGithub() {
+    if (config.github) {
+        prList = fetchOpenPRs(config.github);
+        doRender();
+    }
+}
+
 function doRender() {
-    render(ui, env, healthResults, changeResults, state, lastActionStatus);
+    render(ui, config, env, healthResults, changeResults, state, lastActionStatus, gitStatus, prList, getActionForService);
 }
 
 // Navigation — bound to screen so it works regardless of focus
+let gitPanelFocused = false;
+
 ui.screen.key(['j', 'down'], () => {
-    const max = SERVICES.length - 1;
+    if (gitPanelFocused) {
+        ui.gitPanel.scroll(1);
+        process.nextTick(doRender);
+        return;
+    }
+    const max = config.services.length - 1;
     const cur = ui.serviceList.selected || 0;
     if (cur < max) {
         ui.serviceList.select(cur + 1);
@@ -66,12 +85,38 @@ ui.screen.key(['j', 'down'], () => {
 });
 
 ui.screen.key(['k', 'up'], () => {
+    if (gitPanelFocused) {
+        ui.gitPanel.scroll(-1);
+        process.nextTick(doRender);
+        return;
+    }
     const cur = ui.serviceList.selected || 0;
     if (cur > 0) {
         ui.serviceList.select(cur - 1);
         ui.serviceList.focus();
     }
     process.nextTick(doRender);
+});
+
+ui.screen.key(['g'], () => {
+    gitPanelFocused = !gitPanelFocused;
+    if (gitPanelFocused) {
+        ui.gitPanel.focus();
+        ui.gitPanel.style.border = { fg: 'cyan' };
+    } else {
+        ui.serviceList.focus();
+        delete ui.gitPanel.style.border;
+    }
+    process.nextTick(doRender);
+});
+
+ui.screen.key(['escape'], () => {
+    if (gitPanelFocused) {
+        gitPanelFocused = false;
+        ui.serviceList.focus();
+        delete ui.gitPanel.style.border;
+        process.nextTick(doRender);
+    }
 });
 
 ui.screen.key(['r'], () => {
@@ -81,10 +126,10 @@ ui.screen.key(['r'], () => {
     }
 
     const selected = ui.serviceList.selected || 0;
-    const svc = SERVICES[selected];
+    const svc = config.services[selected];
     if (!svc) return;
 
-    execute(svc.id, env, PROJECT_ROOT, state, (status) => {
+    execute(config.services, svc.id, env, config.root, state, (status) => {
         setActionStatus(status);
         // Re-poll after action completes to refresh health
         if (status.type === 'success' || status.type === 'error') {
@@ -100,12 +145,11 @@ ui.screen.key(['enter'], () => {
     }
 
     // Find services with pending changes that have a real (non-auto) action
-    const { getActionForService } = require('./lib/actions');
-    const pending = SERVICES
+    const pending = config.services
         .filter((svc) => {
             const c = changeResults[svc.id];
             if (!c || c.count === 0) return false;
-            const action = getActionForService(svc.id, env);
+            const action = getActionForService(config.services, svc.id, env);
             return action && action.type !== 'auto';
         })
         .map((svc) => svc.id);
@@ -115,10 +159,10 @@ ui.screen.key(['enter'], () => {
         return;
     }
 
-    const names = pending.map((id) => SERVICES.find((s) => s.id === id).label).join(', ');
+    const names = pending.map((id) => config.services.find((s) => s.id === id).label).join(', ');
     setActionStatus({ type: 'progress', message: `Rebuilding ${pending.length} services: ${names}` });
 
-    executeQueue(pending, env, PROJECT_ROOT, state, (status) => {
+    executeQueue(config.services, pending, env, config.root, state, (status) => {
         setActionStatus(status);
         if (status.type === 'success' || status.type === 'error') {
             setTimeout(poll, 2000);
@@ -128,10 +172,13 @@ ui.screen.key(['enter'], () => {
 
 ui.screen.key(['tab'], () => {
     poll();
+    pollGithub();
     setActionStatus({ type: 'info', message: 'Refreshed' });
 });
 
-// Initial poll and start interval
+// Initial poll and start intervals
 poll();
+pollGithub();
 
-setInterval(poll, 5000);
+setInterval(poll, config.polling.health);
+setInterval(pollGithub, config.polling.github);

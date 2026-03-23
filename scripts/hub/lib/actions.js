@@ -1,7 +1,6 @@
 'use strict';
 
 const { spawn } = require('child_process');
-const { SERVICES } = require('./services');
 const { markRestarted } = require('./state');
 
 let activeAction = null;
@@ -10,8 +9,8 @@ function isRunning() {
     return activeAction !== null;
 }
 
-function getActionForService(serviceId, env) {
-    const svc = SERVICES.find((s) => s.id === serviceId);
+function getActionForService(services, serviceId, env) {
+    const svc = services.find((s) => s.id === serviceId);
     if (!svc) return null;
 
     // mixed/none fall back to prod actions
@@ -21,13 +20,13 @@ function getActionForService(serviceId, env) {
     return action;
 }
 
-function execute(serviceId, env, projectRoot, state, onUpdate) {
+function execute(services, serviceId, env, projectRoot, state, onUpdate) {
     if (activeAction) {
         onUpdate({ type: 'error', message: 'Another action is already running' });
         return;
     }
 
-    const action = getActionForService(serviceId, env);
+    const action = getActionForService(services, serviceId, env);
     if (!action) {
         onUpdate({ type: 'error', message: `No action available for ${serviceId} in ${env} mode` });
         return;
@@ -38,7 +37,7 @@ function execute(serviceId, env, projectRoot, state, onUpdate) {
         return;
     }
 
-    const svc = SERVICES.find((s) => s.id === serviceId);
+    const svc = services.find((s) => s.id === serviceId);
     const label = svc ? svc.label : serviceId;
     const verb = action.type === 'rebuild' ? 'Rebuilding' : 'Restarting';
 
@@ -80,7 +79,7 @@ function execute(serviceId, env, projectRoot, state, onUpdate) {
     });
 }
 
-function executeQueue(serviceIds, env, projectRoot, state, onUpdate) {
+function executeQueue(services, serviceIds, env, projectRoot, state, onUpdate) {
     if (activeAction) {
         onUpdate({ type: 'error', message: 'Another action is already running' });
         return;
@@ -88,7 +87,7 @@ function executeQueue(serviceIds, env, projectRoot, state, onUpdate) {
 
     // Filter to services that have a real (non-auto) action
     const queue = serviceIds.filter((id) => {
-        const action = getActionForService(id, env);
+        const action = getActionForService(services, id, env);
         return action && action.type !== 'auto';
     });
 
@@ -107,7 +106,7 @@ function executeQueue(serviceIds, env, projectRoot, state, onUpdate) {
         }
 
         const id = queue[completed];
-        execute(id, env, projectRoot, state, (status) => {
+        execute(services, id, env, projectRoot, state, (status) => {
             if (status.type === 'progress') {
                 onUpdate({ type: 'progress', message: `[${completed + 1}/${total}] ${status.message}`, serviceId: status.serviceId });
             } else if (status.type === 'success') {

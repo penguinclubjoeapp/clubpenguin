@@ -1,8 +1,6 @@
 'use strict';
 
 const blessed = require('neo-blessed');
-const { SERVICES } = require('./services');
-const { getActionForService } = require('./actions');
 
 const STATUS_COLORS = {
     running: 'green',
@@ -34,42 +32,48 @@ function timeAgo(isoString) {
     return `${days}d ago`;
 }
 
-function createScreen() {
+function createScreen(config) {
+    const numServices = config.services.length;
+
     const screen = blessed.screen({
         smartCSR: true,
-        title: 'Club Penguin Hub',
+        title: `${config.name} Hub`,
         fullUnicode: true,
     });
+
+    let y = 0;
 
     // Header
     const header = blessed.box({
         parent: screen,
-        top: 0,
+        top: y,
         left: 0,
         width: '100%',
         height: 1,
         tags: true,
         style: { fg: 'white', bg: 'black' },
     });
+    y += 1;
 
     // Column headers
     const colHeader = blessed.box({
         parent: screen,
-        top: 1,
+        top: y,
         left: 0,
         width: '100%',
         height: 1,
         tags: true,
         style: { fg: 'white', bg: 'blue' },
     });
+    y += 1;
 
-    // Service list — navigation handled at screen level in hub.js
+    // Service list
     const serviceList = blessed.list({
         parent: screen,
-        top: 2,
+        top: y,
         left: 0,
         width: '100%',
-        height: SERVICES.length,
+        height: numServices,
         tags: true,
         mouse: true,
         style: {
@@ -77,21 +81,23 @@ function createScreen() {
             item: { fg: 'white' },
         },
     });
+    y += numServices;
 
     // Separator
     const sep = blessed.line({
         parent: screen,
-        top: 2 + SERVICES.length,
+        top: y,
         left: 0,
         width: '100%',
         orientation: 'horizontal',
         style: { fg: 'gray' },
     });
+    y += 1;
 
     // Detail panel (changed files)
     const detailPanel = blessed.box({
         parent: screen,
-        top: 3 + SERVICES.length,
+        top: y,
         left: 0,
         width: '100%',
         height: 6,
@@ -103,11 +109,12 @@ function createScreen() {
         style: { fg: 'white' },
         padding: { left: 1 },
     });
+    y += 6;
 
     // Rebuild All button
     const rebuildAllBtn = blessed.box({
         parent: screen,
-        top: 10 + SERVICES.length,
+        top: y + 1,
         left: 1,
         width: 30,
         height: 3,
@@ -119,6 +126,34 @@ function createScreen() {
             fg: 'gray',
             border: { fg: 'gray' },
         },
+    });
+    y += 4;
+
+    // Git separator
+    const gitSep = blessed.line({
+        parent: screen,
+        top: y,
+        left: 0,
+        width: '100%',
+        orientation: 'horizontal',
+        style: { fg: 'gray' },
+    });
+    y += 1;
+
+    // Git panel — fills remaining space above footer
+    const gitPanel = blessed.box({
+        parent: screen,
+        top: y,
+        left: 0,
+        width: '100%',
+        bottom: 2,
+        tags: true,
+        scrollable: true,
+        alwaysScroll: true,
+        keys: true,
+        vi: true,
+        style: { fg: 'white' },
+        padding: { left: 1 },
     });
 
     // Footer (keybindings)
@@ -132,7 +167,7 @@ function createScreen() {
         style: { fg: 'white', bg: 'black' },
         padding: { left: 1 },
     });
-    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
+    footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[g]{/} Git   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
 
     // Status line
     const statusLine = blessed.box({
@@ -154,7 +189,7 @@ function createScreen() {
     // Focus the service list so it receives key events
     serviceList.focus();
 
-    return { screen, header, colHeader, serviceList, detailPanel, rebuildAllBtn, statusLine };
+    return { screen, header, colHeader, serviceList, detailPanel, rebuildAllBtn, gitPanel, statusLine };
 }
 
 function formatRow(label, status, health, changeCount, lastRestart, actionLabel, width) {
@@ -174,13 +209,14 @@ function formatRow(label, status, health, changeCount, lastRestart, actionLabel,
     return `  ${col1}${col2}${col3}${col4}${col5}`;
 }
 
-function render(ui, env, healthResults, changeResults, state, actionStatus) {
-    const { header, colHeader, serviceList, detailPanel, statusLine } = ui;
+function render(ui, config, env, healthResults, changeResults, state, actionStatus, gitStatus, prList, getActionForService) {
+    const { header, colHeader, serviceList, detailPanel, statusLine, gitPanel } = ui;
+    const services = config.services;
 
     // Header
     const now = new Date().toLocaleTimeString();
     const envBadge = ENV_STYLES[env] || ENV_STYLES.none;
-    header.setContent(` {bold}CLUB PENGUIN HUB{/}    ${envBadge}    ${now}`);
+    header.setContent(` {bold}${config.name.toUpperCase()} HUB{/}    ${envBadge}    ${now}`);
 
     // Column headers
     const ch1 = 'Service'.padEnd(16);
@@ -192,7 +228,7 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
 
     // Service rows
     const selected = serviceList.selected || 0;
-    const items = SERVICES.map((svc) => {
+    const items = services.map((svc) => {
         const h = healthResults[svc.id] || { status: 'unknown', health: null };
         const c = changeResults[svc.id] || { count: 0, files: [] };
         const lastInfo = state.lastRestart[svc.id];
@@ -200,7 +236,7 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
 
         let actionLabel = '';
         if (c.count > 0) {
-            const action = getActionForService(svc.id, env);
+            const action = getActionForService(services, svc.id, env);
             if (action) {
                 if (action.type === 'auto') actionLabel = 'auto';
                 else if (action.type === 'rebuild') actionLabel = 'rebuild';
@@ -218,10 +254,9 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
 
     serviceList.setItems(items);
     serviceList.select(selected);
-    serviceList.focus();
 
     // Detail panel — show changed files for selected service
-    const selectedSvc = SERVICES[selected];
+    const selectedSvc = services[selected];
     if (selectedSvc) {
         const c = changeResults[selectedSvc.id] || { count: 0, files: [] };
         if (c.files.length > 0) {
@@ -236,10 +271,10 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
 
     // Rebuild All button
     const { rebuildAllBtn } = ui;
-    const pendingCount = SERVICES.filter((s) => {
+    const pendingCount = services.filter((s) => {
         const c = changeResults[s.id] || { count: 0 };
         if (c.count === 0) return false;
-        const action = getActionForService(s.id, env);
+        const action = getActionForService(services, s.id, env);
         return action && action.type !== 'auto';
     }).length;
 
@@ -255,6 +290,58 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
         rebuildAllBtn.setContent('{white-fg}All Up to Date{/}');
         rebuildAllBtn.style.border.fg = 'white';
         rebuildAllBtn.style.fg = 'white';
+    }
+
+    // Git status panel
+    if (gitStatus) {
+        const lines = [];
+
+        // Branch line
+        let branchLine = `{bold}Branch:{/} {white-fg}${gitStatus.branch}{/}`;
+        if (gitStatus.upstream) {
+            const aheadStr = gitStatus.ahead > 0 ? `{green-fg}+${gitStatus.ahead}{/}` : '{white-fg}+0{/}';
+            const behindStr = gitStatus.behind > 0 ? `{red-fg}-${gitStatus.behind}{/}` : '{white-fg}-0{/}';
+            branchLine += `  {white-fg}[${gitStatus.upstream}:{/} ${aheadStr}/{behindStr}{white-fg}]{/}`;
+        } else {
+            branchLine += '  {white-fg}(no upstream){/}';
+        }
+        lines.push(branchLine);
+
+        // Changes summary
+        const parts = [];
+        if (gitStatus.staged > 0) parts.push(`{green-fg}${gitStatus.staged} staged{/}`);
+        if (gitStatus.unstaged > 0) parts.push(`{yellow-fg}${gitStatus.unstaged} modified{/}`);
+        if (gitStatus.untracked > 0) parts.push(`{red-fg}${gitStatus.untracked} untracked{/}`);
+        lines.push(`{bold}Changes:{/} ${parts.length > 0 ? parts.join('  ') : '{white-fg}clean{/}'}`);
+
+        // Stash
+        if (gitStatus.stashCount > 0) {
+            lines.push(`{bold}Stash:{/}   {magenta-fg}${gitStatus.stashCount} stash(es){/}`);
+        }
+
+        // Recent commits
+        if (gitStatus.recentCommits.length > 0) {
+            lines.push('');
+            lines.push('{bold}Recent Commits:{/}');
+            for (const c of gitStatus.recentCommits) {
+                lines.push(`  {cyan-fg}${c.sha}{/} ${c.subject} {gray-fg}(${c.author}, ${c.timeAgo}){/}`);
+            }
+        }
+
+        // Open PRs
+        if (prList !== null && prList !== undefined) {
+            lines.push('');
+            if (prList.length > 0) {
+                lines.push(`{bold}Open PRs ({white-fg}${prList.length}{/}{bold}):{/}`);
+                for (const pr of prList) {
+                    lines.push(`  {green-fg}#${pr.number}{/} ${pr.title} {gray-fg}[${pr.branch}] (${pr.author}, ${pr.updatedAt}){/}`);
+                }
+            } else {
+                lines.push('{bold}Open PRs:{/} {white-fg}none{/}');
+            }
+        }
+
+        gitPanel.setContent(lines.join('\n'));
     }
 
     // Status line

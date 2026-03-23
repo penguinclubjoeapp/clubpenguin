@@ -1,8 +1,11 @@
 {
-  "name": "clubpenguin-hub",
+  "name": "devhub",
   "version": "1.0.0",
-  "private": true,
+  "description": "Terminal dashboard for multi-service development projects",
   "main": "hub.js",
+  "bin": {
+    "devhub": "./hub.js"
+  },
   "dependencies": {
     "neo-blessed": "^0.2.0"
   }
