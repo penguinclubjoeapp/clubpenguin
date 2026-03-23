@@ -54,6 +54,10 @@ export default class PurchaseValidator {
         if (!item) {
             return false
 
+        } else if (item.member && !this.user.isMember) {
+            this.user.send('error', { error: 'You need to be a member to buy this item.' })
+            return false
+
         } else if (item.cost > this.user.coins) {
             this.user.send('error', { error: 'You need more coins.' })
             return false

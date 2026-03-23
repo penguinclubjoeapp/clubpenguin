@@ -19,6 +19,7 @@ export default class User {
     address: string
     loginSent = false
     isModerator = false
+    isMember = false
 
     events: EventEmitter | null = null
     cooldowns: Record<string, number> = {}
@@ -42,6 +43,7 @@ export default class User {
     flag!: number
     ninjaRank!: number
     ninjaProgress!: number
+    member!: number
 
     authToken: AuthToken | null = null
     ban: Ban | null = null
@@ -140,6 +142,7 @@ export default class User {
 
     setPermissions() {
         this.isModerator = this.rank >= 2
+        this.isMember = this.member >= 1
     }
 
     get anonymous() {
@@ -154,7 +157,8 @@ export default class User {
             'feet',
             'color',
             'photo',
-            'flag'
+            'flag',
+            'member'
         )
     }
 

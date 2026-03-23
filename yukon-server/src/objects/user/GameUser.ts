@@ -326,6 +326,7 @@ export default class GameUser extends User {
             'color',
             'photo',
             'flag',
+            'member',
             'x',
             'y',
             'frame'
