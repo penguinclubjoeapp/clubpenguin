@@ -296,14 +296,22 @@ function render(ui, config, env, healthResults, changeResults, state, actionStat
     if (gitStatus) {
         const lines = [];
 
-        // Branch line
+        // Branch line — avoid nested blessed tags, they break rendering
         let branchLine = `{bold}Branch:{/} {white-fg}${gitStatus.branch}{/}`;
         if (gitStatus.upstream) {
-            const aheadStr = gitStatus.ahead > 0 ? `{green-fg}+${gitStatus.ahead}{/}` : '{white-fg}+0{/}';
-            const behindStr = gitStatus.behind > 0 ? `{red-fg}-${gitStatus.behind}{/}` : '{white-fg}-0{/}';
-            branchLine += `  {white-fg}[${gitStatus.upstream}:{/} ${aheadStr}/{behindStr}{white-fg}]{/}`;
+            const ahead = gitStatus.ahead;
+            const behind = gitStatus.behind;
+            if (ahead > 0 && behind > 0) {
+                branchLine += `  [${gitStatus.upstream}: {green-fg}+${ahead}{/} {red-fg}-${behind}{/}]`;
+            } else if (ahead > 0) {
+                branchLine += `  [${gitStatus.upstream}: {green-fg}+${ahead}{/} -0]`;
+            } else if (behind > 0) {
+                branchLine += `  [${gitStatus.upstream}: +0 {red-fg}-${behind}{/}]`;
+            } else {
+                branchLine += `  [${gitStatus.upstream}: +0 -0]`;
+            }
         } else {
-            branchLine += '  {white-fg}(no upstream){/}';
+            branchLine += '  (no upstream)';
         }
         lines.push(branchLine);
 
