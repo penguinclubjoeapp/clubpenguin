@@ -63,7 +63,7 @@ function createScreen(config) {
         width: '100%',
         height: 1,
         tags: true,
-        style: { fg: 'white', bg: 'blue' },
+        style: { fg: 'white', bg: '#1a1a2e' },
     });
     y += 1;
 
@@ -77,7 +77,7 @@ function createScreen(config) {
         tags: true,
         mouse: true,
         style: {
-            selected: { bg: 'blue', fg: 'white' },
+            selected: { bg: '#1a1a2e', fg: 'white' },
             item: { fg: 'white' },
         },
     });
@@ -132,7 +132,7 @@ function createScreen(config) {
         tags: true,
         mouse: true,
         style: {
-            selected: { bg: 'blue', fg: 'white' },
+            selected: { bg: '#1a1a2e', fg: 'white' },
             item: { fg: 'white' },
         },
         padding: { left: 1 },
