@@ -118,8 +118,7 @@ CREATE TABLE `users` (
   `photo` int(11) NOT NULL DEFAULT 0,
   `flag` int(11) NOT NULL DEFAULT 0,
   `ninjaRank` tinyint(1) NOT NULL DEFAULT 0,
-  `ninjaProgress` tinyint(3) NOT NULL DEFAULT 0,
-  `member` tinyint(1) NOT NULL DEFAULT 0
+  `ninjaProgress` tinyint(3) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Users';
 DELIMITER $$
 CREATE TRIGGER `trigger_users_insert` AFTER INSERT ON `users` FOR EACH ROW BEGIN
@@ -134,18 +133,6 @@ CREATE TABLE `worlds` (
   `id` varchar(100) NOT NULL,
   `population` smallint(3) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Server populations';
-
-CREATE TABLE `discord_links` (
-  `userId` int(11) NOT NULL,
-  `discordId` bigint(20) NOT NULL,
-  `linkedAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Discord account links';
-
-CREATE TABLE `room_channel_mappings` (
-  `roomId` int(11) NOT NULL,
-  `channelId` bigint(20) NOT NULL,
-  `mappedAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Room to Discord channel mappings';
 
 INSERT INTO `worlds` (`id`, `population`) VALUES
 ('Blizzard', 0);
@@ -202,13 +189,6 @@ ALTER TABLE `users`
 
 ALTER TABLE `worlds`
   ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `discord_links`
-  ADD PRIMARY KEY (`userId`),
-  ADD UNIQUE KEY `discordId` (`discordId`);
-
-ALTER TABLE `room_channel_mappings`
-  ADD PRIMARY KEY (`roomId`);
 
 
 ALTER TABLE `bans`
@@ -267,9 +247,6 @@ ALTER TABLE `pets`
 ALTER TABLE `postcards`
   ADD CONSTRAINT `postcards_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `postcards_ibfk_2` FOREIGN KEY (`senderId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `discord_links`
-  ADD CONSTRAINT `discord_links_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
