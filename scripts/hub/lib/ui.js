@@ -10,8 +10,8 @@ const STATUS_COLORS = {
     stopped: 'red',
     unhealthy: 'yellow',
     starting: 'cyan',
-    'n/a': 'gray',
-    unknown: 'gray',
+    'n/a': 'white',
+    unknown: 'white',
 };
 
 const ENV_STYLES = {
@@ -129,7 +129,7 @@ function createScreen() {
         width: '100%',
         height: 1,
         tags: true,
-        style: { fg: 'gray', bg: 'black' },
+        style: { fg: 'white', bg: 'black' },
         padding: { left: 1 },
     });
     footer.setContent('{bold}[R]{/} Rebuild   {bold}[Enter]{/} Rebuild All   {bold}[j/k]{/} Navigate   {bold}[Tab]{/} Refresh   {bold}[Q]{/} Quit');
@@ -165,7 +165,7 @@ function formatRow(label, status, health, changeCount, lastRestart, actionLabel,
     const col2 = `{${statusColor}-fg}${statusDisplay.padEnd(12)}{/}`;
     const col3 = changeCount > 0
         ? `{yellow-fg}${(changeCount + (changeCount === 1 ? ' file' : ' files')).padEnd(10)}{/}`
-        : '{gray-fg}' + '-'.padEnd(10) + '{/}';
+        : '{white-fg}' + '-'.padEnd(10) + '{/}';
     const col4 = (lastRestart || 'never').padEnd(13);
     const col5 = actionLabel
         ? `{bold}${actionLabel}{/}`
@@ -230,7 +230,7 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
                 c.files.map((f) => `  ${f}`).join('\n')
             );
         } else {
-            detailPanel.setContent(`{gray-fg}No pending changes for ${selectedSvc.label}{/}`);
+            detailPanel.setContent(`{white-fg}No pending changes for ${selectedSvc.label}{/}`);
         }
     }
 
@@ -252,9 +252,9 @@ function render(ui, env, healthResults, changeResults, state, actionStatus) {
         rebuildAllBtn.style.border.fg = 'green';
         rebuildAllBtn.style.fg = 'green';
     } else {
-        rebuildAllBtn.setContent('{gray-fg}All Up to Date{/}');
-        rebuildAllBtn.style.border.fg = 'gray';
-        rebuildAllBtn.style.fg = 'gray';
+        rebuildAllBtn.setContent('{white-fg}All Up to Date{/}');
+        rebuildAllBtn.style.border.fg = 'white';
+        rebuildAllBtn.style.fg = 'white';
     }
 
     // Status line
