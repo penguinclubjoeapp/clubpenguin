@@ -9,7 +9,7 @@ RUN apk add --no-cache netcat-openbsd
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source code
 COPY . .
