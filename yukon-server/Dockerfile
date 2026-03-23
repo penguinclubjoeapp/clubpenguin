@@ -22,4 +22,4 @@ RUN npx prisma generate && npm run build
 EXPOSE 6112 6113
 
 # Start both Login and World servers
-CMD ["node", "dist/World.js", "Login", "Blizzard"]
+CMD ["node", "dist/src/World.js", "Login", "Blizzard"]
