@@ -135,6 +135,10 @@ export default class User {
 
             Object.assign(this, data)
 
+            if ('member' in data || 'rank' in data) {
+                this.setPermissions()
+            }
+
         } catch (error) {
             console.error(error)
         }
