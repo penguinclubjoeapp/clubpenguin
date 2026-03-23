@@ -245,7 +245,7 @@ step_03() {
     cd "$PROJECT_ROOT"
     docker compose -f docker-compose.dev.yml up -d
 
-    info "Waiting for MySQL to be ready..."
+    info "Waiting for MySQL daemon to be ready..."
     local retries=30
     while (( retries > 0 )); do
         if docker compose -f docker-compose.dev.yml exec -T mysql-dev mysqladmin ping -h localhost --silent 2>/dev/null; then
@@ -261,13 +261,23 @@ step_03() {
     fi
     ok "Dev MySQL ready"
 
-    # Verify schema
-    if docker compose -f docker-compose.dev.yml exec -T mysql-dev \
-        mysql -u penguin -pdevpassword yukon -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='yukon'" 2>/dev/null | grep -q '[0-9]'; then
-        ok "Schema loaded"
+    # Wait for init SQL to finish loading (first-time only: MySQL runs yukon.sql after daemon starts)
+    info "Waiting for schema to be ready (first run may take up to 60s)..."
+    local schema_retries=60
+    while (( schema_retries > 0 )); do
+        if docker compose -f docker-compose.dev.yml exec -T mysql-dev \
+            mysql -u penguin -pdevpassword yukon -e "SELECT 1 FROM users LIMIT 1" 2>/dev/null; then
+            break
+        fi
+        sleep 1
+        (( schema_retries-- ))
+    done
+
+    if (( schema_retries == 0 )); then
+        warn "Schema not ready after 60s — tables may be missing."
+        info "Try: docker compose -f docker-compose.dev.yml down -v && re-run this step"
     else
-        warn "Schema may not be loaded yet (first-time init can take a moment)"
-        info "If tables are missing, try: docker compose -f docker-compose.dev.yml down -v && re-run this step"
+        ok "Schema loaded"
     fi
 }
 
@@ -299,13 +309,14 @@ step_04() {
     # We'll use a small inline node script
     info "Creating account..."
     cd "$PROJECT_ROOT"
-    node -e "
+    local create_output
+    create_output=$(DEV_USER="$dev_username" DEV_PASS="$dev_password" node -e "
 const path = require('path');
 const bcrypt = require(path.join('$PROJECT_ROOT', 'yukon-server', 'node_modules', 'bcrypt'));
 const mysql = require(path.join('$PROJECT_ROOT', 'scripts', 'node_modules', 'mysql2', 'promise'));
 
 (async () => {
-    const hash = await bcrypt.hash('$dev_password', 10);
+    const hash = await bcrypt.hash(process.env.DEV_PASS, 10);
     const conn = await mysql.createConnection({
         host: '127.0.0.1', port: 3307,
         user: 'penguin', password: 'devpassword', database: 'yukon'
@@ -314,38 +325,28 @@ const mysql = require(path.join('$PROJECT_ROOT', 'scripts', 'node_modules', 'mys
     try {
         await conn.execute(
             'INSERT INTO users (username, password, member) VALUES (?, ?, 1)',
-            ['$dev_username', hash]
+            [process.env.DEV_USER, hash]
         );
         console.log('OK');
     } catch (e) {
         if (e.code === 'ER_DUP_ENTRY') {
             console.log('EXISTS');
         } else {
-            throw e;
+            console.error(e.message);
+            process.exit(1);
         }
     } finally {
         await conn.end();
     }
 })();
-" 2>/dev/null && result=$? || result=$?
+" 2>&1) || true
 
-    # Check output
-    if node -e "
-const path = require('path');
-const mysql = require(path.join('$PROJECT_ROOT', 'scripts', 'node_modules', 'mysql2', 'promise'));
-(async () => {
-    const conn = await mysql.createConnection({
-        host: '127.0.0.1', port: 3307,
-        user: 'penguin', password: 'devpassword', database: 'yukon'
-    });
-    const [rows] = await conn.execute('SELECT id, member FROM users WHERE username = ?', ['$dev_username']);
-    await conn.end();
-    if (rows.length > 0) process.exit(0); else process.exit(1);
-})();
-" 2>/dev/null; then
-        ok "Account '$dev_username' ready (member)"
+    if [[ "$create_output" == "OK" ]]; then
+        ok "Account '$dev_username' created (member)"
+    elif [[ "$create_output" == "EXISTS" ]]; then
+        ok "Account '$dev_username' already exists"
     else
-        err "Failed to create account. Check dev database is running."
+        err "Failed to create account: $create_output"
     fi
 }
 

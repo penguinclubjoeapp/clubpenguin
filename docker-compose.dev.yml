@@ -12,7 +12,7 @@ services:
       - "${DEV_MYSQL_PORT:-3307}:3306"
     volumes:
       - mysql-dev-data:/var/lib/mysql
-      - ./yukon-server/yukon.sql:/docker-entrypoint-initdb.d/yukon.sql:ro
+      - ./yukon-server/yukon.sql:/docker-entrypoint-initdb.d/yukon.sql:ro,z
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
