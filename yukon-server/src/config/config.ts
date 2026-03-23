@@ -1,7 +1,7 @@
 import { loadJson } from '@utils/loadJson'
+import { existsSync } from 'fs'
 
 import type { Assert } from 'ts-runtime-checks'
-import type { Dialect } from 'sequelize'
 
 export interface Config {
     crypto: {
@@ -14,7 +14,7 @@ export interface Config {
         user: string
         password: string
         database: string
-        dialect: Dialect
+        port?: number
         debug: boolean
         logQueryParameters: boolean
     }
@@ -48,4 +48,32 @@ export interface Config {
     }
 }
 
-export const config = loadJson('config/config') as Assert<Config>
+function loadConfig(): Config {
+    const isDev = process.env.NODE_ENV === 'development'
+    let configPath: string
+
+    if (isDev && existsSync('config/config.dev.json')) {
+        configPath = 'config/config.dev'
+    } else if (existsSync('config/config.json')) {
+        configPath = 'config/config'
+    } else {
+        configPath = 'config/config_example'
+    }
+
+    const loaded = loadJson(configPath) as Assert<Config>
+
+    // Allow env vars to override database config
+    if (process.env.MYSQL_HOST) loaded.database.host = process.env.MYSQL_HOST
+    if (process.env.MYSQL_USER) loaded.database.user = process.env.MYSQL_USER
+    if (process.env.MYSQL_PASSWORD) loaded.database.password = process.env.MYSQL_PASSWORD
+    if (process.env.MYSQL_DATABASE) loaded.database.database = process.env.MYSQL_DATABASE
+
+    // Allow env vars to override ports
+    if (process.env.DEV_MYSQL_PORT) loaded.database.port = parseInt(process.env.DEV_MYSQL_PORT)
+    if (process.env.DEV_LOGIN_PORT) loaded.worlds.Login.port = parseInt(process.env.DEV_LOGIN_PORT)
+    if (process.env.DEV_WORLD_PORT) loaded.worlds.Blizzard.port = parseInt(process.env.DEV_WORLD_PORT)
+
+    return loaded
+}
+
+export const config = loadConfig()
