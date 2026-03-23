@@ -23,7 +23,8 @@ export default class Chat extends GamePlugin {
             'jr': this.joinRoom,
             'id': this.id,
             'users': this.userPopulation,
-            'link': this.linkDiscord
+            'link': this.linkDiscord,
+            'room': this.room
         }
 
         this.bindCommands()
@@ -182,6 +183,12 @@ export default class Chat extends GamePlugin {
 
     userPopulation(args, user) {
         user.send('error', { error: `Users online: ${this.handler.population}` })
+    }
+
+    room(args, user) {
+        let r = user.room
+        let players = Object.keys(r.users).length
+        user.send('error', { error: `Room: ${r.name} | ID: ${r.id} | Players: ${players}/${r.maxUsers}` })
     }
 
     linkDiscord(args, user) {
